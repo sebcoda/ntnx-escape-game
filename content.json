@@ -110,6 +110,41 @@
             "Message": "\nLet me check this storage policy... \n",
             "CheckTask": "CheckStoragePolicy",
             "Color": "blue"
+        },   
+        {
+            "id": 16,
+            "active": true,
+            "Message": "\nOK...#>P:4#\n\n=== Part 10 ===\nNext step, create a microsegmentation policy to protect our VM.#>P:3# It is a way to isolate the VM from the others, and to protect it from the network. It is very useful to avoid any data leak. #P:3# It is a bit embarrassing to have this feature and not use it. it would have annoyed us in our mission... I they knew :o) ... #>P:5#\nCreate a new Microsegmentation policy named '#>V:Trigram#-policy' with the following rules :\n - Refuse all trafic to the VM\n - Allow all outboud traffic\n\nWrite 'OK' when it's done. #>I:#",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 17,
+            "active": true,
+            "Message": "\nI am going to check that... \n",
+            "CheckTask": "CheckSecurityPolicy",
+            "Color": "blue"
+        },
+        {
+            "id": 17,
+            "active": true,
+            "Message": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5# As a reminder, the user and password feinied in the cloud-init are 'admin' and 'MyPassword'. Your turn... #>P:10#\nOh wait, it won't work with our security policy... My bad.#>P:4#\nFirst check if our Security policy is working well, then update it to allow the SSH traffic from the jumphost VM where we are talking on.#>P:2# You'll get the IP with command 'ip a' in another ssh session.#>P:3#\nAfter Security policy update, check ssh connection and put 'OK' here. #>I:#",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 17,
+            "active": true,
+            "Message": "\nI trut you but I prefer to double-check that buddy... \n",
+            "CheckTask": "CheckSecurityPolicy2",
+            "Color": "blue"
+        },
+        {
+            "id": 19,
+            "active": true,
+            "Message": "\n=== Part 11 ===\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 mn\n - Keep 1 day of snapshots\n\nWe do not need to replicate here\nWrite 'OK' when it's done. #>I:#",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
         },        
         {
             "id": 50,
