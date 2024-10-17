@@ -65,9 +65,50 @@
         {
             "id": 10,
             "active": true,
-            "Message": "\n==== Part 6 ====\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk\n - 2 NICS in the subnet 'Primary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nWrite 'OK' when the VM is created. #>I:#",
+            "Message": "\n==== Part 6 ====\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk\n - 2 NICS in the subnet 'Primary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nWrite 'OK' when the VM is created. #>I:#",
             "CheckTask": "CheckVM",
             "WaitForInputValue": "OK",
+            "Color": "blue"
+        }, 
+        {
+            "id": 11,
+            "active": true,
+            "Message": "\n==== Part 7 ====\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM in the UI list, and check the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 12,
+            "active": true,
+            "Message": "\nPerfect, it is pretty discrete. They won't see it, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central.\n#>P:6#Oh wait !!!#>P:5#They are scanning the host, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#",
+            "Color": "blue"
+        },
+        {
+            "id": 13,
+            "active": true,
+            "Message": "\nThanks god, they have not detected the VM... huhu, it was VERY hot !\n\n=== Part 8 ===\nNow we are starting serious things. Unfortunately, you are not Nutanix certified, but it is not a big deal. They makes things simple with their interface, and you should find how to do that by yourself#>P:4#\nIn the 'Infrastructure' page, you should find something to manage categories. Nutanix uses Catagories to manage all the policies on the cluster, it is very efficient.#>P:3#\nCreate a new category #>V:Trigram#-cat with 2 values : 'Critical' and 'Test'.#>P:3# I am waiting for your 'OK'. #>I:",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 14,
+            "active": true,
+            "Message": "\nNice, you work quickly. I expect you don't do it dirty ;) #>P:4#\nLet me check this category... \n",
+            "CheckTask": "CheckCat",
+            "Color": "blue"
+        },
+        {
+            "id": 14,
+            "active": true,
+            "Message": "\nNow we are going to create different policies to protect our VM.\n=== Part 9 ===\nFirst we are going to encrypt our VM. #>P:3#You need, in the Infrastrucutre page, create a Storage policy #>V:Trigram#-policy enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nWrite 'OK' when it's done. #>I:#",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 15,
+            "active": true,
+            "Message": "\nLet me check this storage policy... \n",
+            "CheckTask": "CheckStoragePolicy",
             "Color": "blue"
         },        
         {

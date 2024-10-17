@@ -14,10 +14,12 @@ variables = {
     "IPPool": "192.168.1.50-192.168.1.99",
     "Gateway": "192.168.1.1",
     "ImageURL": "https://cloud-images.ubuntu.com/daily/server/jammy/current/jammy-server-cloudimg-amd64.img",
+    "ProdUsername": "TheBadGuy",
+    "ProdPassword": "MyProdPassword",
 }
 contentJsonFile="./content.json"
 
-firstStage=5
+firstStage=12
 
 # Example usage
 if __name__ == "__main__":

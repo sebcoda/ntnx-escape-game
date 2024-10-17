@@ -6,10 +6,11 @@
 - Create a subnet / OK
 - Add an image / OK
 - Create a new VM with user / OK
-- Check with prod user it is not viewable
-- Move the VM on another node
+- Check with prod user it is not viewable / OK
+- Move the VM on another node / OK
+- Create a category #OK
 - Securize the VM
-	- Encryption
+	- Encryption #OK
 	- Microseg
 	- Replication
 - Create approval rule to prevent deletion of RP

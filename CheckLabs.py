@@ -1,20 +1,42 @@
 def CheckUser(variables):
-    clue='The user is here, but rights are not the good ones'
-    result=False
+    clue=''
+    result=True
+    print("#GL Need to be coded")
     return result, clue
 
 def CheckProject(variables):
-    print("#GL CheckProject has to be coded")
-    return True
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
+    
 
 def CheckNetwork(variables):
-    print("#GL CheckNetwork has to be coded")
-    return True
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
 
 def CheckImage(variables):
-    print("#GL CheckImage has to be coded")
-    return True
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
 
 def CheckVM(variables):
-    print("#GL CheckVM has to be coded")
-    return True
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
+
+def CheckCat(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
+
+def CheckStoragePolicy(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
