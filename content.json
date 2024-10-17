@@ -1,0 +1,95 @@
+{
+    "stages":[
+        {
+            "id": 1,
+            "active": true,
+            "Message": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n",
+            "Color": "green"
+        },
+        {
+            "id": 2,
+            "active": true,
+            "Message": "Hey, are you ok?\nI am John, I am here to help you. Please tell me your name : #>I:Username#>P:4#\nHi #>V:Username#, it's our first time together. My nickname is 'Lucky', you are in good hands !.#>P:2#\nWe do not have too much time, I will guide you through the process. Please follow my instructions.\n",
+            "Color": "blue"
+        },
+        {
+            "id": 3,
+            "active": true,
+            "Message": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.\n\n",
+            "Color": "blue"
+        },
+        {
+            "id": 4,
+            "active": true,
+            "Message": "==== Part 1 ====\nFirst we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster, create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights.\nWrite here 'Done' when it's... done LOL.\n#>I:#",
+            "Color": "blue",
+            "WaitForInputValue": "Done"
+        },      
+        {
+            "id": 5,
+            "active": true,
+            "Message": "Perfect, let me check that... \n",
+            "CheckTask": "CheckUser",
+            "Color": "blue"
+        },
+        {
+            "id": 6,
+            "active": true,
+            "Message": "==== Part 2 ====\nNow, disconnect from Nutanix Prism Central and connect back with your new user. Click 'Enter' when you are in.#>I:#",
+            "Color": "blue"
+        },
+        {
+            "id": 7,
+            "active": true,
+            "Message": "\n==== Part 3 ====\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other project won't see what we do into this project.\nCreate a new project named '#>V:Trigram#-proj' and associate the Nutanix cluster into it.\nWrite here 'OK' when the project is created.\n#>I:#",
+            "CheckTask": "CheckProject",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 8,
+            "active": true,
+            "Message": "\n==== Part 4 ====\nYou know what ?#>P:2# I already like you, we are great teamates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nCreate a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very usefull for us, Plase configure your subnet with these info :\n - IP Pool: #>V:IPPool#\n - Gateway: #>V:Gateway#\n - Nameserver: #>V:Nameserver#\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#",
+            "CheckTask": "CheckNetwork",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 9,
+            "active": true,
+            "Message": "\n==== Part 5 ====\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#. You will find it in the 'Infrastructure' page.\nWrite 'OK' when the image is added. #>I:#",
+            "CheckTask": "CheckImage",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 10,
+            "active": true,
+            "Message": "\n==== Part 6 ====\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk\n - 2 NICS in the subnet 'Primary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nWrite 'OK' when the VM is created. #>I:#",
+            "CheckTask": "CheckVM",
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },        
+        {
+            "id": 50,
+            "active": false,
+            "Message": "Closing connection... #>P:3#Done.\nGenerating new keys... #>P:3#Done.\nEstablishing connection to the endpoint with multi-layer encryption and with multiple hops to reduce tracking capabilities... #>P:3# Done.\n\n",
+            "Color": "green"
+        },
+        {
+            "id": 51,
+            "active": false,
+            "Message": "Ok, I'm back. I hope you are still ok.\n\n",
+            "Color": "blue"
+        },
+        
+        {
+            "id": 100,
+            "active": false,
+            "Message": "Thank you and good bye!\n",
+            "Color": "green"
+        }
+]
+}
+
+
