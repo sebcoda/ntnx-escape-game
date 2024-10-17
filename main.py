@@ -6,8 +6,8 @@ from jsonpath_ng import jsonpath, parse
 variables = {
     "Username": "JohnDoe",
     "PC": "pc.ntnxlab.org",
-    "PCPassword": "MyPassword",
-    "PCUser": "MyUser",
+    "PCPassword": "nx2Tech736!",
+    "PCUser": "admin",
     "Trigram": "JDO",
     "Vlanid": "10",
     "Nameserver": "8.8.8.8",
@@ -19,7 +19,7 @@ variables = {
 }
 contentJsonFile="./content.json"
 
-firstStage=22
+firstStage=4
 
 # Example usage
 if __name__ == "__main__":
