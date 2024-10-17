@@ -1,0 +1,4 @@
+ntnx-iam-py-client
+python-dotenv
+jsonpath-ng
+cursor
