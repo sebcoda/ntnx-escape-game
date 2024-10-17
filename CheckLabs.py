@@ -41,7 +41,19 @@ def CheckStoragePolicy(variables):
     print("#GL Need to be coded")
     return result, clue
 
-def CheckStoragePolicy2(variables):
+def CheckSecurityPolicy(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
+
+def CheckSecurityPolicy2(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
+
+def CheckProtectionPolicy(variables):
     clue=''
     result=True
     print("#GL Need to be coded")
