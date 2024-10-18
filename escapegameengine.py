@@ -6,6 +6,7 @@ import cursor
 from CheckLabs import *
 import random
 from Sentences import *
+from actions import *
 
 # ========================================================================
 # = display
@@ -15,6 +16,7 @@ from Sentences import *
 #  - #>P:x#, where x is a number, the function will pause for x seconds
 #  - #>I:<name>#, it will wait for a user input and store it in the dictionary variables
 #  - #>V:<name>#, it will display the value of the variable <name> in the dictionary variables
+#  - #>A:<name>#, it will execute an action. The name of the action is the name of the function to call
   
 def display(input_string, variables, color=None, expectedValue='', delay=0.03):
     #Setting up colors
@@ -54,6 +56,10 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
                     time.sleep(0.5)
 
                 cursor.show()
+
+            elif element[1]=='A':
+                # If we have an action, we call the function with the name specified in the string
+                globals()[element[3:]](variables)
 
             elif element[1]=='I':
                 # If we have a read action, we wait for the user to press enter and store the input in the variables dictionary

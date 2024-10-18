@@ -4,7 +4,6 @@ import json
 import os
 from escapegameengine import *
 
-
 # Definition of the global variables
 load_dotenv('config.env')
 
@@ -30,6 +29,9 @@ firstStage=1
 # Main function
 if __name__ == "__main__":
     variables['SupportedLanguages'] = GetSupportedLanguages(contentJsonFile)
+
+    # Clear the output screen
+    os.system('cls' if os.name == 'nt' else 'clear')
 
     # Display all stages
     with open(contentJsonFile, 'r') as file:
