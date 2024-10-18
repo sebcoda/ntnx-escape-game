@@ -72,3 +72,9 @@ def CheckProtectionPolicy(variables):
     result=True
     print("#GL Need to be coded")
     return result, clue
+
+def CheckApprovalPolicy(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue

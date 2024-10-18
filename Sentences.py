@@ -17,7 +17,7 @@ LabOK=[
 LabKO=[
     'Oups, does not sounds good. Please check it',
     'Nope, try again',
-    'Hum, I does not see it, take a look at it please',
+    'Hum, I do not see it, take a look at it please',
     'Seems to be wrong, fix this',
     'Unfortunately, it is not here',
     'Double check it please',

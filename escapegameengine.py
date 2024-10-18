@@ -132,3 +132,27 @@ def GetSupportedLanguages(json_file_path):
         data = json.load(file)
     
     return ",".join(data['supportedLanguages'])
+
+# ========================================================================
+# = UpdateScoreFile
+# ========================================================================
+# This function updates the score file with the format Trigram:Stage
+def UpdateScoreFile(scoreFile, trigram, stage):
+    scores = {}
+    
+    # Read the existing scores
+    try:
+        with open(scoreFile, 'r') as file:
+            for line in file:
+                t, s = line.strip().split(':')
+                scores[t] = s
+    except FileNotFoundError:
+        pass  # If the file does not exist, we will create it
+
+    # Update the score for the given trigram
+    scores[trigram] = str(stage)
+
+    # Write the updated scores back to the file
+    with open(scoreFile, 'w') as file:
+        for t, s in scores.items():
+            file.write(f"{t}:{s}\n")

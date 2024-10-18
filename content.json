@@ -5,7 +5,7 @@
             "id": 1,
             "active": true,
             "Message": {
-                "en": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n#>P:3#Enter your transcription language (#>V:SupportedLanguages#): #>I:Language#>P:2#Transcription activated#>P:2#\nPlease wait for agent contact\n#>P:5"
+                "en": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n#>P:3#Enter your prefered language (#>V:SupportedLanguages#): #>I:Language#>P:2#Automatic translation activated#>P:2#\n\nPersonal trigram  ID required : #>I:Trigram#>P:3#\nThank you\n\nPlease wait for agent contact\n#>P:5"
             },
             "Color": "green"
         },
@@ -13,7 +13,7 @@
             "id": 2,
             "active": true,
             "Message": {
-                "en": "\nHey, are you ok?\nI am John, I am here to help you. Please tell me your name : #>I:Username#>P:4#\nHi #>V:Username#, it's our first time together. My nickname is 'Lucky', you are in good hands !.#>P:2#\nWe do not have too much time, I will guide you through the process. Please follow my instructions.#>P:5#\nStart entering your trigram please : #>I:Trigram#>P:3#\nThank you\n\n",
+                "en": "\nHey, are you ok?\nI am John, I am here to help you. Please tell me your name : #>I:Username#>P:4#\nHi #>V:Username#, it's our first time together. My nickname is 'Lucky', you are in good hands !.#>P:2#\nWe do not have too much time, I will guide you through the process. Please follow my instructions.#>P:5#\n\n",
                 "fr": "to do"                
             },
             "Color": "blue"
@@ -208,7 +208,15 @@
             "WaitForInputValue": "Done",
             "Color": "blue"
         },
-        
+        {
+            "id": 24,
+            "active": true,
+            "Message": {
+                "en": "Nice. I'll confirm this... 2s please.#>P:2#\n"
+            },
+            "CheckTask": "CheckApprovalPolicy",
+            "Color": "blue"
+        },        
         {
             "id": 50,
             "active": false,

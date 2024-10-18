@@ -24,6 +24,7 @@ variables = {
 }
 
 contentJsonFile="./content.json"
+scoreFile="status.dat"
 firstStage=1
 
 # Main function
@@ -48,6 +49,9 @@ if __name__ == "__main__":
             # Check student work if needed
             if checkScript != '':
                 CheckStage(checkScript, variables)
+
+        # Update the score file
+        UpdateScoreFile(scoreFile, variables['Trigram'], stage['id'])
 
     # Reset display color
     sys.stdout.write('\033[0m')
