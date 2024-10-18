@@ -1,4 +1,5 @@
 ntnx-iam-py-client
+ntnx_networking_py_client
 python-dotenv
 jsonpath-ng
 cursor

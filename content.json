@@ -1,47 +1,63 @@
 {
+    "supportedLanguages": ["en"],
     "stages":[
         {
             "id": 1,
             "active": true,
-            "Message": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n",
+            "Message": {
+                "en": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n#>P:3#Enter your transcription language (#>V:SupportedLanguages#): #>I:Language#>P:2#Transcription activated#>P:2#\nPlease wait for agent contact\n#>P:5"
+            },
             "Color": "green"
         },
         {
             "id": 2,
             "active": true,
-            "Message": "Hey, are you ok?\nI am John, I am here to help you. Please tell me your name : #>I:Username#>P:4#\nHi #>V:Username#, it's our first time together. My nickname is 'Lucky', you are in good hands !.#>P:2#\nWe do not have too much time, I will guide you through the process. Please follow my instructions.\n",
+            "Message": {
+                "en": "\nHey, are you ok?\nI am John, I am here to help you. Please tell me your name : #>I:Username#>P:4#\nHi #>V:Username#, it's our first time together. My nickname is 'Lucky', you are in good hands !.#>P:2#\nWe do not have too much time, I will guide you through the process. Please follow my instructions.#>P:5#\nStart entering your trigram please : #>I:Trigram#>P:3#\nThank you\n\n",
+                "fr": "to do"                
+            },
             "Color": "blue"
         },
         {
             "id": 3,
             "active": true,
-            "Message": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.\n\n",
+            "Message": {
+                "en": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.#>P:3#\n\n"
+            },
             "Color": "blue"
         },
         {
             "id": 4,
             "active": true,
-            "Message": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster, create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights.\nWrite here 'Done' when it's... done LOL.\n#>I:#",
+            "Message": {
+                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster, create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights.\nWrite here 'Done' when it's... done LOL.\n#>I:#"
+            },
             "Color": "blue",
             "WaitForInputValue": "Done"
         },      
         {
             "id": 5,
             "active": true,
-            "Message": "Perfect, let me check that... \n",
+            "Message": {
+                "en": "Perfect, let me check that... \n"
+            },
             "CheckTask": "CheckUser",
             "Color": "blue"
         },
         {
             "id": 6,
             "active": true,
-            "Message": "Now, disconnect from Nutanix Prism Central and connect back with your new user. Click 'Enter' when you are in.#>I:#",
+            "Message": {
+                "en": "Now, disconnect from Nutanix Prism Central and connect back with your new user. Click 'Enter' when you are in.#>I:#"
+            },
             "Color": "blue"
         },
         {
             "id": 7,
             "active": true,
-            "Message": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other project won't see what we do into this project.\nCreate a new project named '#>V:Trigram#-proj' and associate the Nutanix cluster into it.\nWrite here 'OK' when the project is created.\n#>I:#",
+            "Message": {
+                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other project won't see what we do into this project.\nCreate a new project named '#>V:Trigram#-proj' and associate the Nutanix cluster into it.\nWrite here 'OK' when the project is created.\n#>I:#"
+            },
             "CheckTask": "CheckProject",
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -49,7 +65,9 @@
         {
             "id": 8,
             "active": true,
-            "Message": "\nYou know what ?#>P:2# I already like you, we are great teamates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nCreate a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very usefull for us, Plase configure your subnet with these info :\n - IP Pool: #>V:IPPool#\n - Gateway: #>V:Gateway#\n - Nameserver: #>V:Nameserver#\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#",
+            "Message": {
+                "en": "\nYou know what ?#>P:2# I already like you, we are great teamates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nCreate a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very usefull for us, Plase configure your subnet with these info :\n - IP Pool: #>V:IPPool#\n - Gateway: #>V:Gateway#\n - Nameserver: #>V:Nameserver#\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
+            },
             "CheckTask": "CheckNetwork",
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -57,7 +75,9 @@
         {
             "id": 9,
             "active": true,
-            "Message": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#. You will find it in the 'Infrastructure' page.\nWrite 'OK' when the image is added. #>I:#",
+            "Message": {
+                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#. You will find it in the 'Infrastructure' page.\nWrite 'OK' when the image is added. #>I:#"
+            },
             "CheckTask": "CheckImage",
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -65,7 +85,9 @@
         {
             "id": 10,
             "active": true,
-            "Message": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk\n - 2 NICS in the subnet 'Primary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nWrite 'OK' when the VM is created. #>I:#",
+            "Message": {
+                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk\n - 2 NICS in the subnet 'Primary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nWrite 'OK' when the VM is created. #>I:#"
+            },
             "CheckTask": "CheckVM",
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -73,90 +95,116 @@
         {
             "id": 11,
             "active": true,
-            "Message": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM in the UI list, and check the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#",
+            "Message": {
+                "en": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM in the UI list, and check the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#"
+            },
             "WaitForInputValue": "OK",
             "Color": "blue"
         },
         {
             "id": 12,
             "active": true,
-            "Message": "\nPerfect, it is pretty discrete. They won't see it, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central and hit 'Enter' when you are ready.\n#>P:6#Oh wait !!!#>P:5#They are scanning the host, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#",
+            "Message": {
+                "en": "\nPerfect, it is pretty discrete. They won't see it, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central and hit 'Enter' when you are ready.\n#>P:6#Oh wait !!!#>P:5#They are scanning the host, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#"
+            },
             "Color": "blue"
         },
         {
             "id": 13,
             "active": true,
-            "Message": "\nThanks god, they have not detected the VM... huhu, it was VERY hot !\n\nNow we are starting serious things. Unfortunately, you are not Nutanix certified, but it is not a big deal. They makes things simple with their interface, and you should find how to do that by yourself#>P:4#\nIn the 'Infrastructure' page, you should find something to manage categories. Nutanix uses Catagories to manage all the policies on the cluster, it is very efficient.#>P:3#\nCreate a new category #>V:Trigram#-cat with 2 values : 'Critical' and 'Test'.#>P:3# I am waiting for your 'OK'. #>I:",
+            "Message": {
+                "en": "\nThanks god, they have not detected the VM... huhu, it was VERY hot !\n\nNow we are starting serious things. Unfortunately, you are not Nutanix certified, but it is not a big deal. They makes things simple with their interface, and you should find how to do that by yourself#>P:4#\nIn the 'Infrastructure' page, you should find something to manage categories. Nutanix uses Catagories to manage all the policies on the cluster, it is very efficient.#>P:3#\nCreate a new category #>V:Trigram#-cat with 2 values : 'Critical' and 'Test'.#>P:3# I am waiting for your 'OK'. #>I:"
+            },
             "WaitForInputValue": "OK",
             "Color": "blue"
         },
         {
             "id": 14,
             "active": true,
-            "Message": "\nNice, you work quickly. I expect you don't do it dirty ;) #>P:4#\nLet me check this category... \n",
+            "Message": {
+                "en": "\nNice, you work quickly. I expect you don't do it dirty ;) #>P:4#\nLet me check this category... \n"
+            },
             "CheckTask": "CheckCat",
             "Color": "blue"
         },
         {
             "id": 15,
             "active": true,
-            "Message": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need, in the Infrastrucutre page, create a Storage policy #>V:Trigram#-policy enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nWrite 'OK' when it's done. #>I:#",
+            "Message": {
+                "en": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need, in the Infrastrucutre page, create a Storage policy #>V:Trigram#-policy enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nWrite 'OK' when it's done. #>I:#"
+            },
             "WaitForInputValue": "OK",
             "Color": "blue"
         },
         {
             "id": 16,
             "active": true,
-            "Message": "\nLet me check this storage policy... \n",
+            "Message": {
+                "en": "\nLet me check this storage policy... \n"
+            },
             "CheckTask": "CheckStoragePolicy",
             "Color": "blue"
         },   
         {
             "id": 17,
             "active": true,
-            "Message": "\nOK...#>P:4#\n\nNext step, create a microsegmentation policy to protect our VM.#>P:3# It is a way to control network exchange between the VM and other elements of the network. It is very useful to avoid any data leak or attack. #P:3# It is a bit embarrassing to have this feature and not use it. It would have annoyed us in our mission... If they knew :D ... #>P:5#\nCreate a new Microsegmentation policy named '#>V:Trigram#-policy' with the following rules :\n - Refuse all trafic to the VM\n - Allow all outboud traffic\n\nWrite 'OK' when it's done. #>I:#",
+            "Message": {
+                "en": "\nOK...#>P:4#\n\nNext step, create a microsegmentation policy to protect our VM.#>P:3# It is a way to control network exchange between the VM and other elements of the network. It is very useful to avoid any data leak or attack. #P:3# It is a bit embarrassing to have this feature and not use it. It would have annoyed us in our mission... If they knew :D ... #>P:5#\nCreate a new Microsegmentation policy named '#>V:Trigram#-policy' with the following rules :\n - Refuse all trafic to the VM\n - Allow all outboud traffic\n\nWrite 'OK' when it's done. #>I:#"
+            },
             "WaitForInputValue": "OK",
             "Color": "blue"
         },
         {
             "id": 18,
             "active": true,
-            "Message": "\nI am going to check that... \n",
+            "Message": {
+                "en": "\nI am going to check that... \n"
+            },
             "CheckTask": "CheckSecurityPolicy",
             "Color": "blue"
         },
         {
             "id": 19,
             "active": true,
-            "Message": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:10#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, then update it to allow the SSH traffic from the jumphost from we are talking on.#>P:2# You'll get the IP with command 'ip a' in another ssh session.#>P:3#\nAfter Security policy update, check ssh connection and put 'OK' here. #>I:#",
+            "Message": {
+                "en": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:10#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, then update it to allow the SSH traffic from the jumphost from we are talking on.#>P:2# You'll get the IP with command 'ip a' in another ssh session.#>P:3#\nAfter Security policy update, check ssh connection and put 'OK' here. #>I:#"
+            },
             "WaitForInputValue": "OK",
             "Color": "blue"
         },
         {
             "id": 20,
             "active": true,
-            "Message": "\nI trut you but I prefer to double-check that buddy... \n",
+            "Message": {
+                "en": "\nI trut you but I prefer to double-check that buddy... \n"
+            },
             "CheckTask": "CheckSecurityPolicy2",
             "Color": "blue"
         },
         {
             "id": 21,
             "active": true,
-            "Message": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 mn\n - Keep 1 day of snapshots\n\nWe do not need to replicate here\nWrite 'OK' when it's done. #>I:#",
+            "Message": {
+                "en": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 mn\n - Keep 1 day of snapshots\n\nWe do not need to replicate here\nWrite 'OK' when it's done. #>I:#"
+            },
             "WaitForInputValue": "OK",
             "Color": "blue"
         },
         {
             "id": 22,
             "active": true,
-            "Message": "Good. I check again. Less risks, more fun !\n",
+            "Message": {
+                "en": "Good. I check again. Less risks, more fun !\n"
+            },
             "CheckTask": "CheckProtectionPolicy",
             "Color": "blue"
         },
         {
             "id": 23,
             "active": true,
-            "Message": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named 'SecureSnaps' requestiong validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William.#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#",
+            "Message": {
+                "en": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named 'SecureSnaps' requestiong validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William.#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#"
+            },
             "WaitForInputValue": "Done",
             "Color": "blue"
         },
@@ -164,21 +212,27 @@
         {
             "id": 50,
             "active": false,
-            "Message": "Closing connection... #>P:3#Done.\nGenerating new keys... #>P:3#Done.\nEstablishing connection to the endpoint with multi-layer encryption and with multiple hops to reduce tracking capabilities... #>P:3# Done.\n\n",
+            "Message": {
+                "en": "Closing connection... #>P:3#Done.\nGenerating new keys... #>P:3#Done.\nEstablishing connection to the endpoint with multi-layer encryption and with multiple hops to reduce tracking capabilities... #>P:3# Done.\n\n"
+            },
             "Color": "green"
         },
 
         {
             "id": 51,
             "active": false,
-            "Message": "Ok, I'm back. I hope you are still ok.\n\n",
+            "Message": {
+                "en": "Ok, I'm back. I hope you are still ok.\n\n"
+            },
             "Color": "blue"
         },
         
         {
             "id": 100,
             "active": false,
-            "Message": "Thank you and good bye!\n",
+            "Message": {
+                "en": "Thank you and good bye!\n"
+            },
             "Color": "green"
         }
 ]

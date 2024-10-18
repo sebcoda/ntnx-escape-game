@@ -85,7 +85,7 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
 # ========================================================================
 # This function reads a JSON file and returns the message of a specific stage
 
-def stageMessage(id_number, json_file_path):
+def stageMessage(id_number, json_file_path, language='en'):
     with open(json_file_path, 'r') as file:
         data = json.load(file)
     
@@ -101,8 +101,9 @@ def stageMessage(id_number, json_file_path):
     else:
         checkTask=''
 
+    print
     
-    return(info['Message'], info['Color'],waitForInputValue,checkTask)
+    return(info['Message'][language], info['Color'],waitForInputValue,checkTask)
 
 # ========================================================================
 # = CheckStage
@@ -120,6 +121,16 @@ def CheckStage(checkScript, variables):
     else:
         raise ValueError(f"Function {checkScript} is not defined.")
     
+# ========================================================================
+# = GetSupportedLanguages
+# ========================================================================
+# This function reads a JSON file and returns the list of supported languages
+def GetSupportedLanguages(json_file_path):
+    with open(json_file_path, 'r') as file:
+        data = json.load(file)
+    
+    return ",".join(data['supportedLanguages'])
+
 # Function to retrieve the extId of a specific subnet
 def retrieveUserId(userName, variables):
 

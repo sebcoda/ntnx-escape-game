@@ -4,6 +4,7 @@ from jsonpath_ng import jsonpath, parse
 
 # Definition of the global variables
 variables = {
+    "Language": "en",
     "Username": "JohnDoe",
     "PC": "pc.ntnxlab.org",
     "PCPassword": "nx2Tech736!",
@@ -18,11 +19,12 @@ variables = {
     "ProdPassword": "MyProdPassword",
 }
 contentJsonFile="./content.json"
+firstStage=1
 
-firstStage=4
-
-# Example usage
+# Main function
 if __name__ == "__main__":
+    variables['SupportedLanguages'] = GetSupportedLanguages(contentJsonFile)
+
     # Display all stages
     with open(contentJsonFile, 'r') as file:
         data = json.load(file)
@@ -32,7 +34,7 @@ if __name__ == "__main__":
         
         if stage['id'] >= firstStage and stage['active'] == True:
             # Get message of the stage
-            message,color,expectedvalue,checkScript=stageMessage(stage['id'], contentJsonFile)
+            message,color,expectedvalue,checkScript=stageMessage(stage['id'], contentJsonFile, variables['Language'])
             display(message, variables, color, expectedvalue)
 
             # Check student work if needed
