@@ -2,7 +2,8 @@ from functions import *
 from dotenv import load_dotenv
 import json
 import os
-from jsonpath_ng import jsonpath, parse
+from escapegameengine import *
+
 
 # Definition of the global variables
 load_dotenv('config.env')
