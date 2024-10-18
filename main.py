@@ -1,23 +1,28 @@
 from functions import *
+from dotenv import load_dotenv
 import json
+import os
 from jsonpath_ng import jsonpath, parse
 
 # Definition of the global variables
+load_dotenv('config.env')
+
 variables = {
-    "Language": "en",
-    "Username": "JohnDoe",
-    "PC": "pc.ntnxlab.org",
-    "PCPassword": "nx2Tech736!",
-    "PCUser": "admin",
-    "Trigram": "JDO",
-    "Vlanid": "10",
-    "Nameserver": "8.8.8.8",
-    "IPPool": "192.168.1.50-192.168.1.99",
-    "Gateway": "192.168.1.1",
-    "ImageURL": "https://cloud-images.ubuntu.com/daily/server/jammy/current/jammy-server-cloudimg-amd64.img",
-    "ProdUsername": "TheBadGuy",
-    "ProdPassword": "MyProdPassword",
+    "Language": os.getenv('LANGUAGE'),
+    "Username": os.getenv('USERNAME'),
+    "PC": os.getenv('PC'),
+    "PCPassword": os.getenv('PCPASSWORD'),
+    "PCUser": os.getenv('PCUSER'),
+    "Trigram": os.getenv('TRIGRAM'),
+    "Vlanid": os.getenv('VLANID'),
+    "Nameserver": os.getenv('NAMESERVER'),
+    "IPPool": os.getenv('IPPOOL'),
+    "Gateway": os.getenv('GATEWAY'),
+    "ImageURL": os.getenv('IMAGEURL'),
+    "ProdUsername": os.getenv('PRODUSERNAME'),
+    "ProdPassword": os.getenv('PRODPASSWORD'),
 }
+
 contentJsonFile="./content.json"
 firstStage=1
 
