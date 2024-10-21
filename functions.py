@@ -31,7 +31,7 @@ def retrieveUserId(userName, variables):
         return None
     
 # ========================================================================
-# = retrieveUserId
+# = retrieveRoleId
 # ========================================================================
 # Function to retrieve the extId of a specific subnet
 def retrieveRoleId(roleName, variables):
