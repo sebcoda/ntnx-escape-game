@@ -5,8 +5,7 @@ def CheckUser(variables):
     clue = ''
 
     #retrieve the user by filtering by name
-    #userId = retrieveUserId(userName=variables['Trigram'] + "-adm", variables=variables) #non existing user
-    userId = retrieveUserId(userName="fabrice@ntnxlab.local", variables=variables) #non existing user
+    userId = retrieveUserId(userName=variables['Trigram'] + "-adm", variables=variables) #non existing user
     if userId is None:
         result=False
         clue="The user " + variables['Trigram'] + "-adm hasn't been found. Are you sure you've created it with the correct name?"
