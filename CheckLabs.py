@@ -36,9 +36,19 @@ def CheckUser(variables):
     return result, clue
 
 def CheckProject(variables):
-    clue=''
-    result=True
-    print("#GL Need to be coded")
+    from functions import retrieveProjectId
+
+    result = True
+    clue = ''
+
+    response = retrieveProjectId(projectName=variables['Trigram'] + "-proj", variables=variables)
+
+    if response is None: 
+        result=False
+        clue="The project " + variables['Trigram'] + "-proj doesn't exist. Are you sure you named it correctly?"
+        
+        return result, clue
+        
     return result, clue
     
 

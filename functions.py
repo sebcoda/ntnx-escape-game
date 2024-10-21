@@ -2,6 +2,7 @@ from CheckLabs import *
 from Sentences import *
 import ntnx_networking_py_client.models.networking.v4.config 
 import ntnx_iam_py_client
+import requests
 
 # ========================================================================
 # = retrieveUserId
@@ -118,3 +119,54 @@ def checkAuthorizationPolicyAssignement(authorizationPolicyId, roleId, userId, v
     
     # If everything is correct, return True
     return True
+
+# ========================================================================
+# = retrieveProjectId
+# ========================================================================
+# Function that is returning the extId of a project
+def retrieveProjectId(projectName, variables):
+
+    url = "https://%s:9440/api/nutanix/v3/groups" % variables['PC']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    payload = {
+        "entity_type": "project",
+        "group_member_attributes": [
+            {"attribute": "name"},
+            {"attribute": "description"},
+            {"attribute": "uuid"},
+            {"attribute": "state"},
+            {"attribute": "vcpus_count"},
+            {"attribute": "memory_bytes"},
+            {"attribute": "storage_bytes"},
+            {"attribute": "vcpus_count_limit"},
+            {"attribute": "memory_bytes_limit"},
+            {"attribute": "storage_bytes_limit"},
+            {"attribute": "user_reference_list"},
+            {"attribute": "user_group_reference_list"},
+            {"attribute": "vms_count"},
+            {"attribute": "network_id_list"},
+            {"attribute": "environment_id_list"},
+            {"attribute": "default_environment_id"},
+            {"attribute": "account_id_list"},
+            {"attribute": "message"},
+            {"attribute": "error"}
+        ],
+        "filter_criteria": "",
+        "group_member_offset": 0,
+        "group_member_count": 20,
+        "group_member_sort_order": "ASCENDING",
+        "group_member_sort_attribute": "name"
+    }
+
+    response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = response.json()
+
+    for group in response_data.get('group_results', []):
+        for entity in group.get('entity_results', []):
+            for data in entity.get('data', []):
+                if data['name'] == 'name' and data['values'][0]['values'][0] == projectName:
+                    return entity['entity_id']
+    return None
