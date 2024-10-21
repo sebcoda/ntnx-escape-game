@@ -1,27 +1,54 @@
 def CheckUser(variables):
-    from functions import retrieveUserId, getUserById
+    from functions import retrieveUserId, retrieveRoleId, retrieveAuthorizationPolicyId, checkAuthorizationPolicyAssignement
 
     result = True
     clue = ''
 
     #retrieve the user by filtering by name
-    #existing user : userId = retrieveUserId("fabrice@ntnxlab.local", variables=variables)
-    userId = retrieveUserId(variables['Trigram'] + "-adm", variables=variables) #non existing user
+    userId = retrieveUserId(userName=variables['Trigram'] + "-adm", variables=variables) #non existing user
     if userId is None:
         result=False
         clue="The user " + variables['Trigram'] + "-adm hasn't been found. Are you sure you've created it with the correct name?"
         
         return result, clue
     
-    #to be finished. Group association and role should be checked
-    #test = getUserById(extId=userId, variables=variables)
+    #retrieve the Super Admin role ID
+    roleId = retrieveRoleId(roleName="Super Admin", variables=variables)
+
+    #retrieve the authorization policy ID
+    authorizationPolicyId = retrieveAuthorizationPolicyId(policyName=variables['Trigram'] + "-auth", variables=variables)
+
+    if authorizationPolicyId is None:
+        result=False
+        clue="The authorization policy  " + variables['Trigram'] + "-auth is not created as requested. Are you sure you've created it with the correct name?"
+        
+        return result, clue
+    
+    #check if the authorization policy is associated to the correct role and user
+    response = checkAuthorizationPolicyAssignement(authorizationPolicyId=authorizationPolicyId, roleId=roleId, userId=userId, variables=variables)
+
+    if response is False: 
+        result=False
+        clue="The authorization policy  " + variables['Trigram'] + "-auth exist, but is not correctly assigning the role to the user. Are you sure you've assigned the correct ressources?"
+        
+        return result, clue
         
     return result, clue
 
 def CheckProject(variables):
-    clue=''
-    result=True
-    print("#GL Need to be coded")
+    from functions import retrieveProjectId
+
+    result = True
+    clue = ''
+
+    response = retrieveProjectId(projectName=variables['Trigram'] + "-proj", variables=variables)
+
+    if response is None: 
+        result=False
+        clue="The project " + variables['Trigram'] + "-proj doesn't exist. Are you sure you named it correctly?"
+        
+        return result, clue
+        
     return result, clue
     
 

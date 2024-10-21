@@ -25,7 +25,7 @@ variables = {
 
 contentJsonFile="./content.json"
 scoreFile="status.dat"
-firstStage=27
+firstStage=7
 
 # Main function
 if __name__ == "__main__":
