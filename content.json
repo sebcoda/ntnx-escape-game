@@ -30,7 +30,7 @@
             "id": 4,
             "active": true,
             "Message": {
-                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster, create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights.\nWrite here 'Done' when it's... done LOL.\n#>I:#"
+                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster, create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights in a policy named  #>V:Trigram#-auth .\nWrite here 'Done' when it's... done LOL.\n#>I:#"
             },
             "Color": "blue",
             "WaitForInputValue": "Done"
@@ -246,11 +246,65 @@
             "id": 28,
             "active": true,
             "Message": {
-                "en": "It looks like they have destroyed our VM, but we should still have our recovery point.#>P:3# Recreate the VM with the same name, from the latest recovery point please. I wait. Put 'OK' here when it's done. #>I:#"
+                "en": "It looks like they have destroyed our VM, but we should still have our recovery point regarding our config.#>P:3# Recreate the VM with the same name, from the latest recovery point please. I wait. Put 'OK' here when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",           
             "Color": "blue"
+        },
+        {
+            "id": 29,
+            "active": true,
+            "Message": {
+                "en": "Good. Just 2 mn...#>P:2#\n"
+            },
+            "CheckTask": "CheckRestoreVM",      
+            "Color": "blue"
         },        
+        {
+            "id": 30,
+            "active": true,
+            "Message": {
+                "en": "You know what ? As we have a few time, we gonna use it to spy them a bit more.\n#>P:2#It would be great if you could sent to this discreet address (noreply@supco.com) a repport containing the list of VMs, and send it each day at 3:00 AM. It will help us to know what they are doing.\n#>P:3#Name your repport #>V:Trigram#-report. #>P:3#\n Put OK here when you have finished.#>I:#"
+            },
+            "WaitForInputValue": "OK",           
+            "Color": "blue"
+        },                        
+        {
+            "id": 31,
+            "active": true,
+            "Message": {
+                "en": "Perfect... Let me few seconds...\n"
+            },
+            "CheckTask": "CheckReport",      
+            "Color": "blue"
+        },
+        {
+            "id": 32,
+            "active": false,
+            "Message": {
+                "en": "Now I need you go on the Infrastructure > Hardware > Clusters page. Then simulate cluster expansion, without validating them. Just take a screenshot of the review page, it will be usefull for a future mission. I can't tell you more right know. #>P:3#Tell me when it's done, writng 'OK' there. #>I:#"
+            },
+            "WaitForInputValue": "OK",           
+            "Color": "blue"
+        },                        
+        {
+            "id": 33,
+            "active": true,
+            "Message": {
+                "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM page, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Put 'OK' here when it's done. #>I:#"
+            },
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },                        
+        {
+            "id": 34,
+            "active": true,
+            "Message": {
+                "en": "Nice ! #>P:3#Third and last check I need you do for me : #>P:1#Frome the Dasboard page of the Infrastructure, you should have a tile with secrutity concerns. From here, display the full security Dashboard, and dig into it, takes some screenshot which will help us for upcoming operations. We will have to act quickly, this tool is very helpfull to identify all security issues of the platform, and they probably take care of it. #>P:5#Put 'OK' here when it's done. #I>:#\n"
+            },
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
         {
             "id": 100,
             "active": false,

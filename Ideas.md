@@ -14,14 +14,14 @@
 	- Microseg OK
 	- Replication OK
 - Create approval rule to prevent deletion of RP OK
-- VM has been deleted, restore VM from recovery point
+- VM has been deleted, restore VM from recovery point OK
 
 ## Operational help
 
-- Create report to send-it regularly to an email
-- Add a node
-- LCM ?
-- Security dashboard
+- Create report to send-it regularly to an email OK
+- Add a node OK (just view)
+- LCM (just view)
+- Security dashboard (just view)
 - Cluster Runaway (on Specialists HPOC ?)
 	- Identify bad sized VM (on Specialists HPOC ?) with `Optimize resources`
 - Create Playbook to call a webhook as soon as VM is restarted

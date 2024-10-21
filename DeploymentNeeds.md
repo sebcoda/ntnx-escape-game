@@ -1,6 +1,5 @@
 # Prerequisites
-HPOC with 
-
+HPOC with 3 nodes, Self service activated
 
 # Deployment of
 Activate flow

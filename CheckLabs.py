@@ -78,3 +78,15 @@ def CheckApprovalPolicy(variables):
     result=True
     print("#GL Need to be coded")
     return result, clue
+
+def CheckRestoreVM(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
+
+def CheckReport(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
