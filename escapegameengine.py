@@ -31,6 +31,10 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
         'reset': '\033[0m'
     }
 
+    if variables['Debug']==True:
+        # We remove delay
+        delay=0
+
     cursor.show()
       
     if color and color in color_codes:
@@ -43,7 +47,8 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
     for element in input_string:
         if len(element)>0 and element[0]=='>' :
             # We check if we have a spcial action to do
-            if element[1]=='P':
+            
+            if element[1]=='P' and variables['Debug']==False:
                 # If we have a pause action, we wait for the specified number of seconds
                 cursor.hide()
 

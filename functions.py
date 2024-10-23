@@ -2,7 +2,25 @@ from CheckLabs import *
 from Sentences import *
 import ntnx_networking_py_client.models.networking.v4.config 
 import ntnx_iam_py_client
+import ntnx_networking_py_client
 import requests
+
+# ========================================================================
+# = configSdkClient
+# ========================================================================
+def confSDKClient(host, user, password, ssl=False):
+    
+    # Configure the client
+    sdkConfig = ntnx_networking_py_client.Configuration()
+    sdkConfig.host = host
+    sdkConfig.port = 9440
+    sdkConfig.maxRetryAttempts = 3
+    sdkConfig.backoffFactor = 3
+    sdkConfig.username = user
+    sdkConfig.password = password
+    sdkConfig.verify_ssl = ssl
+
+    return sdkConfig
 
 # ========================================================================
 # = retrieveUserId
@@ -170,3 +188,26 @@ def retrieveProjectId(projectName, variables):
                 if data['name'] == 'name' and data['values'][0]['values'][0] == projectName:
                     return entity['entity_id']
     return None
+
+
+# ========================================================================
+# = retrieveSubnetID
+# ========================================================================
+# Function that is returning the extId of a subnet
+def retrieveSubnetID(subnet_name, variables):
+
+    # Configure the client
+    sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
+
+    client = ntnx_networking_py_client.ApiClient(configuration=sdkConfig)
+    subnets_api = ntnx_networking_py_client.SubnetsApi(api_client=client)
+
+    response=subnets_api.list_subnets(filter="name eq '" + subnet_name + "'")
+    myData = response.to_dict()
+
+    # Check if we got an id
+    if len(myData['entities']) == 0:
+        return None
+        
+    # If everything is correct, return True
+    return True 

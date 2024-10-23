@@ -1,8 +1,8 @@
-from functions import *
 from dotenv import load_dotenv
 import json
 import os
 from escapegameengine import *
+from functions import *
 
 # Definition of the global variables
 load_dotenv('config.env')
@@ -21,11 +21,19 @@ variables = {
     "ImageURL": os.getenv('IMAGEURL'),
     "ProdUsername": os.getenv('PRODUSERNAME'),
     "ProdPassword": os.getenv('PRODPASSWORD'),
+    "OldPC": os.getenv('OLDPC'),
+    "OldPCUsername": os.getenv('OLDPCUSERNAME'),
+    "OldPCPassword": os.getenv('OLDPCPASSWORD'),
+    "Debug": False
 }
+
+# handling debug mode
+if os.getenv('DEBUG') == 'True':
+    variables['Debug'] = True
 
 contentJsonFile="./content.json"
 scoreFile="status.dat"
-firstStage=7
+firstStage=8
 
 # Main function
 if __name__ == "__main__":

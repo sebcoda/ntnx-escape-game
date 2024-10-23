@@ -4,5 +4,4 @@ python-dotenv
 jsonpath-ng
 cursor
 requests
-dotenv
-os
+python-dotenv

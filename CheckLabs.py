@@ -1,3 +1,8 @@
+from functions import *
+
+# =============================================================================
+# CheckUSer - Done
+# =============================================================================
 def CheckUser(variables):
     from functions import retrieveUserId, retrieveRoleId, retrieveAuthorizationPolicyId, checkAuthorizationPolicyAssignement
 
@@ -35,6 +40,9 @@ def CheckUser(variables):
         
     return result, clue
 
+# =============================================================================
+# CheckProject - Done
+# =============================================================================
 def CheckProject(variables):
     from functions import retrieveProjectId
 
@@ -51,11 +59,22 @@ def CheckProject(variables):
         
     return result, clue
     
-
+# =============================================================================
+# CheckNetwork - WIP
+# =============================================================================
 def CheckNetwork(variables):
+    
     clue=''
     result=True
-    print("#GL Need to be coded")
+
+    response = retrieveSubnetID(networkName=variables['Trigram'] + "-subnet", variables=variables)
+
+    if response is None: 
+        result=False
+        clue="The subnet " + variables['Trigram'] + "-subnet is not on the cluster. Are you sure you named it correctly?"
+        
+        return result, clue
+    
     return result, clue
 
 def CheckImage(variables):
