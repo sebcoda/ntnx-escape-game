@@ -76,7 +76,7 @@
             "id": 9,
             "active": true,
             "Message": {
-                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#. You will find it in the 'Infrastructure' page.\nWrite 'OK' when the image is added. #>I:#"
+                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#. You will find it in the 'Infrastructure' page.\nWrite 'OK' when the image is available on the cluster. #>I:#"
             },
             "CheckTask": "CheckImage",
             "WaitForInputValue": "OK",

@@ -67,14 +67,19 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
                 globals()[element[3:]](variables)
 
             elif element[1]=='I':
+                
                 # If we have a read action, we wait for the user to press enter and store the input in the variables dictionary
                 if len(element)>3:
+                    sys.stdout.write(color_codes['yellow'])
                     variables[element[3:]]=input()
+                    sys.stdout.write(color_codes[color])
                 else:
+                    sys.stdout.write(color_codes['yellow'])
                     tmp=input()
+                    sys.stdout.write(color_codes[color])
                     if tmp!=expectedValue:
                         display("I do not understand. You said? #>I:",variables,color,expectedValue)
-
+                
 
             elif element[1]=='V':
                 display(variables[element[3:]], variables, color)

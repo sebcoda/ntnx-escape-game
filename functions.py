@@ -3,6 +3,7 @@ from Sentences import *
 import ntnx_networking_py_client.models.networking.v4.config 
 import ntnx_iam_py_client
 import ntnx_networking_py_client
+import ntnx_vmm_py_client
 import requests
 
 # ========================================================================
@@ -211,3 +212,32 @@ def retrieveSubnetID(subnet_name, variables):
         
     # If everything is correct, return True
     return True 
+
+# ========================================================================
+# = retrieveImageID
+# ========================================================================
+# Function that is returning the extId of an image
+# Note : developped in v3 API because Python SDK seems to be broken (list_images is not found)
+# SDK Ref : https://developers.nutanix.com/sdk-reference?namespace=vmm&version=v4.0.b1&language=python
+def retrieveImageID(image_name, variables):
+
+    url = "https://%s:9440/api/nutanix/v3/images/list" % variables['PC']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    payload={
+        "kind": "image",
+        "length": 100,
+        }
+
+    response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = response.json()
+
+    for image in response_data['entities']:
+        if image['status']['name'] == image_name:
+            return image['metadata']['uuid']
+
+        
+    return None
