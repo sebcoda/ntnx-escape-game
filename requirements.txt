@@ -5,3 +5,4 @@ jsonpath-ng
 cursor
 requests
 python-dotenv
+urllib3

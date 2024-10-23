@@ -67,7 +67,7 @@ def CheckNetwork(variables):
     clue=''
     result=True
 
-    response = retrieveSubnetID(networkName=variables['Trigram'] + "-subnet", variables=variables)
+    response = retrieveSubnetID(subnet_name=variables['Trigram'] + "-subnet", variables=variables)
 
     if response is None: 
         result=False

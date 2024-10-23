@@ -3,6 +3,9 @@ import json
 import os
 from escapegameengine import *
 from functions import *
+import urllib3
+
+urllib3.disable_warnings()
 
 # Definition of the global variables
 load_dotenv('config.env')
@@ -14,9 +17,8 @@ variables = {
     "PCPassword": os.getenv('PCPASSWORD'),
     "PCUser": os.getenv('PCUSER'),
     "Trigram": os.getenv('TRIGRAM'),
-    "Vlanid": os.getenv('VLANID'),
+    "Vlanid": str(random.randrange(250)),
     "Nameserver": os.getenv('NAMESERVER'),
-    "IPPool": os.getenv('IPPOOL'),
     "Gateway": os.getenv('GATEWAY'),
     "ImageURL": os.getenv('IMAGEURL'),
     "ProdUsername": os.getenv('PRODUSERNAME'),
@@ -27,13 +29,16 @@ variables = {
     "Debug": False
 }
 
+firstStage=1
+
 # handling debug mode
 if os.getenv('DEBUG') == 'True':
     variables['Debug'] = True
+    firstStage=int(os.getenv('FIRSTSTAGE'))
 
 contentJsonFile="./content.json"
 scoreFile="status.dat"
-firstStage=8
+
 
 # Main function
 if __name__ == "__main__":

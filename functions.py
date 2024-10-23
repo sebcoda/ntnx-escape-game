@@ -202,11 +202,11 @@ def retrieveSubnetID(subnet_name, variables):
     client = ntnx_networking_py_client.ApiClient(configuration=sdkConfig)
     subnets_api = ntnx_networking_py_client.SubnetsApi(api_client=client)
 
-    response=subnets_api.list_subnets(filter="name eq '" + subnet_name + "'")
+    response=subnets_api.list_subnets(_filter="name eq '" + subnet_name + "'")
     myData = response.to_dict()
 
     # Check if we got an id
-    if len(myData['entities']) == 0:
+    if myData['data']==None or len(myData['data']) != 1:
         return None
         
     # If everything is correct, return True
