@@ -241,3 +241,65 @@ def retrieveImageID(image_name, variables):
 
         
     return None
+
+# ========================================================================
+# = retrieveVMInfo
+# ========================================================================
+def retrieveVMInfo(vm_name, variables):
+
+    # Configure the client
+    sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
+
+    client = ntnx_vmm_py_client.ApiClient(configuration=sdkConfig)
+    vms_api = ntnx_vmm_py_client.VmApi(api_client=client)
+
+    response=vms_api.list_vms(_filter="name eq '" + vm_name + "'")
+    myData = response.to_dict()
+
+    # Check if we got an id
+    if myData['data']==None or len(myData['data']) != 1:
+        return False, {}
+    
+    vmUUID=myData['data'][0]['ext_id']
+    
+    response=vms_api.get_vm_by_ext_id(vmUUID)
+    myData=response.to_dict()
+
+    # If everything is correct, return True
+    return True, myData['data']
+
+# ========================================================================
+# = getVMProjectUUID
+# ========================================================================
+def getVMProjectUUID(vmuuid, pc, user, password):
+    url = "https://%s:9440/api/nutanix/v3/vms/%s"% (pc,vmuuid)
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    response = requests.get(url, headers=headers, verify=False, auth=(user, password))
+    response_data = response.json()
+
+    return response_data['metadata']['project_reference']['uuid']
+
+# ========================================================================
+# = hasVMCloudinit
+# ========================================================================
+def hasVMCloudinit(vmuuid, pc, user, password):
+    url = "https://%s:9440/api/nutanix/v3/vms/%s"% (pc,vmuuid)
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    response = requests.get(url, headers=headers, verify=False, auth=(user, password))
+    response_data = response.json()
+
+    if response_data['spec']['resources']['guest_customization'] == None:
+        return False
+    
+    return True
+
+
+

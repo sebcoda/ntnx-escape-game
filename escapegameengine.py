@@ -17,6 +17,7 @@ from actions import *
 #  - #>I:<name>#, it will wait for a user input and store it in the dictionary variables
 #  - #>V:<name>#, it will display the value of the variable <name> in the dictionary variables
 #  - #>A:<name>#, it will execute an action. The name of the action is the name of the function to call
+#  - #>S# will display the Sharp (#) character
   
 def display(input_string, variables, color=None, expectedValue='', delay=0.03):
     #Setting up colors
@@ -41,54 +42,57 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
         sys.stdout.write(color_codes[color])
     
     # First we split the string by the # character
-    input_string = input_string.split("#")
+    if input_string:
+        input_string = input_string.split("#")
 
-    # Then we iterate over the elements of the list
-    for element in input_string:
-        if len(element)>0 and element[0]=='>' :
-            # We check if we have a spcial action to do
-            
-            if element[1]=='P' and variables['Debug']==False:
-                # If we have a pause action, we wait for the specified number of seconds
-                cursor.hide()
-
-                for _ in range(int(element[3:])):  # Blink 5 times
-                    sys.stdout.write('_')
-                    sys.stdout.flush()
-                    time.sleep(0.5)
-                    sys.stdout.write('\b \b')
-                    sys.stdout.flush()
-                    time.sleep(0.5)
-
-                cursor.show()
-
-            elif element[1]=='A':
-                # If we have an action, we call the function with the name specified in the string
-                globals()[element[3:]](variables)
-
-            elif element[1]=='I':
+        # Then we iterate over the elements of the list
+        for element in input_string:
+            if len(element)>0 and element[0]=='>' :
+                # We check if we have a spcial action to do
                 
-                # If we have a read action, we wait for the user to press enter and store the input in the variables dictionary
-                if len(element)>3:
-                    sys.stdout.write(color_codes['yellow'])
-                    variables[element[3:]]=input()
-                    sys.stdout.write(color_codes[color])
-                else:
-                    sys.stdout.write(color_codes['yellow'])
-                    tmp=input()
-                    sys.stdout.write(color_codes[color])
-                    if tmp!=expectedValue:
-                        display("I do not understand. You said? #>I:",variables,color,expectedValue)
-                
+                if element[1]=='P' and variables['Debug']==False:
+                    # If we have a pause action, we wait for the specified number of seconds
+                    cursor.hide()
 
-            elif element[1]=='V':
-                display(variables[element[3:]], variables, color)
-        else:
-            # If not, we display the string letter by letter
-            for letter in element:
-                sys.stdout.write(letter)
-                sys.stdout.flush()
-                time.sleep(delay)   
+                    for _ in range(int(element[3:])):  # Blink 5 times
+                        sys.stdout.write('_')
+                        sys.stdout.flush()
+                        time.sleep(0.5)
+                        sys.stdout.write('\b \b')
+                        sys.stdout.flush()
+                        time.sleep(0.5)
+
+                    cursor.show()
+
+                elif element[1]=='A':
+                    # If we have an action, we call the function with the name specified in the string
+                    globals()[element[3:]](variables)
+
+                elif element[1]=='I':
+                    
+                    # If we have a read action, we wait for the user to press enter and store the input in the variables dictionary
+                    if len(element)>3:
+                        sys.stdout.write(color_codes['yellow'])
+                        variables[element[3:]]=input()
+                        sys.stdout.write(color_codes[color])
+                    else:
+                        sys.stdout.write(color_codes['yellow'])
+                        tmp=input()
+                        sys.stdout.write(color_codes[color])
+                        if tmp!=expectedValue:
+                            display("I do not understand. You said? #>I:",variables,color,expectedValue)
+                    
+
+                elif element[1]=='V':
+                    display(variables[element[3:]], variables, color)
+                elif element[1]=='S':
+                    sys.stdout.write("#")
+            else:
+                # If not, we display the string letter by letter
+                for letter in element:
+                    sys.stdout.write(letter)
+                    sys.stdout.flush()
+                    time.sleep(delay)   
     
 
 

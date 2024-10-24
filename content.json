@@ -5,7 +5,7 @@
             "id": 1,
             "active": true,
             "Message": {
-                "en": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n#>P:3#Enter your prefered language (#>V:SupportedLanguages#): #>I:Language#>P:2#Automatic translation activated#>P:2#\n\nPersonal trigram  ID required : #>I:Trigram#>P:3#\nThank you\n\nPlease wait for agent contact\n#>P:5"
+                "en": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n#>P:3#Enter your prefered language (#>V:SupportedLanguages#): #>I:Language#>P:2#Automatic translation activated#>P:2#\n\nPersonal trigram ID required : #>I:Trigram#>P:3#\nThank you\n\nPlease wait for agent contact\n#>P:5"
             },
             "Color": "green"
         },
@@ -86,7 +86,7 @@
             "id": 10,
             "active": true,
             "Message": {
-                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk\n - 2 NICS in the subnet 'Primary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nWrite 'OK' when the VM is created. #>I:#"
+                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk based on image we just uploaded\n - 2 NICS in the subnet 'Primary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAfter that, move your VM into your project, it's done with 'Manage ownership' action in the VM contextual menu.\nWhen it is done, start the VM, and write 'OK' when you have finished. #>I:#"
             },
             "CheckTask": "CheckVM",
             "WaitForInputValue": "OK",
@@ -96,7 +96,7 @@
             "id": 11,
             "active": true,
             "Message": {
-                "en": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM in the UI list, and check the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#"
+                "en": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM list in the UI, and confirm the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"

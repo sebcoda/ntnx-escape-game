@@ -35,6 +35,14 @@ firstStage=1
 if os.getenv('DEBUG') == 'True':
     variables['Debug'] = True
     firstStage=int(os.getenv('FIRSTSTAGE'))
+    variables['UserUUID'] = os.getenv('USERUUID')
+    variables['NetworkUUID'] = os.getenv('NETWORKUUID')
+    variables['ProjectUUID'] = os.getenv('PROJECTUUID')
+    variables['VMUUID'] = os.getenv('VMUUID')
+    variables['ImageUUID'] = os.getenv('IMAGEUUID')
+    variables['HostUUID'] = os.getenv('HOSTUUID')
+
+
 
 contentJsonFile="./content.json"
 scoreFile="status.dat"
