@@ -315,12 +315,33 @@ def retrieveStoragePolicyID(policy_name, variables):
     }
 
     payload = {}
-    
+
     response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = response.json()
 
     for policy in response_data['entities']:
         if policy['status']['name'] == policy_name:
             return policy['metadata']['uuid']
+
+    return None
+
+# ========================================================================
+# = retrieveSecurityPolicyID
+# ========================================================================
+# Function that is returning the extId of a security policy
+def retrieveSecurityPolicyID(policy_name, variables):
+
+    url = "https://%s:9440/api/microseg/v4.0.b1/config/policies?((type eq Schema.Enums.SecurityPolicyType'APPLICATION'))" % variables['PC']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = response.json()
+
+    for policy in response_data['data']:
+        if policy['name'] == policy_name:
+            return policy['extId']
 
     return None
