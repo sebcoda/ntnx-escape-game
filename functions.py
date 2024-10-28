@@ -302,4 +302,25 @@ def hasVMCloudinit(vmuuid, pc, user, password):
     return True
 
 
+# ========================================================================
+# = retrieveStoragePolicyID
+# ========================================================================
+# Function that is returning the extId of a storage policy
+def retrieveStoragePolicyID(policy_name, variables):
 
+    url = "https://%s:9440/api/nutanix/v3/storage_policies/list" % variables['PC']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    payload = {}
+    
+    response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = response.json()
+
+    for policy in response_data['entities']:
+        if policy['status']['name'] == policy_name:
+            return policy['metadata']['uuid']
+
+    return None

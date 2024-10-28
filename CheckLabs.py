@@ -199,7 +199,18 @@ def CheckCat(variables):
 def CheckStoragePolicy(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
+
+    response = retrieveStoragePolicyID(policy_name=variables['Trigram'] + "-policy", variables=variables)
+
+    if response is None: 
+        result=False
+        clue="Are you sure you created the storage policy " + variables['Trigram'] + "-policy ? I did not find it?"
+        
+        return result, clue
+
+    # We store ImageUUID in the variables to be used later
+    variables['StoragePolicyUUID'] = response
+
     return result, clue
 
 def CheckSecurityPolicy(variables):
