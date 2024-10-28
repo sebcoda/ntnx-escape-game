@@ -42,6 +42,7 @@ if os.getenv('DEBUG') == 'True':
     variables['VMUUID'] = os.getenv('VMUUID')
     variables['ImageUUID'] = os.getenv('IMAGEUUID')
     variables['HostUUID'] = os.getenv('HOSTUUID')
+    variables['CatUUID'] = os.getenv('CATUUID')
 
 
 

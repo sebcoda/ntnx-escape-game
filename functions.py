@@ -383,3 +383,33 @@ def retrieveSecurityPolicyID(policy_name, variables):
 
     return None
 
+# ========================================================================
+# = retrieveProtectionPolicyInfo
+# ========================================================================
+# Function that is returning the info of a protection policy
+def retrieveProtectionPolicyInfo(policy_name, variables):
+
+    url = "https://%s:9440/api/nutanix/v3/protection_rules/list" % variables['PC']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    payload = {}
+
+    response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = response.json()
+
+    for policy in response_data['entities']:
+        if policy['status']['name'] == policy_name:
+            
+            # We found the policy, let's return the details
+            poluuid=policy['metadata']['uuid']
+
+            url = "https://%s:9440/api/nutanix/v3/protection_rules/%s" % (variables['PC'], poluuid)
+
+            response2 = requests.get(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+
+            return response2.json()
+
+    return None

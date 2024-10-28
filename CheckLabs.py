@@ -272,11 +272,45 @@ def CheckSecurityPolicy2(variables):
     print("#GL Need to be coded")
     return result, clue
 
+# =============================================================================
+# CheckProtectionPolicy - Done
+# =============================================================================
 def CheckProtectionPolicy(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
-    return result, clue
+    
+    info = retrieveProtectionPolicyInfo(variables['Trigram'] + "-policy", variables=variables)
+
+    if info == None:
+        clue="Are you sure you created the protection policy " + variables['Trigram'] + "-policy ? I did not find it?"
+        
+        return False, clue
+    else:
+        # We check policy details
+
+        # Schedule
+        if info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['recovery_point_objective_secs'] != 60:
+            clue="It looks like the snapshot schedule is not set to 60 seconds. Can you fix it ?"            
+            return False, clue
+
+        # Retention
+        if info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy']['rollup_retention_policy']['multiple'] != 1 or info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy']['rollup_retention_policy']['snapshot_interval_type'] != 'DAILY':
+            clue="It looks like the snapshot retention is not set to 1 day. Can you fix it ?"            
+            return False, clue
+
+        # Categories
+        cat=variables['Trigram']+"-cat"
+
+        if cat not in info['status']['resources']['category_filter']['params'].keys():
+            clue="It looks like the category filter is not set correctly. Can you fix it ?"            
+            return False, clue
+        
+        # Category value
+        if info['status']['resources']['category_filter']['params'][cat] == 'Critical':
+            clue="It looks like the category value is not set correctly. Can you fix it ?"
+            return False, clue
+
+    return True, clue
 
 def CheckApprovalPolicy(variables):
     clue=''
