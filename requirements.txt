@@ -1,5 +1,6 @@
 ntnx-iam-py-client
 ntnx_networking_py_client
+ntnx_prism_py_client
 ntnx_vmm_py_client
 python-dotenv
 jsonpath-ng
