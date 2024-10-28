@@ -4,6 +4,7 @@ import os
 from escapegameengine import *
 from functions import *
 import urllib3
+import sys
 
 urllib3.disable_warnings()
 
@@ -45,11 +46,23 @@ if os.getenv('DEBUG') == 'True':
 
 
 contentJsonFile="./content.json"
-scoreFile="status.dat"
+scoreFile="score.json"
 
 
 # Main function
 if __name__ == "__main__":
+
+    # Load game content
+    with open(contentJsonFile, 'r') as file:
+        data = json.load(file)
+
+    # Check for -clean parameter
+    if '-clean' in sys.argv:
+        maxStages=max(stage['id'] for stage in data['stages'])
+        gameClean(scoreFile, maxStages)
+        print('Game cleaned')
+        sys.exit(0)
+
     variables['SupportedLanguages'] = GetSupportedLanguages(contentJsonFile)
 
     # Clear the output screen

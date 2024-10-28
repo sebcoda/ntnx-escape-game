@@ -163,4 +163,4 @@ cython_debug/
 
 #Custom
 config.env
-status.dat
+score.json

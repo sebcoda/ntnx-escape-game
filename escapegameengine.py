@@ -152,21 +152,43 @@ def GetSupportedLanguages(json_file_path):
 # ========================================================================
 # This function updates the score file with the format Trigram:Stage
 def UpdateScoreFile(scoreFile, trigram, stage):
-    scores = {}
-    
-    # Read the existing scores
+    # Load the existing scores from the JSON file
     try:
-        with open(scoreFile, 'r') as file:
-            for line in file:
-                t, s = line.strip().split(':')
-                scores[t] = s
+        with open(scoreFile, 'r' ) as file:
+            score = json.load(file)
     except FileNotFoundError:
-        pass  # If the file does not exist, we will create it
+        print("Error, score file not found, please run the game with the -clean option first")
+        sys.exit(4)
 
     # Update the score for the given trigram
-    scores[trigram] = str(stage)
+    ##GL score['players'][trigram] = str(stage)
 
-    # Write the updated scores back to the file
+    jsonpath_expr = parse('$.score[?(@.player == "' + trigram + '")]')
+    result = jsonpath_expr.find(score)
+
+    if len(result)==0:
+        score['score'].append({'player': trigram, 'stage': stage})
+    else:
+        result[0].value['stage']=stage
+
+    # Write the updated score back to the JSON file
+    try:
+        with open(scoreFile, 'w') as file:
+            json.dump(score, file, indent=4)
+    except FileNotFoundError:
+        print("Error, score file not found, please run the game with the -clean option first")
+        sys.exit(4)
+
+
+# ========================================================================
+# = gameClean
+# ========================================================================
+# This function clean the scoreboard file
+def gameClean(scoreFile,maxStages):
+    score={
+        'maximumScore': maxStages,
+        'score': []
+    }
+
     with open(scoreFile, 'w') as file:
-        for t, s in scores.items():
-            file.write(f"{t}:{s}\n")
+        json.dump(score, file, indent=4)
