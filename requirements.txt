@@ -7,3 +7,4 @@ cursor
 requests
 python-dotenv
 urllib3
+flask
