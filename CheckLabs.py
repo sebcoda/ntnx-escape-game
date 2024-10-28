@@ -237,3 +237,15 @@ def CheckReport(variables):
     result=True
     print("#GL Need to be coded")
     return result, clue
+
+def CheckNewNode(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue
+
+def CheckRunway(variables):
+    clue=''
+    result=True
+    print("#GL Need to be coded")
+    return result, clue

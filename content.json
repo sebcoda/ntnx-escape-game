@@ -280,20 +280,20 @@
         },
         {
             "id": 32,
-            "active": false,
+            "active": true,
             "Message": {
-                "en": "Now I need you go on the Infrastructure > Hardware > Clusters page. Then simulate cluster expansion, without validating them. Just take a screenshot of the review page, it will be usefull for a future mission. I can't tell you more right know. #>P:3#Tell me when it's done, writng 'OK' there. #>I:#"
+                "en": "Now I need you go on the Infrastructure > Hardware > Clusters page. Then simulate cluster expansion, without validating them. Just take a screenshot of the review page, it will be usefull for a future mission. I can't tell you more right know. #>P:3#Please give me the Mac address of the new node. #>I:NodeMacAddress#"
             },
-            "WaitForInputValue": "OK",           
+            "CheckTask": "CheckNewNode",           
             "Color": "blue"
         },                        
         {
             "id": 33,
             "active": true,
             "Message": {
-                "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM page, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Put 'OK' here when it's done. #>I:#"
+                "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM page, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Tell me how many updates are available #>I:NumberUpdates#"
             },
-            "WaitForInputValue": "OK",
+            "CheckTask": "CheckUpdates",
             "Color": "blue"
         },                        
         {

@@ -167,9 +167,9 @@ def UpdateScoreFile(scoreFile, trigram, stage):
     result = jsonpath_expr.find(score)
 
     if len(result)==0:
-        score['score'].append({'player': trigram, 'stage': stage})
+        score['score'].append({'player': trigram, 'score': stage})
     else:
-        result[0].value['stage']=stage
+        result[0].value['score']=stage
 
     # Write the updated score back to the JSON file
     try:
