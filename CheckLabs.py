@@ -190,7 +190,7 @@ def CheckVM(variables):
 
     return result, clue
 # =============================================================================
-# CheckCat - WIP
+# CheckCat - Done
 # =============================================================================
 def CheckCat(variables):
     clue=''
@@ -226,6 +226,9 @@ def CheckCat(variables):
 
     return result, clue
 
+# =============================================================================
+# CheckStoragePolicy - Done
+# =============================================================================
 def CheckStoragePolicy(variables):
     clue=''
     result=True
@@ -243,6 +246,9 @@ def CheckStoragePolicy(variables):
 
     return result, clue
 
+# =============================================================================
+# CheckSecurityPolicy - WIP
+# =============================================================================
 def CheckSecurityPolicy(variables):
     clue=''
     result=True
