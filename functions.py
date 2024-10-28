@@ -4,6 +4,7 @@ import ntnx_networking_py_client.models.networking.v4.config
 import ntnx_iam_py_client
 import ntnx_networking_py_client
 import ntnx_vmm_py_client
+import ntnx_prism_py_client
 import requests
 
 # ========================================================================
@@ -301,6 +302,42 @@ def hasVMCloudinit(vmuuid, pc, user, password):
     
     return True
 
+# ========================================================================
+# = retrieveCatID
+# ========================================================================
+def retrieveCatID( key, value, variables):
+    
+    sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
+    page = 0
+    limit = 50
+
+    client = ntnx_prism_py_client.ApiClient(configuration=sdkConfig)
+    categories_api = ntnx_prism_py_client.CategoriesApi(api_client=client)
+
+    if value == None:
+        try:
+            api_response = categories_api.get_all_categories(_page=page, _limit=limit,_filter="key eq '" + key + "'")
+            myData=api_response.to_dict()
+
+            if myData['data'] == None:
+                return False, None
+            else:
+                return True, myData['data'][0]['ext_id']
+
+        except ntnx_prism_py_client.rest.ApiException as e:
+            print(e)
+    else:
+        try:
+            api_response = categories_api.get_all_categories(_page=page, _limit=limit,_filter="key eq '" + key + "' and value eq '" + value + "'")
+            myData=api_response.to_dict()
+            
+            if myData['data'] == None:
+                return False, None
+            else:
+                return True, myData['data'][0]['ext_id']
+
+        except ntnx_prism_py_client.rest.ApiException as e:
+            print(e)            
 
 # ========================================================================
 # = retrieveStoragePolicyID
@@ -345,3 +382,4 @@ def retrieveSecurityPolicyID(policy_name, variables):
             return policy['extId']
 
     return None
+

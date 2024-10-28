@@ -109,7 +109,7 @@ def CheckImage(variables):
     return result, clue
 
 # =============================================================================
-# CheckImage - WIP
+# CheckImage - Done
 # =============================================================================
 def CheckVM(variables):
 
@@ -189,11 +189,41 @@ def CheckVM(variables):
     variables['HostUUID'] = response['host']['ext_id']
 
     return result, clue
-
+# =============================================================================
+# CheckCat - WIP
+# =============================================================================
 def CheckCat(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
+
+    found,_ = retrieveCatID(variables['Trigram'] + "-cat", None, variables=variables)
+
+    # Check for category key first
+    if not found: 
+        result=False
+        clue="The category " + variables['Trigram'] + "-cat doesn't exist. Are you sure you named it correctly?"
+        
+        return result, clue
+    
+    # Check for Value "Test"
+    found,_ = retrieveCatID(variables['Trigram'] + "-cat", "Test", variables=variables)
+    if not found: 
+        result=False
+        clue="The category " + variables['Trigram'] + "-cat exists, But I do not see the 'Test' value..."
+        
+        return result, clue
+    
+
+    # Check for Value "Critical"
+    found,uuid = retrieveCatID(variables['Trigram'] + "-cat", "Critical", variables=variables)
+    if not found: 
+        result=False
+        clue="The category " + variables['Trigram'] + "-cat exists, But I do not see the 'Critical' value..."
+        
+        return result, clue
+    else:
+        variables['CatUUID'] = uuid        
+
     return result, clue
 
 def CheckStoragePolicy(variables):
