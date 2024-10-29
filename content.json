@@ -221,12 +221,20 @@
             "id": 25,
             "active": true,
             "Message": {
+                "en": "To be sure the recovery points are protected, just look back at the protection policy page, and ensure your policy has a 'secure' mention.#>P:2# Push 'Enter' when you ave checked#>I:#\n"
+            },
+            "Color": "blue"
+        },
+        {
+            "id": 26,
+            "active": true,
+            "Message": {
                 "en": "\nOh oh... #>P:5#Don't move...#>P:5#>A:DeleteVM# They are inspecting the cluster... Do not do anything. I close the connection, and I am going to reconnect quicly with a more securized protocol. Wait here.\n"
             },
             "Color": "blue"
         },        
         {
-            "id": 26,
+            "id": 27,
             "active": true,
             "Message": {
                 "en": "\nClosing connection... #>P:3#Done.#>P:15#\nIncoming connection...#>P:2#\nGenerating new keys... #>P:3#Done.\nEstablishing connection to the endpoint with multi-layer encryption and multiple hops to reduce tracking capabilities... #>P:3# Done.\n\n"
@@ -234,7 +242,7 @@
             "Color": "green"
         },
         {
-            "id": 27,
+            "id": 28,
             "active": true,
             "Message": {
                 "en": "Ok, I'm back. I hope you are still ok Buddy. Put 'OK' here if heverything is good. #>I:#\nI like you #>V:Username# ! #>P:3# We have a job to finish, here we go#>P:2#\n"
@@ -243,16 +251,16 @@
             "Color": "blue"
         },
         {
-            "id": 28,
+            "id": 29,
             "active": true,
             "Message": {
-                "en": "It looks like they have destroyed our VM, but we should still have our recovery point regarding our config.#>P:3# Recreate the VM with the same name, from the latest recovery point please. I wait. Put 'OK' here when it's done. #>I:#"
+                "en": "It looks like they have destroyed our VM, but we should still have our recovery point regarding our config.#>P:3# Recreate the VM with the same name, from the latest recovery point please, and start it. I wait. Put 'OK' here when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",           
             "Color": "blue"
         },
         {
-            "id": 29,
+            "id": 30,
             "active": true,
             "Message": {
                 "en": "Good. Just 2 mn...#>P:2#\n"
@@ -261,16 +269,16 @@
             "Color": "blue"
         },        
         {
-            "id": 30,
+            "id": 31,
             "active": true,
             "Message": {
-                "en": "You know what ? As we have a few time, we gonna use it to spy them a bit more.\n#>P:2#It would be great if you could sent to this discreet address (noreply@supco.com) a repport containing the list of VMs, and send it each day at 3:00 AM. It will help us to know what they are doing.\n#>P:3#Name your repport #>V:Trigram#-report. #>P:3#\n Put OK here when you have finished.#>I:#"
+                "en": "\nYou know what ? As we have a few time, we gonna use it to spy them a bit more.\n#>P:2#It would be great if you could sent to this discreet address (noreply@supco.com) a repport containing the list of VMs, and send it each day at 3:00 AM. It will help us to know what they are doing.\n#>P:3#Name your repport #>V:Trigram#-report. #>P:3#\n Put OK here when you have finished.#>I:#"
             },
             "WaitForInputValue": "OK",           
             "Color": "blue"
         },                        
         {
-            "id": 31,
+            "id": 32,
             "active": true,
             "Message": {
                 "en": "Perfect... Let me few seconds...\n"
@@ -279,7 +287,7 @@
             "Color": "blue"
         },
         {
-            "id": 32,
+            "id": 33,
             "active": true,
             "Message": {
                 "en": "Now I need you go on the Infrastructure > Hardware > Clusters page. Then simulate cluster expansion, without validating them. Just take a screenshot of the review page, it will be usefull for a future mission. I can't tell you more right know. #>P:3#Please give me the Mac address of the new node. #>I:NodeMacAddress#"
@@ -288,7 +296,7 @@
             "Color": "blue"
         },                        
         {
-            "id": 33,
+            "id": 34,
             "active": true,
             "Message": {
                 "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM page, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Tell me how many updates are available #>I:NumberUpdates#"
@@ -297,7 +305,7 @@
             "Color": "blue"
         },                        
         {
-            "id": 34,
+            "id": 35,
             "active": true,
             "Message": {
                 "en": "Nice ! #>P:3#Third and last check I need you do for me : #>P:1#From the Dashboard page of the Infrastructure, you should have a tile with securtity concerns. From here, display the full security Dashboard, and dig into it, takes some screenshot which will help us for upcoming operations. We will have to act quickly, this tool is very helpfull to identify all security issues of the platform, and they probably take care of it. #>P:5#Put 'OK' here when it's done. #I>:#\n"
@@ -306,7 +314,7 @@
             "Color": "blue"
         },
         {
-            "id": 35,
+            "id": 36,
             "active": true,
             "Message": {
                 "en": "Bob as intercepted a new account for another cluster. #>P:2#Not a big catch, it seems to be the account of the guy who monitors clusters capacity and node procurement. Can you quickly connect on this serverm, check runway values and give me the number of days remaining on this cluster ?#>P:3# Connection info are :\n - PC : #>V:OldPC#\n - User : #>V:OldPCUsername#\n - Password : #>V:OldPCPassword#\n#>P:3#You should find info in the 'Intelligent Operations' page. Put the number of days here when you have it. #>I:Runway#"
@@ -315,7 +323,7 @@
             "Color": "blue"
         },
         {
-            "id": 36,
+            "id": 37,
             "active": true,
             "Message": {
                 "en": "Oh really ? \n"
@@ -324,7 +332,7 @@
             "Color": "blue"
         },
         {
-            "id": 37,
+            "id": 38,
             "active": true,
             "Message": {
                 "en": "Nutanix provides advices to clean VM size and reduce footprint of VMs on the cluster. They will probably use it to reduce the cost of the platform and puch back the node procurement. #>P:3#Can you check how many resources can ben saved on the cluster ?#>P:3#If I remember well you have to find a 'Optimize resources'. Take a screenshot for later please it will help us to estimate nodes add-ons date. Write 'OK' here. #>I:#"

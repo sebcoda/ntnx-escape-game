@@ -318,7 +318,7 @@ def CheckProtectionPolicy(variables):
 
 
 # =============================================================================
-# CheckApprovalPolicy - WIP
+# CheckApprovalPolicy - Done
 # =============================================================================
 def CheckApprovalPolicy(variables):
     clue=''
@@ -346,12 +346,24 @@ def CheckApprovalPolicy(variables):
             
         return False, "The approval policy is not linked to the protection policy. Can you fix it ?"
 
-
+# =============================================================================
+# CheckRestoreVM - Done
+# =============================================================================
 def CheckRestoreVM(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
+
+    found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
+
+    if found == False: 
+        result=False
+        clue="The VM " + variables['Trigram'] + "-vm is not on the cluster. Are you sure you named it correctly?"
+        
+        return result, clue
+
     return result, clue
+
+
 
 def CheckReport(variables):
     clue=''
