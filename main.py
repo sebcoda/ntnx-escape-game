@@ -27,6 +27,7 @@ variables = {
     "OldPC": os.getenv('OLDPC'),
     "OldPCUsername": os.getenv('OLDPCUSERNAME'),
     "OldPCPassword": os.getenv('OLDPCPASSWORD'),
+    "ApprovalPolicy": os.getenv('APPROVALPOLICY'),
     "Debug": False
 }
 
@@ -43,6 +44,7 @@ if os.getenv('DEBUG') == 'True':
     variables['ImageUUID'] = os.getenv('IMAGEUUID')
     variables['HostUUID'] = os.getenv('HOSTUUID')
     variables['CatUUID'] = os.getenv('CATUUID')
+    variables['ProtectionPolicyUUID'] = os.getenv('PROTECTIONPOLICYUUID')
 
 
 

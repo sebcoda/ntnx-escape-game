@@ -189,6 +189,7 @@ def CheckVM(variables):
     variables['HostUUID'] = response['host']['ext_id']
 
     return result, clue
+
 # =============================================================================
 # CheckCat - Done
 # =============================================================================
@@ -289,8 +290,8 @@ def CheckProtectionPolicy(variables):
         # We check policy details
 
         # Schedule
-        if info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['recovery_point_objective_secs'] != 60:
-            clue="It looks like the snapshot schedule is not set to 60 seconds. Can you fix it ?"            
+        if info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['recovery_point_objective_secs'] != 3600:
+            clue="It looks like the snapshot schedule is not set to 1 hour. Can you fix it ?"            
             return False, clue
 
         # Retention
@@ -310,13 +311,41 @@ def CheckProtectionPolicy(variables):
             clue="It looks like the category value is not set correctly. Can you fix it ?"
             return False, clue
 
+        variables['ProtectionPolicyUUID'] = info['metadata']['uuid']
+
+
     return True, clue
 
+
+# =============================================================================
+# CheckApprovalPolicy - WIP
+# =============================================================================
 def CheckApprovalPolicy(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
-    return result, clue
+
+    response = retrieveApprovalPolicyInfo(variables['ApprovalPolicy'], variables=variables)
+
+    # We check if policy is created
+    if response is None: 
+        result=False
+        clue="Are you sure you created the approval policy " + variables['ApprovalPolicy'] + " ? I did not see it?"
+        
+        return result, clue
+    else:
+        # We check policy details
+
+        # Approvers
+        # Not tested, because of useless for next steps
+
+        # targeted protection policy
+        if 'securedPolicies' in response.keys(): 
+            for item in response['securedPolicies']:
+                if item['policyUuid'] == variables['ProtectionPolicyUUID']:
+                    return True, ""
+            
+        return False, "The approval policy is not linked to the protection policy. Can you fix it ?"
+
 
 def CheckRestoreVM(variables):
     clue=''

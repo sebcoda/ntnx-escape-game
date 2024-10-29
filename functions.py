@@ -6,6 +6,7 @@ import ntnx_networking_py_client
 import ntnx_vmm_py_client
 import ntnx_prism_py_client
 import requests
+import json
 
 # ========================================================================
 # = configSdkClient
@@ -413,3 +414,28 @@ def retrieveProtectionPolicyInfo(policy_name, variables):
             return response2.json()
 
     return None
+
+# ========================================================================
+# = retrieveApprovalPolicyInfo
+# ========================================================================
+# Function that is returning the info of a Approval policy
+# GL ToDo : write with SDK when available
+def retrieveApprovalPolicyInfo( policy_name, variables):
+
+    url = "https://%s:9440/api/security/v4.0.a1/dashboard/approval-policies" % variables['PC']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    payload = {}
+
+    response = requests.get(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    if response_data['data'][0]['name'] == variables['ApprovalPolicy']:
+        return response_data['data'][0]
+    else:
+        return None
+
+
+    

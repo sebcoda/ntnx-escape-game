@@ -22,7 +22,7 @@
             "id": 3,
             "active": true,
             "Message": {
-                "en": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.#>P:3#\n\n"
+                "en": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.#>A:lowercaseTrigram#>P:3#\n\n"
             },
             "Color": "blue"
         },
@@ -185,7 +185,7 @@
             "id": 21,
             "active": true,
             "Message": {
-                "en": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 mn\n - Keep 1 day of snapshots\n\nWe do not need to replicate here\nWrite 'OK' when it's done. #>I:#"
+                "en": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 hour\n - Keep 1 day of snapshots\n\nWe do not need to replicate here.\nAs you will see, you can also configure near-sync replication (1mn RPO) but it is not really interesting here.\n#>P:2#Write 'OK' when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -203,7 +203,7 @@
             "id": 23,
             "active": true,
             "Message": {
-                "en": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named 'SecureSnaps' requestiong validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William.#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#"
+                "en": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named '#>V:ApprovalPolicy#' requestiong validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William.#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"
@@ -300,7 +300,7 @@
             "id": 34,
             "active": true,
             "Message": {
-                "en": "Nice ! #>P:3#Third and last check I need you do for me : #>P:1#From the Dasboard page of the Infrastructure, you should have a tile with securtity concerns. From here, display the full security Dashboard, and dig into it, takes some screenshot which will help us for upcoming operations. We will have to act quickly, this tool is very helpfull to identify all security issues of the platform, and they probably take care of it. #>P:5#Put 'OK' here when it's done. #I>:#\n"
+                "en": "Nice ! #>P:3#Third and last check I need you do for me : #>P:1#From the Dashboard page of the Infrastructure, you should have a tile with securtity concerns. From here, display the full security Dashboard, and dig into it, takes some screenshot which will help us for upcoming operations. We will have to act quickly, this tool is very helpfull to identify all security issues of the platform, and they probably take care of it. #>P:5#Put 'OK' here when it's done. #I>:#\n"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
