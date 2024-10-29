@@ -12,7 +12,10 @@ def lowercaseTrigram(variables):
 # ====================================================================================================
 # lowercaseTrigram - To be done
 # ====================================================================================================
+# This function delete VM identified in the variables
 def DeleteVM(variables):
     
+
+
     return True
 
