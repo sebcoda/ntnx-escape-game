@@ -141,11 +141,14 @@ def CheckVM(variables):
         # Check all other information
 
         # Check owner
-        if response['ownership_info']['owner']['ext_id'] != variables['UserUUID']:
-            result=False
-            clue="The VM is not owned by the user " + variables['Trigram'] + "-adm. Can you fix it ?"
+        # GL : Currently disabled because user must be in an IDP to be associated to a project.
+        #      User <Trigram>-adm is local
+        #
+        # if response['ownership_info']['owner']['ext_id'] != variables['UserUUID']:
+        #     result=False
+        #     clue="The VM is not owned by the user " + variables['Trigram'] + "-adm. Can you fix it ?"
             
-            return result, clue
+        #     return result, clue
 
         # Number of NICS
         if len(response['nics']) != 2:
