@@ -381,24 +381,56 @@ def CheckRestoreVM(variables):
     return result, clue
 
 # =============================================================================
-# CheckLiveMigration - WIP
+# CheckLiveMigration - Done
 # =============================================================================
 def CheckLiveMigration(variables):
-    clue=''
-    result=True
-    
+   
     found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
 
     if found and variables['HostUUID'] != response['host']['ext_id']:
         return True,""
     else:
         return False, "The VM is still on the same host, move it right now please !"
-
-
+    
+# =============================================================================
+# CheckLiveMigration - WIP
+# =============================================================================
 def CheckReport(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
+
+    found, info = retrieveReportInfo(variables['Trigram'] + "-report", variables=variables)
+
+    if not found:
+        result=False
+        clue="The report " + variables['Trigram'] + "-report is not on the cluster. Are you sure you named it correctly?"
+        
+        return result, clue
+    else:
+        # We check report config
+
+        # Schedule
+        if info['spec']['resources']['schedule']['interval_type'] != 'DAILY':
+            clue="The report " + variables['Trigram'] + "-report should be scheduled daily. Can you fix it ?"
+            
+            return False, clue
+
+        # Recipients
+        if not (len(info['spec']['resources']['notification_policy']['email_config']['recipient_list'])!=0 and info['spec']['resources']['notification_policy']['email_config']['recipient_list'][0]['email_address']==variables['EmailReport']):
+            clue="The report does not have te good recipient. Can you check that ?"
+            return False, clue
+
+        # Content
+        listvm=False
+        for elt in info['spec']['resources']['template']['template_rows']:
+            if elt['row_element_list'][0]['widget_config']['entity_type'] == 'vm':
+                listvm=True
+
+        if listvm == False:
+            clue="The report " + variables['Trigram'] + "-report should list VMs. Can you fix it ?"
+            
+            return False, clue
+
     return result, clue
 
 def CheckNewNode(variables):

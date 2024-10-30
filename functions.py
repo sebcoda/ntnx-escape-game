@@ -412,5 +412,26 @@ def retrieveApprovalPolicyInfo( policy_name, variables):
     else:
         return None
 
-
+# ========================================================================
+# = retrieveReportInfo
+# ========================================================================
+# Function that is returning the info of a report
+# GL ToDo : write with SDK when available
+def retrieveReportInfo( reportName, variables):
     
+    url="https://%s:9440/api/nutanix/v3/report_configs/list" % variables['PC']
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    payload = {}
+
+    response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    for reports in response_data['entities']:
+        if reports['status']['name'] == reportName:
+            return True, reports
+        
+    return False, None

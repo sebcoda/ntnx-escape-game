@@ -2,7 +2,8 @@ ntnx-iam-py-client
 ntnx_networking_py_client
 ntnx_prism_py_client
 ntnx_vmm_py_client
-ntnx_security_py_client
+# Not available yet ntnx_security_py_client
+# Not available yet ntnx_opsmgmt_py_client
 python-dotenv
 jsonpath-ng
 cursor

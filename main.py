@@ -28,6 +28,7 @@ variables = {
     "OldPCUsername": os.getenv('OLDPCUSERNAME'),
     "OldPCPassword": os.getenv('OLDPCPASSWORD'),
     "ApprovalPolicy": os.getenv('APPROVALPOLICY'),
+    "EmailReport": os.getenv('EMAILREPORT'),
     "Debug": False
 }
 

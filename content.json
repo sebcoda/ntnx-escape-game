@@ -273,7 +273,7 @@
             "id": 31,
             "active": true,
             "Message": {
-                "en": "\nYou know what ? As we have a few time, we gonna use it to spy them a bit more.\n#>P:2#It would be great if you could sent to this discreet address (noreply@supco.com) a repport containing the list of VMs, and send it each day at 3:00 AM. It will help us to know what they are doing.\n#>P:3#Name your repport #>V:Trigram#-report. #>P:3#\n Put OK here when you have finished.#>I:#"
+                "en": "\nYou know what ? As we have a few time, we gonna use it to spy them a bit more.\n#>P:2#It would be great if you could sent to this discreet address (#>V:EmailReport#) a report containing the list of VMs, and send it each day at 3:00 AM. It will help us to know what they are doing.\n#>P:3#Reports are managed in the 'Inteligent-Ops' part of the GUI. #>P:1#Name your repport #>V:Trigram#-report. #>P:2#\n Put OK here when you have finished.#>I:#"
             },
             "WaitForInputValue": "OK",           
             "Color": "blue"
