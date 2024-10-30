@@ -56,7 +56,7 @@
             "id": 7,
             "active": true,
             "Message": {
-                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other project won't see what we do into this project.\nCreate a new project named '#>V:Trigram#-proj' and associate the Nutanix cluster into it.\nWrite here 'OK' when the project is created.\n#>I:#"
+                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other project won't see what we do into this project.\nCreate a new project named '#>V:Trigram#-proj', add any user you will find in the AD, and add the Nutanix cluster in infrastructure list.\nWrite here 'OK' when the project is created.\n#>I:#"
             },
             "CheckTask": "CheckProject",
             "WaitForInputValue": "OK",
@@ -107,6 +107,7 @@
             "Message": {
                 "en": "\nPerfect, it is pretty discrete. They won't see it, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central and hit 'Enter' when you are ready.\n#>P:6#Oh wait !!!#>P:5#They are scanning the host, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#"
             },
+            "CheckTask": "CheckLiveMigration",
             "Color": "blue"
         },
         {

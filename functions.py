@@ -142,54 +142,26 @@ def checkAuthorizationPolicyAssignement(authorizationPolicyId, roleId, userId, v
     return True
 
 # ========================================================================
-# = retrieveProjectId
+# = retrieveProjectInfo
 # ========================================================================
 # Function that is returning the extId of a project
-def retrieveProjectId(projectName, variables):
+def retrieveProjectInfo(projectName, variables):
 
-    url = "https://%s:9440/api/nutanix/v3/groups" % variables['PC']
+    url = "https://%s:9440/api/nutanix/v3/projects/list" % variables['PC']
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
-    payload = {
-        "entity_type": "project",
-        "group_member_attributes": [
-            {"attribute": "name"},
-            {"attribute": "description"},
-            {"attribute": "uuid"},
-            {"attribute": "state"},
-            {"attribute": "vcpus_count"},
-            {"attribute": "memory_bytes"},
-            {"attribute": "storage_bytes"},
-            {"attribute": "vcpus_count_limit"},
-            {"attribute": "memory_bytes_limit"},
-            {"attribute": "storage_bytes_limit"},
-            {"attribute": "user_reference_list"},
-            {"attribute": "user_group_reference_list"},
-            {"attribute": "vms_count"},
-            {"attribute": "network_id_list"},
-            {"attribute": "environment_id_list"},
-            {"attribute": "default_environment_id"},
-            {"attribute": "account_id_list"},
-            {"attribute": "message"},
-            {"attribute": "error"}
-        ],
-        "filter_criteria": "",
-        "group_member_offset": 0,
-        "group_member_count": 20,
-        "group_member_sort_order": "ASCENDING",
-        "group_member_sort_attribute": "name"
-    }
+    payload={}
 
     response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = response.json()
 
-    for group in response_data.get('group_results', []):
-        for entity in group.get('entity_results', []):
-            for data in entity.get('data', []):
-                if data['name'] == 'name' and data['values'][0]['values'][0] == projectName:
-                    return entity['entity_id']
+    if len(response_data['entities']) != 0:
+        for project in response_data['entities']:
+            if project['status']['name'] == projectName:
+                return project
+    
     return None
 
 
@@ -219,7 +191,7 @@ def retrieveSubnetID(subnet_name, variables):
 # = retrieveImageID
 # ========================================================================
 # Function that is returning the extId of an image
-# Note : developped in v3 API because Python SDK seems to be broken (list_images is not found)
+# Note : developped in v3 API because Python SDK seems to be broken (list_images URL is not found, 404 error)
 # SDK Ref : https://developers.nutanix.com/sdk-reference?namespace=vmm&version=v4.0.b1&language=python
 def retrieveImageID(image_name, variables):
 
@@ -240,7 +212,6 @@ def retrieveImageID(image_name, variables):
     for image in response_data['entities']:
         if image['status']['name'] == image_name:
             return image['metadata']['uuid']
-
         
     return None
 
@@ -273,6 +244,7 @@ def retrieveVMInfo(vm_name, variables):
 # ========================================================================
 # = getVMProjectUUID
 # ========================================================================
+# GL Todo : write with SDK when available
 def getVMProjectUUID(vmuuid, pc, user, password):
     url = "https://%s:9440/api/nutanix/v3/vms/%s"% (pc,vmuuid)
     headers = {
@@ -288,6 +260,7 @@ def getVMProjectUUID(vmuuid, pc, user, password):
 # ========================================================================
 # = hasVMCloudinit
 # ========================================================================
+# GL Todo : write with SDK when available
 def hasVMCloudinit(vmuuid, pc, user, password):
     url = "https://%s:9440/api/nutanix/v3/vms/%s"% (pc,vmuuid)
     headers = {
@@ -344,6 +317,8 @@ def retrieveCatID( key, value, variables):
 # = retrieveStoragePolicyID
 # ========================================================================
 # Function that is returning the extId of a storage policy
+# GL Todo : write with SDK when available
+
 def retrieveStoragePolicyID(policy_name, variables):
 
     url = "https://%s:9440/api/nutanix/v3/storage_policies/list" % variables['PC']

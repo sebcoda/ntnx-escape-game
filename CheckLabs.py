@@ -47,22 +47,36 @@ def CheckUser(variables):
 # CheckProject - Done
 # =============================================================================
 def CheckProject(variables):
-    from functions import retrieveProjectId
+
 
     result = True
     clue = ''
 
-    response = retrieveProjectId(projectName=variables['Trigram'] + "-proj", variables=variables)
+    response = retrieveProjectInfo(projectName=variables['Trigram'] + "-proj", variables=variables)
 
     if response is None: 
         result=False
         clue="The project " + variables['Trigram'] + "-proj doesn't exist. Are you sure you named it correctly?"
         
         return result, clue
+    else:
+        # We check if infrastructure is correctly set
+        if len(response['spec']['resources']['account_reference_list']) == 0:
+            result=False
+            clue="The project " + variables['Trigram'] + "-proj doesn't have any cluster associated. Can you fix it ?"
+            
+            return result, clue
+        
+        # We check users
+        if len(response['spec']['resources']['external_user_group_reference_list']) == 0:
+            result=False
+            clue="The project " + variables['Trigram'] + "-proj doesn't have any user associated. Can you fix it ?"
+            
+            return result, clue
 
-    # We store ProjectUUID in the variables to be used later
-    variables['ProjectUUID'] = response
-    return result, clue
+        # We store ProjectUUID in the variables to be used later
+        variables['ProjectUUID'] = response['metadata']['uuid']
+        return result, clue
     
 # =============================================================================
 # CheckNetwork - Done
@@ -363,6 +377,19 @@ def CheckRestoreVM(variables):
 
     return result, clue
 
+# =============================================================================
+# CheckLiveMigration - WIP
+# =============================================================================
+def CheckLiveMigration(variables):
+    clue=''
+    result=True
+    
+    found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
+
+    if found and variables['HostUUID'] != response['host']['ext_id']:
+        return True,""
+    else:
+        return False, "The VM is still on the same host, move it right now please !"
 
 
 def CheckReport(variables):
