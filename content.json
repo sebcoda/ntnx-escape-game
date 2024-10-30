@@ -229,7 +229,7 @@
             "id": 26,
             "active": true,
             "Message": {
-                "en": "\nOh oh... #>P:5#Don't move...#>P:5#>A:DeleteVM# They are inspecting the cluster... Do not do anything. I close the connection, and I am going to reconnect quicly with a more securized protocol. Wait here.\n"
+                "en": "\nOh oh... #>P:5#Don't move...#>P:5#>A:DeleteVM# They are inspecting the cluster... Do not do anything. I close the connection, and I am going to reconnect quickly with a more securized protocol. Wait here.\n"
             },
             "Color": "blue"
         },        
