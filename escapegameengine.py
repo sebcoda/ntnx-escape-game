@@ -129,9 +129,12 @@ def CheckStage(checkScript, variables):
     if checkScript in globals():
         ret=False
         while not ret:
-            ret,clue = globals()[checkScript](variables)
+            ret,clue,renterValue = globals()[checkScript](variables)
             if not ret:
-                display("#>P:3#"+random.choice(LabKO)+". "+clue+" When it is done, hit 'Enter'#>I:", variables, 'blue')
+                if renterValue==None:
+                    display("#>P:3#"+random.choice(LabKO)+". "+clue+" When it is done, hit 'Enter'#>I:", variables, 'blue')
+                else:
+                    display("#>P:3#"+random.choice(LabKO)+". "+clue+" Please reenter the good value : #>I:"+renterValue, variables, 'blue')
             else:
                 display("#>P:3#"+random.choice(LabOK)+"\n", variables, 'blue')
     else:

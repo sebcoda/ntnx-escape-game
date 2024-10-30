@@ -5,6 +5,7 @@ import ntnx_iam_py_client
 import ntnx_networking_py_client
 import ntnx_vmm_py_client
 import ntnx_prism_py_client
+import ntnx_lifecycle_py_client
 import requests
 import json
 
@@ -435,3 +436,27 @@ def retrieveReportInfo( reportName, variables):
             return True, reports
         
     return False, None
+
+# ========================================================================
+# = getNumberOfUpdates
+# ========================================================================
+# This function is returning the number of updates avaialble
+# GL ToDo : write with SDK when available (return was not relevent)
+def getNumberOfUpdates( variables):
+    nbupdates=0
+     
+    url="https://%s:9440/api/lcm/v4.0.a1/resources/entities" % variables['PC']
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    
+    response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    for elt in response_data['data']:
+        if "availableVersions" in elt.keys():
+            nbupdates+=1
+            
+    return nbupdates

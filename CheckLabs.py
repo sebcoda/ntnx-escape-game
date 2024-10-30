@@ -1,5 +1,11 @@
 from functions import *
 
+# Here are all the functions called by the game content to check labs
+# Each function returns a tuple (result, clue, variable name)
+# - result is a boolean (True if the check is OK, False otherwise)
+# - clue is a string that will be displayed to the user why the check is not OK
+# - variable name is the name of the dictionary key containing the value we check to validate the exercise. This value will be reasked by the engine if check is false
+
 # =============================================================================
 # CheckUSer - Done
 # =============================================================================
@@ -15,7 +21,7 @@ def CheckUser(variables):
         result=False
         clue="The user " + variables['Trigram'] + "-adm hasn't been found. Are you sure you've created it with the correct name?"
         
-        return result, clue
+        return result, clue, None
     
     # Store UserUUID in the variables
     variables['UserUUID'] = userId
@@ -30,7 +36,7 @@ def CheckUser(variables):
         result=False
         clue="The authorization policy  " + variables['Trigram'] + "-auth is not created as requested. Are you sure you've created it with the correct name?"
         
-        return result, clue
+        return result, clue, None
     
     #check if the authorization policy is associated to the correct role and user
     response = checkAuthorizationPolicyAssignement(authorizationPolicyId=authorizationPolicyId, roleId=roleId, userId=userId, variables=variables)
@@ -39,9 +45,9 @@ def CheckUser(variables):
         result=False
         clue="The authorization policy  " + variables['Trigram'] + "-auth exist, but is not correctly assigning the role to the user. Are you sure you've assigned the correct ressources?"
         
-        return result, clue
+        return result, clue, None
         
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckProject - Done
@@ -58,25 +64,25 @@ def CheckProject(variables):
         result=False
         clue="The project " + variables['Trigram'] + "-proj doesn't exist. Are you sure you named it correctly?"
         
-        return result, clue
+        return result, clue, None
     else:
         # We check if infrastructure is correctly set
         if len(response['spec']['resources']['account_reference_list']) == 0:
             result=False
             clue="The project " + variables['Trigram'] + "-proj doesn't have any cluster associated. Can you fix it ?"
             
-            return result, clue
+            return result, clue, None
         
         # We check users
         if len(response['spec']['resources']['external_user_group_reference_list']) == 0:
             result=False
             clue="The project " + variables['Trigram'] + "-proj doesn't have any user associated. Can you fix it ?"
             
-            return result, clue
+            return result, clue, None
 
         # We store ProjectUUID in the variables to be used later
         variables['ProjectUUID'] = response['metadata']['uuid']
-        return result, clue
+        return result, clue, None
     
 # =============================================================================
 # CheckNetwork - Done
@@ -94,12 +100,12 @@ def CheckNetwork(variables):
         result=False
         clue="The subnet " + variables['Trigram'] + "-subnet is not on the cluster. Are you sure you named it correctly?"
         
-        return result, clue
+        return result, clue, None
     
     # We store networkUUID in the variables to be used later
     variables['NetworkUUID'] = response
 
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckImage - Done
@@ -115,12 +121,12 @@ def CheckImage(variables):
         result=False
         clue="Are you sure you created the image " + variables['Trigram'] + "-ubuntu ? I do not see it?"
         
-        return result, clue
+        return result, clue, None
 
     # We store ImageUUID in the variables to be used later
     variables['ImageUUID'] = response
 
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckImage - Done
@@ -136,7 +142,7 @@ def CheckVM(variables):
         result=False
         clue="The VM " + variables['Trigram'] + "-vm is not on the cluster. Are you sure you named it correctly?"
         
-        return result, clue
+        return result, clue, None
     else:
         # Check all other information
 
@@ -155,28 +161,28 @@ def CheckVM(variables):
             result=False
             clue="The VM " + variables['Trigram'] + "-vm should have 2 NICs. Are you sure you've configured it properly?"
             
-            return result, clue
+            return result, clue, None
 
         # Check network connection on our subnet
         if ( response['nics'][0]['network_info']['subnet']['ext_id'] != variables['NetworkUUID']) and (response['nics'][1]['network_info']['subnet']['ext_id'] != variables['NetworkUUID'] ):
             result=False
             clue="The VM " + variables['Trigram'] + "-vm should be connected to the network " + variables['Trigram'] + "-subnet. It looks like it is not done. Can you check ?"
             
-            return result, clue
+            return result, clue, None
         
         # Check image used
         if response['disks'][0]['backing_info']['data_source']['reference']['image_ext_id'] != variables['ImageUUID']:
             result=False
             clue="The VM " + variables['Trigram'] + "-vm should be based on the image " + variables['Trigram'] + "-ubuntu. It seems not to be the case. Can you fix it ?"
             
-            return result, clue
+            return result, clue, None
 
         # Check owner
         if response['disks'][0]['backing_info']['data_source']['reference']['image_ext_id'] != variables['ImageUUID']:
             result=False
             clue="The VM " + variables['Trigram'] + "-vm should be based on the image " + variables['Trigram'] + "-ubuntu. It seems not to be the case. Can you fix it ?"
             
-            return result, clue
+            return result, clue, None
 
         # Project
         # GL ToDo : Migrate to v4/SDK when project will be available in SDK
@@ -184,7 +190,7 @@ def CheckVM(variables):
             result=False
             clue="The VM " + variables['Trigram'] + "-vm should be in the project " + variables['Trigram'] + "-proj. It seems not to be the case. Can you fix it ?"
             
-            return result, clue
+            return result, clue, None
         
         # Cloud Init
         # GL ToDo : Migrate to v4/SDK when guest-customization will be available in SDK
@@ -192,20 +198,20 @@ def CheckVM(variables):
             result=False
             clue="Your should have cloud-init configured. It seems not to be the case. Can you fix it or I won't able to connect on ? You'll have to recreate it, unfortunately."
             
-            return result, clue
+            return result, clue, None
 
         # Power State
         if response['power_state'] != 'ON':
             result=False
             clue="The VM " + variables['Trigram'] + "-vm is not powered on. Are you sure you started it?"
             
-            return result, clue
+            return result, clue, None
 
     # Store VMUUID and HostUUID in the variables to be used later
     variables['VMUUID'] = response['ext_id']
     variables['HostUUID'] = response['host']['ext_id']
 
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckCat - Done
@@ -221,7 +227,7 @@ def CheckCat(variables):
         result=False
         clue="The category " + variables['Trigram'] + "-cat doesn't exist. Are you sure you named it correctly?"
         
-        return result, clue
+        return result, clue, None
     
     # Check for Value "Test"
     found,_ = retrieveCatID(variables['Trigram'] + "-cat", "Test", variables=variables)
@@ -229,7 +235,7 @@ def CheckCat(variables):
         result=False
         clue="The category " + variables['Trigram'] + "-cat exists, But I do not see the 'Test' value..."
         
-        return result, clue
+        return result, clue, None
     
 
     # Check for Value "Critical"
@@ -238,11 +244,11 @@ def CheckCat(variables):
         result=False
         clue="The category " + variables['Trigram'] + "-cat exists, But I do not see the 'Critical' value..."
         
-        return result, clue
+        return result, clue, None
     else:
         variables['CatUUID'] = uuid        
 
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckStoragePolicy - Done
@@ -257,12 +263,12 @@ def CheckStoragePolicy(variables):
         result=False
         clue="Are you sure you created the storage policy " + variables['Trigram'] + "-policy ? I did not find it?"
         
-        return result, clue
+        return result, clue, None
 
     # We store ImageUUID in the variables to be used later
     variables['StoragePolicyUUID'] = response
 
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckSecurityPolicy - WIP
@@ -277,18 +283,18 @@ def CheckSecurityPolicy(variables):
         result=False
         clue="Are you sure you created the security policy " + variables['Trigram'] + "-policy ? I guess you should double check ;-) ?"
         
-        return result, clue
+        return result, clue, None
 
     # We store ImageUUID in the variables to be used later
     variables['SecurityPolicyUUID'] = response
 
-    return result, clue
+    return result, clue, None
 
 def CheckSecurityPolicy2(variables):
     clue=''
     result=True
     print("#GL Need to be coded")
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckProtectionPolicy - Done
@@ -302,36 +308,36 @@ def CheckProtectionPolicy(variables):
     if info == None:
         clue="Are you sure you created the protection policy " + variables['Trigram'] + "-policy ? I did not find it?"
         
-        return False, clue
+        return False, clue, None
     else:
         # We check policy details
 
         # Schedule
         if info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['recovery_point_objective_secs'] != 3600:
             clue="It looks like the snapshot schedule is not set to 1 hour. Can you fix it ?"            
-            return False, clue
+            return False, clue, None
 
         # Retention
         if info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy']['rollup_retention_policy']['multiple'] != 1 or info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy']['rollup_retention_policy']['snapshot_interval_type'] != 'DAILY':
             clue="It looks like the snapshot retention is not set to 1 day. Can you fix it ?"            
-            return False, clue
+            return False, clue, None
 
         # Categories
         cat=variables['Trigram']+"-cat"
 
         if cat not in info['status']['resources']['category_filter']['params'].keys():
             clue="It looks like the category filter is not set correctly. Can you fix it ?"            
-            return False, clue
+            return False, clue, None
         
         # Category value
         if info['status']['resources']['category_filter']['params'][cat] == 'Critical':
             clue="It looks like the category value is not set correctly. Can you fix it ?"
-            return False, clue
+            return False, clue, None
 
         variables['ProtectionPolicyUUID'] = info['metadata']['uuid']
 
 
-    return True, clue
+    return True, clue, None
 
 
 # =============================================================================
@@ -348,7 +354,7 @@ def CheckApprovalPolicy(variables):
         result=False
         clue="Are you sure you created the approval policy " + variables['ApprovalPolicy'] + " ? I did not see it?"
         
-        return result, clue
+        return result, clue, None
     else:
         # We check policy details
 
@@ -359,9 +365,9 @@ def CheckApprovalPolicy(variables):
         if 'securedPolicies' in response.keys(): 
             for item in response['securedPolicies']:
                 if item['policyUuid'] == variables['ProtectionPolicyUUID']:
-                    return True, ""
+                    return True, "", None
             
-        return False, "The approval policy is not linked to the protection policy. Can you fix it ?"
+        return False, "The approval policy is not linked to the protection policy. Can you fix it ?", None
 
 # =============================================================================
 # CheckRestoreVM - Done
@@ -376,9 +382,9 @@ def CheckRestoreVM(variables):
         result=False
         clue="The VM " + variables['Trigram'] + "-vm is not on the cluster. Are you sure you named it correctly?"
         
-        return result, clue
+        return result, clue, None
 
-    return result, clue
+    return result, clue, None
 
 # =============================================================================
 # CheckLiveMigration - Done
@@ -388,12 +394,12 @@ def CheckLiveMigration(variables):
     found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
 
     if found and variables['HostUUID'] != response['host']['ext_id']:
-        return True,""
+        return True,"", None
     else:
-        return False, "The VM is still on the same host, move it right now please !"
+        return False, "The VM is still on the same host, move it right now please !", None
     
 # =============================================================================
-# CheckLiveMigration - WIP
+# CheckLiveMigration - Done
 # =============================================================================
 def CheckReport(variables):
     clue=''
@@ -405,7 +411,7 @@ def CheckReport(variables):
         result=False
         clue="The report " + variables['Trigram'] + "-report is not on the cluster. Are you sure you named it correctly?"
         
-        return result, clue
+        return result, clue, None
     else:
         # We check report config
 
@@ -413,12 +419,12 @@ def CheckReport(variables):
         if info['spec']['resources']['schedule']['interval_type'] != 'DAILY':
             clue="The report " + variables['Trigram'] + "-report should be scheduled daily. Can you fix it ?"
             
-            return False, clue
+            return False, clue, None
 
         # Recipients
         if not (len(info['spec']['resources']['notification_policy']['email_config']['recipient_list'])!=0 and info['spec']['resources']['notification_policy']['email_config']['recipient_list'][0]['email_address']==variables['EmailReport']):
             clue="The report does not have te good recipient. Can you check that ?"
-            return False, clue
+            return False, clue, None
 
         # Content
         listvm=False
@@ -429,18 +435,39 @@ def CheckReport(variables):
         if listvm == False:
             clue="The report " + variables['Trigram'] + "-report should list VMs. Can you fix it ?"
             
-            return False, clue
+            return False, clue, None
 
-    return result, clue
+    return result, clue, None
 
+# =============================================================================
+# CheckNewNode - ToDo
+# =============================================================================
 def CheckNewNode(variables):
     clue=''
     result=True
     print("#GL Need to be coded")
-    return result, clue
+    return result, clue, None
+
+# =============================================================================
+# CheckUpdates - WIP
+# =============================================================================
+def CheckUpdates(variables):
+    clue=''
+    result=True
+
+    response = getNumberOfUpdates(variables)
+
+    if response != int(variables['NumberUpdates']):
+        result=False
+        clue="The number of updates is not the one expected. Can you double-check it ?"
+        
+        return result, clue, "NumberUpdates"
+
+    return result, clue, None
+
 
 def CheckRunway(variables):
     clue=''
     result=True
     print("#GL Need to be coded")
-    return result, clue
+    return result, clue, None

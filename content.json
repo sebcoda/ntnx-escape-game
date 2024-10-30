@@ -300,7 +300,7 @@
             "id": 34,
             "active": true,
             "Message": {
-                "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM page, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Tell me how many updates are available #>I:NumberUpdates#"
+                "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM page, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Tell me how many updates are available : #>I:NumberUpdates#"
             },
             "CheckTask": "CheckUpdates",
             "Color": "blue"
