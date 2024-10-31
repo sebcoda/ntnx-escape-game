@@ -3,24 +3,24 @@
 ## Setup 
 
 - [x] Create an alternative admin user
-- [x] Connect with it / OK
-- [x] Create a project / OK
-- [x] Create a subnet / OK
-- [x] Add an image / OK
-- [x] Create a new VM with user / OK
-- [x] Check with prod user it is not viewable / OK
-- [x] Move the VM on another node / OK
-- [x] Create a category OK
+- [x] Connect with it
+- [x] Create a project
+- [x] Create a subnet
+- [x] Add an image
+- [x] Create a new VM with user
+- [x] Check with prod user it is not viewable
+- [x] Move the VM on another node
+- [x] Create a category
 - [x] Securize the VM
-	- [x] Encryption OK
-	- [x] Microseg OK
-	- [x] Replication OK
-- [x] Create approval rule to prevent deletion of RP OK
-- [x] VM has been deleted, restore VM from recovery point OK
+	- [x] Encryption
+	- [x] Microseg
+	- [x] Replication
+- [x] Create approval rule to prevent deletion of RP
+- [x] VM has been deleted, restore VM from recovery point
 
 ## Operational help
 
-- [x] Create report to send-it regularly to an email OK
+- [x] Create report to send-it regularly to an email
 - [x] Add a node OK (just view)
 - [x] LCM (just view)
 - [] Security dashboard (just view)
