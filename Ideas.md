@@ -37,6 +37,7 @@
  - [] Script to send starting email
  - [] Medals system (if some stages are done in limited time)
  - [] Summary webpage/email to summarize the lab and Nutanix platform features
+ - [] Use Web interface to connect on game
 
 # Additional content for next release
 - Create file share
