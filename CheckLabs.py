@@ -74,7 +74,7 @@ def CheckProject(variables):
             return result, clue, None
         
         # We check users
-        if len(response['spec']['resources']['external_user_group_reference_list']) == 0:
+        if len(response['spec']['resources']['external_user_group_reference_list']) + len(response['spec']['resources']['account_reference_list']) == 0:
             result=False
             clue="The project " + variables['Trigram'] + "-proj doesn't have any user associated. Can you fix it ?"
             

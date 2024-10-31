@@ -30,7 +30,7 @@
             "id": 4,
             "active": true,
             "Message": {
-                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster, create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights in a policy named  #>V:Trigram#-auth .\nWrite here 'Done' when it's... done LOL.\n#>I:#"
+                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster, create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights in a policy named  #>V:Trigram#-auth. This is done in the 'Admin center' part of the GUI.\nWrite here 'Done' when it's... done LOL. #>I:# \n"
             },
             "Color": "blue",
             "WaitForInputValue": "Done"
@@ -56,7 +56,7 @@
             "id": 7,
             "active": true,
             "Message": {
-                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other project won't see what we do into this project.\nCreate a new project named '#>V:Trigram#-proj', add any user you will find in the AD, and add the Nutanix cluster in infrastructure list.\nWrite here 'OK' when the project is created.\n#>I:#"
+                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other projects won't see what we do into this project.\nOh! An important thing : if I forgot to guide you into the good part of the interface, use the search bar at the top Prism Central, it is soooo useful to go quickly from a point to another one.#>P:3#You can try typing 'projects' in the search bar, then create a new project named '#>V:Trigram#-proj', add any user you will find in the AD, and add the Nutanix cluster in infrastructure list.\n Write here 'OK' when the project is created. #>I:#\n"
             },
             "CheckTask": "CheckProject",
             "WaitForInputValue": "OK",
@@ -66,7 +66,7 @@
             "id": 8,
             "active": true,
             "Message": {
-                "en": "\nYou know what ?#>P:2# I already like you, we are great teamates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nCreate a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very usefull for us, Plase configure your subnet with these info :\n - Network adress : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: #>V:Gateway#\n - Nameserver: #>V:Nameserver#\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
+                "en": "\nYou know what ?#>P:2# I already like you, we are great teamates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nGo in the 'Infrastructure' menue, and create a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very usefull for us, Plase configure your subnet with these info :\n - Network adress : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: 192.168.#>V:Vlanid#.1\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
             },
             "CheckTask": "CheckNetwork",
             "WaitForInputValue": "OK",
@@ -76,7 +76,7 @@
             "id": 9,
             "active": true,
             "Message": {
-                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#. You will find it in the 'Infrastructure' page.\nWrite 'OK' when the image is available on the cluster. #>I:#"
+                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#\nWrite 'OK' when the image is available on the cluster. #>I:#"
             },
             "CheckTask": "CheckImage",
             "WaitForInputValue": "OK",
@@ -96,7 +96,7 @@
             "id": 11,
             "active": true,
             "Message": {
-                "en": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM list in the UI, and confirm the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#"
+                "en": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this AD user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM list in the UI, and confirm the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -132,7 +132,7 @@
             "id": 15,
             "active": true,
             "Message": {
-                "en": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need, in the Infrastrucutre page, create a Storage policy #>V:Trigram#-policy enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nWrite 'OK' when it's done. #>I:#"
+                "en": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need to create a Storage policy #>V:Trigram#-policy enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nApply it to VMs with youe categorie, and the value 'Critical'.\nWrite 'OK' when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"

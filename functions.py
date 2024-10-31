@@ -186,7 +186,7 @@ def retrieveSubnetID(subnet_name, variables):
         return None
         
     # If everything is correct, return True
-    return True 
+    return  myData['data'][0]['ext_id']
 
 # ========================================================================
 # = retrieveImageID
