@@ -6,6 +6,7 @@ import ntnx_networking_py_client
 import ntnx_vmm_py_client
 import ntnx_prism_py_client
 import ntnx_lifecycle_py_client
+import ntnx_microseg_py_client
 import requests
 import json
 
@@ -314,6 +315,7 @@ def retrieveCatID( key, value, variables):
         except ntnx_prism_py_client.rest.ApiException as e:
             print(e)            
 
+
 # ========================================================================
 # = retrieveStoragePolicyID
 # ========================================================================
@@ -340,25 +342,64 @@ def retrieveStoragePolicyID(policy_name, variables):
     return None
 
 # ========================================================================
-# = retrieveSecurityPolicyID
+# = retrieveFlowServiceID
 # ========================================================================
-# Function that is returning the extId of a security policy
-def retrieveSecurityPolicyID(policy_name, variables):
+# Function that is returning the extId of a seccurity service
+def retrieveFlowServiceID(service_name, variables):
+    
+    sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
+    page = 0
+    limit = 50
 
-    url = "https://%s:9440/api/microseg/v4.0.b1/config/policies?((type eq Schema.Enums.SecurityPolicyType'APPLICATION'))" % variables['PC']
-    headers = {
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-    }
+    client = ntnx_microseg_py_client.ApiClient(configuration=sdkConfig)
+    service_groups_api = ntnx_microseg_py_client.ServiceGroupsApi(api_client=client)
 
-    response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
-    response_data = response.json()
+    try:
+        api_response = service_groups_api.list_service_groups(_page=page, _limit=limit, _filter="name eq '" + service_name + "'")
+        info = api_response.to_dict()
 
-    for policy in response_data['data']:
-        if policy['name'] == policy_name:
-            return policy['extId']
+        return info['data'][0]['ext_id']
+    except ntnx_microseg_py_client.rest.ApiException as e:
+        print(e)
 
     return None
+
+# ========================================================================
+# = retrieveSecurityPolicyInfo
+# ========================================================================
+# Function that is returning the extId of a security policy
+def retrieveSecurityPolicyInfo(policy_name, variables):
+
+    # url = "https://%s:9440/api/microseg/v4.0.b1/config/policies?((type eq Schema.Enums.SecurityPolicyType'APPLICATION'))" % variables['PC']
+    # headers = {
+    #     "Content-Type": "application/json",
+    #     "Accept": "application/json"
+    # }
+
+    # response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    # response_data = response.json()
+
+    # for policy in response_data['data']:
+    #     if policy['name'] == policy_name:
+
+
+
+    #         return policy
+
+    sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
+    page = 0
+    limit = 50
+
+    client = ntnx_microseg_py_client.ApiClient(configuration=sdkConfig)
+    network_security_policies_api = ntnx_microseg_py_client.NetworkSecurityPoliciesApi(api_client=client)
+
+    try:
+        api_response = network_security_policies_api.list_network_security_policies(_page=page, _limit=limit, _filter="name eq '" + policy_name + "'")
+        api_response2 = network_security_policies_api.get_network_security_policy_by_id(extId=api_response._ListNetworkSecurityPoliciesApiResponse__data[0].ext_id)
+    except ntnx_microseg_py_client.rest.ApiException as e:
+        print(e)
+
+    return api_response2.data.to_dict()
 
 # ========================================================================
 # = retrieveProtectionPolicyInfo
