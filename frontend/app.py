@@ -1,8 +1,7 @@
 from dotenv import load_dotenv
 
 from flask import Flask, render_template
-import json
-import os
+import json, os, base64
 
 app = Flask(__name__)
 
@@ -37,6 +36,16 @@ def scoreBoard():
     """
     data = loadScores()
     return render_template('scoreboard.html', maximumScore=data["maximumScore"], scores=data["score"])
+
+@app.route('/terminal')
+def terminal():
+    """
+    Render the page for in Browser SSH terminal.
+
+    Returns:
+        str: Rendered HTML of the terminal page.
+    """
+    return render_template('terminal.html', hostname=os.getenv('FRONTENDHOST'), username=os.getenv('HOSTSSHUSERNAME'), password=base64.b64encode(os.getenv('HOSTSSHPASSWORD').encode("ascii")).decode('utf-8'))
 
 if __name__ == '__main__':
     app.run(host=os.getenv('FRONTENDHOST'), port=os.getenv('FRONTENDPORT'), debug=True)

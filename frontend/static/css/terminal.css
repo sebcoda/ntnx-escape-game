@@ -1,0 +1,18 @@
+body {
+    background-image: url("../images/logo.png"); /* Sets the background image */
+    background-size: contain; /* Ensures the image fits within the set dimensions */
+    background-position: top; /* Positions the image at the top */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-color: #030f1b; /* Fallback color in case the image doesn't load */
+    max-width: 80%; /* Sets the maximum width of the body content */
+    margin: 0 auto; /* Centers the body content horizontally */
+    height: 100vh; /* Sets the height to full viewport height */
+    color: #fff; /* Sets the text color to white */
+}
+
+.transparent-container {
+    background-color: rgba(0, 0, 0, 0.4); /* Sets a black background with 40% transparency */
+    padding: 20px; /* Adds padding inside the container */
+    border-radius: 8px; /* Rounds the corners of the container */
+}
+
