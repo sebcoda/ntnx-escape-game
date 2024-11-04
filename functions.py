@@ -449,10 +449,12 @@ def retrieveApprovalPolicyInfo( policy_name, variables):
     response = requests.get(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = json.loads(response.text)
 
-    if response_data['data'][0]['name'] == variables['ApprovalPolicy']:
+    if len(response_data['data']) and response_data['data'][0]['name'] == variables['ApprovalPolicy']:
         return response_data['data'][0]
     else:
         return None
+
+
 
 # ========================================================================
 # = retrieveReportInfo

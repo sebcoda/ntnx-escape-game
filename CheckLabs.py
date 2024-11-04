@@ -334,6 +334,10 @@ def CheckSecurityPolicy(variables):
 
     return result, clue, None
 
+
+# =============================================================================
+# CheckSecurityPolicy2 - Done
+# =============================================================================
 def CheckSecurityPolicy2(variables):
     clue=''
     result=True

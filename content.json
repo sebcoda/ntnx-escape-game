@@ -204,7 +204,7 @@
             "id": 23,
             "active": true,
             "Message": {
-                "en": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 hour\n - Keep 1 day of snapshots\n\nWe do not need to replicate here.\nAs you will see, you can also configure near-sync replication (1mn RPO) but it is not really interesting here.\n#>P:2#Write 'OK' when it's done. #>I:#"
+                "en": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 hour\n - Keep 1 day of snapshots\n - It will be applied to VM with your categorie with value 'Critical'\nWe do not need to replicate here.\nAs you will see, you can also configure near-sync replication (1mn RPO) but it is not really interesting here, but I like the idea.\n#>P:2#Write 'OK' when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -240,7 +240,7 @@
             "id": 27,
             "active": true,
             "Message": {
-                "en": "To be sure the recovery points are protected, just look back at the protection policy page, and ensure your policy has a 'secure' mention.#>P:2# Push 'Enter' when you ave checked#>I:#\n"
+                "en": "To be sure the recovery points are protected, just look back at the protection policy page, and ensure your policy has a 'secure' mention.#>P:2# Push 'Enter' when you ave checked. #>I:#\n"
             },
             "Color": "blue"
         },
@@ -264,7 +264,7 @@
             "id": 30,
             "active": true,
             "Message": {
-                "en": "Ok, I'm back. I hope you are still ok Buddy. Put 'OK' here if everything is good. #>I:#\nI like you #>V:Username# ! #>P:3# We have a job to finish, here we go#>P:2#\n"
+                "en": "Ok, I'm back. I hope you are still ok Buddy. Put 'OK' here if everything is good. #>I:#\nI like you #>V:Username# ! #>P:3# We have a job to finish, here we go !#>P:2#\n"
             },
             "WaitForInputValue": "OK",                 
             "Color": "blue"
