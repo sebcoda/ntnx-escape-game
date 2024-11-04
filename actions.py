@@ -39,4 +39,3 @@ def DeleteVM(variables):
         print(e)
 
     return True
-

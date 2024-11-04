@@ -1,4 +1,5 @@
 from functions import *
+from jsonpath_ng.ext import parse
 
 # Here are all the functions called by the game content to check labs
 # Each function returns a tuple (result, clue, variable name)
@@ -251,6 +252,25 @@ def CheckCat(variables):
     return result, clue, None
 
 # =============================================================================
+# CheckCatVM - Done
+# =============================================================================
+def CheckCatVM(variables):
+    clue=''
+    result=True
+
+    found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
+
+    for tmp in response['categories']:
+        if variables['CatUUID'] == tmp['ext_id']:
+            return True,'', None
+
+
+    clue="The VM " + variables['Trigram'] + "-vm is not associated to the category " + variables['Trigram'] + "-cat with value 'Critical'. Can you fix it ?"
+    
+    return False, clue, None
+
+
+# =============================================================================
 # CheckStoragePolicy - Done
 # =============================================================================
 def CheckStoragePolicy(variables):
@@ -271,30 +291,83 @@ def CheckStoragePolicy(variables):
     return result, clue, None
 
 # =============================================================================
-# CheckSecurityPolicy - WIP
+# CheckSecurityPolicy - Done
 # =============================================================================
 def CheckSecurityPolicy(variables):
     clue=''
     result=True
 
-    response = retrieveSecurityPolicyID(policy_name=variables['Trigram'] + "-policy", variables=variables)
+    # Get info
+    info = retrieveSecurityPolicyInfo(policy_name=variables['Trigram'] + "-policy", variables=variables)
 
-    if response is None: 
+    if info is None: 
         result=False
         clue="Are you sure you created the security policy " + variables['Trigram'] + "-policy ? I guess you should double check ;-) ?"
         
         return result, clue, None
+    
+    # We need to check the security policy configuration
+    info_json=json.loads(json.dumps(info, default=str))
+
+    #Category
+    json_expr = parse('$.rules[*].spec.secured_group_category_references[*]')
+
+    if variables['CatUUID'] not in [match.value for match in json_expr.find(info_json)]:
+        clue="The security policy is not associated to your category. Can you check ?"
+        return False, clue, None
+
+    #State
+
+    if info['state'] != 'ENFORCE':
+        clue="The security policy is not in enforce mode. Can you change it ?"
+        return False, clue, None
+
+    #Outbound
+    json_expr = parse('$.rules[?(@.spec.is_all_protocol_allowed)].ext_id')
+
+    if len(json_expr.find(info_json)) == 0:
+        clue="The security policy seems not authorize all outbound protocols. Can you check ?"
+        return False, clue, None
 
     # We store ImageUUID in the variables to be used later
-    variables['SecurityPolicyUUID'] = response
+    variables['SecurityPolicyUUID'] = info['ext_id']
 
     return result, clue, None
 
 def CheckSecurityPolicy2(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
-    return result, clue, None
+
+    # We get ssh service ID
+    sshServiceUUID = retrieveFlowServiceID(service_name="ssh", variables=variables)
+
+    # Get info
+    info = retrieveSecurityPolicyInfo(policy_name=variables['Trigram'] + "-policy", variables=variables)
+
+    if info is None: 
+        result=False
+        clue="Are you sure you created the security policy " + variables['Trigram'] + "-policy ? I guess you should double check ;-) ?"
+        
+        return result, clue, None
+    
+    # We need to check the security policy configuration
+    info_json=json.loads(json.dumps(info, default=str))
+
+    #Inboud / Check if ssh rule is present
+    json_expr= parse("$.rules[?(@.spec.service_group_references=~'"+sshServiceUUID+"')].ext_id")
+        
+    if json_expr.find(info_json):
+        clue="The security policy seems not authorize the ssh service. Can you check ?"
+        return False, clue, None
+
+    #Inboud / Check if icmp rule is present
+    json_expr= parse("$.rules[?(@.spec.icmp_services)].ext_id")
+
+    if not json_expr.find(info_json):
+        clue="The security policy seems not authorize the icmp service. Can you check ?"
+        return False, clue, None
+
+    return True, '', None
 
 # =============================================================================
 # CheckProtectionPolicy - Done
