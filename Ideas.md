@@ -24,7 +24,7 @@
 - [x] Add a node OK (just view)
 - [x] LCM (just view)
 - [] Security dashboard (just view)
-- [] Cluster Runaway (on Specialists HPOC ?)
+- [x] Cluster Runaway (on Specialists HPOC ?)
 	- Identify bad sized VM (on Specialists HPOC ?) with `Optimize resources`
 - [] Create Playbook to call a webhook as soon as VM is restarted
 - [] Clone prod into a VPC

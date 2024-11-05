@@ -358,7 +358,37 @@
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
-        },        
+        },
+        {
+            "id": 41,
+            "active": true,
+            "Message": {
+                "en": "Ok, #>P:3#Now go back on the first cluster please.#>P:3#\nWe are going to leverage Intelligent-Ops Low-Code capabilities from NCM. They call this feature X-play, and it is very useful to automate tasks. #>P:3#Can you create a new playbook\n - named '#>V:Trigram#-playbook'\n - it will send an email to #>V:EmailReport# as soon as a VM is 'Power cycled'\n - In the email body, put all information you have on the VM please.\nDo not forget to enable it ;). I wait here for your 'OK'. #>I:#"
+            },
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 42,
+            "active": true,
+            "Message": {
+                "en": "Let me take a look..."
+            },
+            "CheckTask": "CheckPlaybook", 
+            "Color": "blue"
+        },
+        {
+            "id": 43,
+            "active": true,
+            "Message": {
+                "en": "\nI think we need to check this. Can you 'Power Cycle' the VM #>V:Trigram#-vm and then verify the playbook has been played ?#>P:2# I wait here for your 'Done'. #>I:#"
+            },
+            "WaitForInputValue": "Done",
+            "Color": "blue"
+        },
+
+
+
         {
             "id": 100,
             "active": false,

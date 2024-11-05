@@ -566,3 +566,33 @@ def CheckRunway(variables):
         return False, clue, "Runway"
     
     return result, clue, None
+
+# =============================================================================
+# CheckPlaybook - WIP
+# =============================================================================
+def CheckPlaybook(variables):
+    clue=''
+    result=True
+
+    
+    response, info = retrievePlaybookInfo(variables['Trigram'] + "-playbook", variables=variables)
+
+    if not response:
+        clue="The playbook " + variables['Trigram'] + "-playbook is not on the cluster. Are you sure you named it correctly?"
+        return False, clue, None
+    else:
+        # We Check elements
+
+        # Trigger
+        if len(info['spec']['resources']['trigger_list']) != 1 or info['spec']['resources']['trigger_list'][0]['input_parameter_values']['type'] != 'VmPowerCycleAudit':
+            clue="Are you sure your trigger is correctly set ?"
+            return False, clue, None
+
+        # Action
+        if len(info['spec']['resources']['action_list'])==1 and  info['spec']['resources']['action_list'][0]['action_type_reference']['name'] == 'email_action':
+            return True, '', None
+        else:
+            clue = 'It is strange, actions are wrong. We need only one action which sends an email. Can you fix it ?'
+            return False, clue, None
+
+    return True, '', None

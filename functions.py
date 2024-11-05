@@ -561,7 +561,7 @@ def getRunwayForCluster( clusterUUID, variables):
     ],
     "query_name": "prism:EBQueryModel"
     }
-#$.group_results[*].entity_results[*].data[?(@.name=='capacity.runway')].values
+
     response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['OldPCUsername'], variables['OldPCPassword']))
     response_data = json.loads(response.text)    
 
@@ -571,3 +571,49 @@ def getRunwayForCluster( clusterUUID, variables):
         return match.value[0]
 
     return None
+
+# ========================================================================
+# = retrievePlaybookInfo
+# ========================================================================
+# ToDo : Redevelop with v4 API/sdk when available
+def retrievePlaybookInfo( name, variables):
+    playbookID=None
+
+    url="https://%s:9440//api/nutanix/v3/groups" % variables['PC']
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    payload = {
+        "entity_type": "action_rule",    
+        "grouping_attribute": " ",
+        "group_count": 3,
+        "group_offset": 0,
+        "group_attributes": [],
+        "group_member_count": 40,
+        "group_member_offset": 0,
+        "group_member_attributes": [
+            {
+                "attribute": "name"
+            }
+        ]
+    }
+
+    response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    json_expr=parse("$.group_results[*].entity_results[?(@.data[0].values[0].values[0]=='"+name+"')].entity_id")
+
+    for match in json_expr.find(response_data):
+        playbookID=match.value
+
+    if playbookID == None:
+        return False, None
+    else:
+        url = "https://%s:9440/api/nutanix/v3/action_rules/%s" % (variables['PC'], playbookID)
+
+        response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+        response_data = json.loads(response.text)    
+        return True, response_data
