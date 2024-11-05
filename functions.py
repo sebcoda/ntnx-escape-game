@@ -6,9 +6,12 @@ import ntnx_networking_py_client
 import ntnx_vmm_py_client
 import ntnx_prism_py_client
 import ntnx_lifecycle_py_client
+import ntnx_clustermgmt_py_client
 import ntnx_microseg_py_client
 import requests
 import json
+from jsonpath_ng.ext import parse
+
 
 # ========================================================================
 # = configSdkClient
@@ -370,22 +373,6 @@ def retrieveFlowServiceID(service_name, variables):
 # Function that is returning the extId of a security policy
 def retrieveSecurityPolicyInfo(policy_name, variables):
 
-    # url = "https://%s:9440/api/microseg/v4.0.b1/config/policies?((type eq Schema.Enums.SecurityPolicyType'APPLICATION'))" % variables['PC']
-    # headers = {
-    #     "Content-Type": "application/json",
-    #     "Accept": "application/json"
-    # }
-
-    # response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
-    # response_data = response.json()
-
-    # for policy in response_data['data']:
-    #     if policy['name'] == policy_name:
-
-
-
-    #         return policy
-
     sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
     page = 0
     limit = 50
@@ -503,3 +490,84 @@ def getNumberOfUpdates( variables):
             nbupdates+=1
             
     return nbupdates
+
+# ========================================================================
+# = GetNewNodeInfo
+# ========================================================================
+# This function is returning the info about nodes available for expansion
+# ToDo : rewrite with SDK when available (seems broken because of authentication)
+def getNewNodeSerial(variables):
+    
+    clusterUUID=getClusterUUID(variables) 
+    
+    url="https://%s:9440/api/clustermgmt/v4.0.b2/config/clusters/%s/rackable-units" % (variables['PC'],clusterUUID)
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    
+    response = requests.get(url , headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    if len(response_data['data']):
+        return response_data['data'][0]['serial']
+    else:
+        return None
+
+# ========================================================================
+# = getClusterUUID
+# ========================================================================
+# ToDo : rewrite with SDK when available (seems broken)
+def getClusterUUID(variables):
+
+    url="https://%s:9440/api/clustermgmt/v4.0.b2/config/clusters" % variables['PC']
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    
+    response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    json_expr = parse('data[?(@.nodes.numberOfNodes==3)].extId')
+
+    for match in json_expr.find(response_data):
+        return match.value
+
+    return None    
+
+# ========================================================================
+# = getRunwayForCluster
+# ========================================================================
+# ToDo : rewrite with SDK when available
+def getRunwayForCluster( clusterUUID, variables):
+
+    url="https://%s:9440/api/nutanix/v3/groups" % variables['OldPC']
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+    payload = {
+    "entity_type": "cluster",
+    "group_count": 3,
+    "group_offset": 0,
+    "group_member_count": 100,
+    "group_member_offset": 0,
+    "group_member_attributes": [
+        {
+            "attribute": "capacity.runway"
+        }
+    ],
+    "query_name": "prism:EBQueryModel"
+    }
+#$.group_results[*].entity_results[*].data[?(@.name=='capacity.runway')].values
+    response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['OldPCUsername'], variables['OldPCPassword']))
+    response_data = json.loads(response.text)    
+
+    json_expr = parse("$.group_results[0].entity_results[0].data[?(@.name=='capacity.runway')].values[*].values")
+
+    for match in json_expr.find(response_data):
+        return match.value[0]
+
+    return None

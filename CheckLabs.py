@@ -493,7 +493,7 @@ def CheckReport(variables):
         # We check report config
 
         # Schedule
-        if info['spec']['resources']['schedule']['interval_type'] != 'DAILY':
+        if 'schedule' in info['spec']['resources'].keys() and info['spec']['resources']['schedule']['interval_type'] != 'DAILY':
             clue="The report " + variables['Trigram'] + "-report should be scheduled daily. Can you fix it ?"
             
             return False, clue, None
@@ -517,16 +517,26 @@ def CheckReport(variables):
     return result, clue, None
 
 # =============================================================================
-# CheckNewNode - ToDo
+# CheckNewNode - Done
 # =============================================================================
 def CheckNewNode(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
-    return result, clue, None
+    
+    info = getNewNodeSerial(variables)
+
+    if info is None:
+        clue="I did not find the serial number of the new node. Can you check it ?"
+        return False, clue, None
+    
+    if info != variables['NodeSerial']:
+        clue="This serial is really weird... Please double-check !"
+        return False, clue, 'NodeSerial'
+
+    return True, '', None
 
 # =============================================================================
-# CheckUpdates - WIP
+# CheckUpdates - Done
 # =============================================================================
 def CheckUpdates(variables):
     clue=''
@@ -542,9 +552,17 @@ def CheckUpdates(variables):
 
     return result, clue, None
 
-
+# =============================================================================
+# CheckRunway - Done
+# =============================================================================
 def CheckRunway(variables):
     clue=''
     result=True
-    print("#GL Need to be coded")
+    
+    value = getRunwayForCluster(getClusterUUID(variables),variables)
+    
+    if value != variables['Runway']:
+        clue="The runway is not the one expected. Can you verify it ? "
+        return False, clue, "Runway"
+    
     return result, clue, None

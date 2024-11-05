@@ -309,7 +309,7 @@
             "id": 35,
             "active": true,
             "Message": {
-                "en": "Now I need you go on the Infrastructure > Hardware > Clusters page. Then simulate cluster expansion, without validating them. Just take a screenshot of the review page, it will be useful for a future mission. I can't tell you more right know. #>P:3#Please give me the Mac address of the new node. #>I:NodeMacAddress#"
+                "en": "Now I need you go on the Infrastructure > Hardware > Clusters page. Then simulate cluster expansion, without validating them. Just take a screenshot of the review page, it will be useful for a future mission. I can't tell you more right know. #>P:3#Please give me the Serieal number of the new node. #>I:NodeSerial#"
             },
             "CheckTask": "CheckNewNode",           
             "Color": "blue"
@@ -327,7 +327,7 @@
             "id": 37,
             "active": true,
             "Message": {
-                "en": "Nice ! #>P:3#Third and last check I need you do for me : #>P:1#From the Dashboard page of the Infrastructure, you should have a tile with security concerns. From here, display the full security Dashboard, and dig into it, takes some screenshot which will help us for upcoming operations. We will have to act quickly, this tool is very helpfull to identify all security issues of the platform, and they probably take care of it. #>P:5#Put 'OK' here when it's done. #I>:#\n"
+                "en": "Nice ! #>P:3#Third and last check I need you do for me : #>P:1#From the Dashboard page of the Infrastructure, you should have a tile with security concerns. From here, display the full security Dashboard, and dig into it, takes some screenshot which will help us for upcoming operations. We will have to act quickly, this tool is very helpfull to identify all security issues of the platform, and they probably take care of it. #>P:5#Put 'OK' here when it's done. #>I:#\n"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -336,7 +336,7 @@
             "id": 38,
             "active": true,
             "Message": {
-                "en": "Bob as intercepted a new account for another cluster. #>P:2#Not a big catch, it seems to be the account of the guy who monitors clusters capacity and node procurement. Can you quickly connect on this serverm, check runway values and give me the number of days remaining on this cluster ?#>P:3# Connection info are :\n - PC : #>V:OldPC#\n - User : #>V:OldPCUsername#\n - Password : #>V:OldPCPassword#\n#>P:3#You should find info in the 'Intelligent Operations' page. Put the number of days here when you have it. #>I:Runway#"
+                "en": "Bob as intercepted a new account for another cluster. #>P:2#Not a big catch, it seems to be the account of the guy who monitors clusters capacity and node procurement. Can you quickly connect on this cluster, check runway values and give me the number of days remaining on this cluster ?#>P:3# Connection info are :\n - PC : #>V:OldPC#\n - User : #>V:OldPCUsername# (it's a local user)\n - Password : #>V:OldPCPassword#\n#>P:3#You should find info in the 'Intelligent Operations' page. Put the number of days here when you have it : #>I:Runway#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -354,7 +354,7 @@
             "id": 40,
             "active": true,
             "Message": {
-                "en": "Nutanix provides advices to clean VM size and reduce footprint of VMs on the cluster. They will probably use it to reduce the cost of the platform and push back the node procurement. #>P:3#Can you check how many resources can ben saved on the cluster ?#>P:3#If I remember well you have to find a 'Optimize resources'. Take a screenshot for later please it will help us to estimate nodes addons date. Write 'OK' here. #>I:#"
+                "en": "Nutanix provides advices to clean VM size and reduce footprint of VMs on the cluster. They will probably use it to reduce the cost of the platform and push back the node procurement. #>P:3#Can you check how many resources can ben saved on the cluster ? #>P:3#If I remember well you have to find an 'Optimize resources' button. Take a screenshot for later please it will help us to estimate nodes addons date. Write 'OK' here. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
