@@ -559,7 +559,7 @@ def CheckRunway(variables):
     clue=''
     result=True
     
-    value = getRunwayForCluster(getClusterUUID(variables),variables)
+    value = getRunwayForCluster(variables)
     
     if value != variables['Runway']:
         clue="The runway is not the one expected. Can you verify it ? "
@@ -568,7 +568,7 @@ def CheckRunway(variables):
     return result, clue, None
 
 # =============================================================================
-# CheckPlaybook - WIP
+# CheckPlaybook - Done
 # =============================================================================
 def CheckPlaybook(variables):
     clue=''
@@ -596,3 +596,6 @@ def CheckPlaybook(variables):
             return False, clue, None
 
     return True, '', None
+
+
+def CheckCloneApp(variables)

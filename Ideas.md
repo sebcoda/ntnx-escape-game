@@ -26,7 +26,7 @@
 - [] Security dashboard (just view)
 - [x] Cluster Runaway (on Specialists HPOC ?)
 	- Identify bad sized VM (on Specialists HPOC ?) with `Optimize resources`
-- [] Create Playbook to call a webhook as soon as VM is restarted
+- [x] Create Playbook to call a webhook as soon as VM is restarted
 - [] Clone prod into a VPC
 	- do it once
 	- Schedule a refresh 

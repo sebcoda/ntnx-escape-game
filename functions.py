@@ -541,7 +541,7 @@ def getClusterUUID(variables):
 # = getRunwayForCluster
 # ========================================================================
 # ToDo : rewrite with SDK when available
-def getRunwayForCluster( clusterUUID, variables):
+def getRunwayForCluster( variables):
 
     url="https://%s:9440/api/nutanix/v3/groups" % variables['OldPC']
     headers = {

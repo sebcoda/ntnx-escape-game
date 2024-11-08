@@ -381,14 +381,29 @@
             "id": 43,
             "active": true,
             "Message": {
-                "en": "\nI think we need to check this. Can you 'Power Cycle' the VM #>V:Trigram#-vm and then verify the playbook has been played ?#>P:2# I wait here for your 'Done'. #>I:#"
+                "en": "\nI think we need to check this. Can you 'Power Cycle' the VM #>V:Trigram#-vm and then verify the playbook has been played ? #>P:2# If my memories are good, in the playbook page, you have a 'Plays' manue with execution history. #>P:2# I wait here for your 'Done'. #>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"
         },
-
-
-
+        {
+            "id": 44,
+            "active": true,
+            "Message": {
+                "en": "\nWe continue to trap this cluster... #>P:3#It seems they use Nutanix Self-Service, to create automation, and provide them in a marketplace for end-users.#>P:2#They have a blueprint to clone some VM into a dedicated private network (VPC), for testing purpose obiously. It could be interesting to execute it and I'll be quiet to investigate, far form production.\nPlease go in Self-Service > Blueprints, and execute 'Clone environment' with these parameters :\n - App Name : #>V:Trigram#-app\n - VPC name : #>V:Trigram#-app\n - Category : Environment\n - Category value : 'Production'\n - External Network Name : TestNetwork\n - Category for floating IP : 'Quarantine' (Actually we do not care here)\n\nWrite 'OK' when it's done. #>I:#"
+            },
+            "WaitForInputValue": "OK",
+            "Color": "blue"
+        },
+        {
+            "id": 45,
+            "active": true,
+            "Message": {
+                "en": "\nNice, let me confirm it is ok. #>I:#"
+            },
+            "CheckTask": "CheckCloneApp", 
+            "Color": "blue"
+        },
         {
             "id": 100,
             "active": false,
