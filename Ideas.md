@@ -27,9 +27,9 @@
 - [x] Cluster Runaway (on Specialists HPOC ?)
 	- Identify bad sized VM (on Specialists HPOC ?) with `Optimize resources`
 - [x] Create Playbook to call a webhook as soon as VM is restarted
-- [] Clone prod into a VPC
+- [x] Clone prod into a VPC
 	- [x] do it once
-	- [] Schedule a refresh 
+	- [x] Schedule a refresh 
 - [] Change app in marketplace to add (spying) task
 
 # Game Improvement

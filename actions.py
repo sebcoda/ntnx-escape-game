@@ -14,7 +14,7 @@ def lowercaseTrigram(variables):
     return True
 
 # ====================================================================================================
-# lowercaseTrigram - To be done
+# lowercaseTrigram - Done
 # ====================================================================================================
 # This function delete VM identified in the variables
 def DeleteVM(variables):
@@ -39,3 +39,19 @@ def DeleteVM(variables):
         print(e)
 
     return True
+
+# ====================================================================================================
+# DeployBP - WIP
+# ====================================================================================================
+# To Do : Migrate to v4 API/SDK when available
+def DeployBP( variables ):
+    
+    # Get BP from github
+
+
+    # Push it to the PC
+
+    # Update credentials
+
+    return True
+

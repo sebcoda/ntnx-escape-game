@@ -421,12 +421,38 @@
             },
             "CheckTask": "CheckSchedDay2", 
             "Color": "blue"
-        },        
+        },
+        {
+            "id": 48,
+            "active": true,
+            "Message": {
+                "en": "\n#>A:DeployBP#Its time for our last task. #>P:4#. We are going to modifiy one of their blueprint, to add a backdoor in the VM they will deploy. This blueprint is used by their  end-users to deploy a brand new VM in their environment (IPAM, CMDB, DNS, FW rules, backup client, etc).#>P:3#\nLook at the BP bp-blankvm-prd#>V:Vlanid# and edit it. Please add a task in the 'Create' action of the service 'VM'. In the 'Execute' task, enter this :\n\n #>S#pyhton\n\nSave everything and enter 'Done' here when you have finished#>I:#"
+            },
+            "WaitForInputValue": "Done",
+            "Color": "blue"
+        },
+        {
+            "id": 49,
+            "active": true,
+            "Message": {
+                "en": "\nTerrific... I check#>P:2#\n"
+            },
+            "CheckTask": "CheckUpdateBP", 
+            "Color": "blue"
+        },                    
+        {
+            "id": 99,
+            "active": false,
+            "Message": {
+                "en": "Thank you #>:Username# it was great. Close you session. I wait for you to the bascamp, I owe you a beer or two!\n"
+            },
+            "Color": "blue"
+        },                    
         {
             "id": 100,
             "active": false,
             "Message": {
-                "en": "Thank you and good bye!\n"
+                "en": "Connection is closing....#>P:3#\nDeleting all traces...#>P:3#\n\nConnection closed.\n"
             },
             "Color": "green"
         }

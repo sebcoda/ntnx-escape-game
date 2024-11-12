@@ -29,6 +29,8 @@
   [] Create endpoint (on game VM) ? It may keep endpoint if one exists with the good name ? 
   [] Update variables
   [] Updates tasks using endpoint
+[] Deploy fakes BP
+
 
 
 # Notes :
