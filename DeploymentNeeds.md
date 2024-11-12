@@ -1,6 +1,8 @@
 # Prerequisites
-[x] HPOC with 3 nodes, Self service activated
-
+[x] HPOC with 3 nodes, Self service and Microseg activated
+[x] Versions :
+ - AOS : 6.10
+ - PC : 2024.2
 
 # Deployment of
 [] Remove 1 host

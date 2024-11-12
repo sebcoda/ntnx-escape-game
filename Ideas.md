@@ -23,18 +23,18 @@
 - [x] Create report to send-it regularly to an email
 - [x] Add a node OK (just view)
 - [x] LCM (just view)
-- [] Security dashboard (just view)
+- [x] Security dashboard (just view)
 - [x] Cluster Runaway (on Specialists HPOC ?)
 	- Identify bad sized VM (on Specialists HPOC ?) with `Optimize resources`
 - [x] Create Playbook to call a webhook as soon as VM is restarted
 - [] Clone prod into a VPC
-	- do it once
-	- Schedule a refresh 
+	- [x] do it once
+	- [] Schedule a refresh 
 - [] Change app in marketplace to add (spying) task
 
 # Game Improvement
- - [] Script to setup everything on a HPOC
- - [] Script to send starting email
+ - [] Script/BP to setup everything on a HPOC
+ - [] Script/BP to send starting email
  - [] Medals system (if some stages are done in limited time)
  - [] Summary webpage/email to summarize the lab and Nutanix platform features
  - [] Use Web interface to connect on game

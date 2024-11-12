@@ -597,5 +597,41 @@ def CheckPlaybook(variables):
 
     return True, '', None
 
+# =============================================================================
+# CheckCloneApp - Done
+# =============================================================================
+def CheckCloneApp(variables):
+    clue=''
+    result=True
 
-def CheckCloneApp(variables)
+    # Check App
+    appId = retrieveAppId(variables['Trigram'] + "-app", variables=variables)
+
+    if not appId:
+        clue="The app " + variables['Trigram'] + "-app is not on the cluster. Are you sure you named it correctly?"
+        return False, clue, None
+
+    # Check VPC
+    vpcId = retireveVpcId(variables['Trigram'] + "-vpc", variables=variables)
+
+    if not vpcId:
+        clue="Automation has not created VPC " + variables['Trigram'] + "-vpc, that is weird. Can you check apps log in its audit panel?"
+        return False, clue, None
+
+    return True, '', None
+
+# =============================================================================
+# CheckCloneApp - Done
+# =============================================================================
+def CheckSchedDay2(variables):
+    clue=''
+    result=True
+
+    # Check Schedule
+    response = retrieveScheduleInfo(variables['Trigram'] + "-sched", variables=variables)
+
+    if response['executable']['entity']['uuid'] != variables['AppUUID']:
+        clue="The schedule " + variables['Trigram'] + "-sched is not associated to the app. Can you fix it ?"
+        return False, clue, None
+
+    return True, '', None

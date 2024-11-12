@@ -617,3 +617,73 @@ def retrievePlaybookInfo( name, variables):
         response = requests.get(url, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
         response_data = json.loads(response.text)    
         return True, response_data
+
+# ========================================================================
+# = retrieveAppId
+# ========================================================================
+# ToDo : Redevelop with v4 API/sdk when available
+def retrieveAppId( name, variables):
+    url="https://%s:9440/api/nutanix/v3/apps/list" % variables['PC']
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    payload = { "kind": "app" }
+
+    response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    json_expr=parse("$.entities[?(@.status.name=='"+name+"')].status.uuid")
+
+    # Only 1 ap can match
+    for match in json_expr.find(response_data):
+        variables['AppUUID']=match.value
+        return match.value
+
+    return None
+
+# ========================================================================
+# = retireveVpcId
+# ========================================================================
+def retireveVpcId( name, variables):
+
+    sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
+    client = ntnx_networking_py_client.ApiClient(configuration=sdkConfig)
+    vpcs_api = ntnx_networking_py_client.VpcsApi(api_client=client)
+    page = 0
+    limit = 50
+
+    try:
+        api_response = vpcs_api.list_vpcs(_filter="name eq '" + name + "'")      
+        return api_response._ListVpcsApiResponse__data[0].ext_id
+    except ntnx_networking_py_client.rest.ApiException as e:
+        print(e)
+
+    return None
+
+# ========================================================================
+# = retrieveScheduleInfo
+# ========================================================================
+# ToDo : Redevelop with v4 API/sdk when available
+def retrieveScheduleInfo( name, variables):
+    url="https://%s:9440/api/nutanix/v3/jobs/list" % variables['PC']
+    
+    headers = {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    }
+
+    payload = { }
+
+    response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    response_data = json.loads(response.text)
+
+    json_expr=parse("$.entities[?(@.metadata.name=='"+name+"')].resources")
+
+    # Only 1 ap can match
+    for match in json_expr.find(response_data):
+        return match.value
+
+    return None

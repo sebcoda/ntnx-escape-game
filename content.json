@@ -390,7 +390,7 @@
             "id": 44,
             "active": true,
             "Message": {
-                "en": "\nWe continue to trap this cluster... #>P:3#It seems they use Nutanix Self-Service, to create automation, and provide them in a marketplace for end-users.#>P:2#They have a blueprint to clone some VM into a dedicated private network (VPC), for testing purpose obiously. It could be interesting to execute it and I'll be quiet to investigate, far form production.\nPlease go in Self-Service > Blueprints, and execute 'Clone environment' with these parameters :\n - App Name : #>V:Trigram#-app\n - VPC name : #>V:Trigram#-app\n - Category : Environment\n - Category value : 'Production'\n - External Network Name : TestNetwork\n - Category for floating IP : 'Quarantine' (Actually we do not care here)\n\nWrite 'OK' when it's done. #>I:#"
+                "en": "\nWe continue to trap this cluster... #>P:3#It seems they use Nutanix Self-Service, to create automation, and provide them in a marketplace for end-users.#>P:2#They have a blueprint to clone some VM into a dedicated private network (VPC), for testing purpose obviously. It could be interesting to execute it and I'll be quiet to investigate, far form production and potention trackers.\nPlease go in Self-Service > Blueprints, and execute 'Clone environment' with these parameters :\n - App Name : #>V:Trigram#-app\n - VPC name : #>V:Trigram#-vpc\n - Category : Environment\n - Category value : 'Production'\n - External Network Name : TestNetwork\n - Category for floating IP : 'Quarantine' (Actually we do not care for my usage)\n\nWrite 'OK' when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -399,11 +399,29 @@
             "id": 45,
             "active": true,
             "Message": {
-                "en": "\nNice, let me confirm it is ok. #>I:#"
+                "en": "\nNice, let me confirm it is ok...#>P:2#\n"
             },
             "CheckTask": "CheckCloneApp", 
             "Color": "blue"
         },
+        {
+            "id": 46,
+            "active": true,
+            "Message": {
+                "en": "\nTo have a fresh config of prod VM on a daily basis, I would like you schedule an action named 'Refresh machines'. It can be done in the 'Self-Service > Policies' page. Name it '#>V:Trigram#-sched' please. FYI, your app is currently deployed in the 'Production' environment'. Enter 'Done' when the schedule is created. #>I:#"
+            },
+            "WaitForInputValue": "Done",
+            "Color": "blue"
+        },
+        {
+            "id": 47,
+            "active": true,
+            "Message": {
+                "en": "\nTerrific... I check#>P:2#\n"
+            },
+            "CheckTask": "CheckSchedDay2", 
+            "Color": "blue"
+        },        
         {
             "id": 100,
             "active": false,
