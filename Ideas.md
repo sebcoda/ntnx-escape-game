@@ -33,11 +33,12 @@
 - [] Change app in marketplace to add (spying) task
 
 # Game Improvement
- - [] Script/BP to setup everything on a HPOC
- - [] Script/BP to send starting email
- - [] Medals system (if some stages are done in limited time)
- - [] Summary webpage/email to summarize the lab and Nutanix platform features
  - [] Use Web interface to connect on game
+ - [x] Script/BP to setup everything on a HPOC
+ - [] Script/BP to send starting email
+ - [] Summary webpage/email to summarize the lab and Nutanix platform features
+ - [] Medals system (if some stages are done in limited time)
+ - [] Update prerequisites runbook to deploy main bp and launch-it during preparation task ?
 
 # Additional content for next release
 - Create file share

@@ -2,6 +2,8 @@
     
 import ntnx_vmm_py_client
 from functions import *
+import requests
+from base64 import b64encode
 
 
 # ====================================================================================================
@@ -47,11 +49,27 @@ def DeleteVM(variables):
 def DeployBP( variables ):
     
     # Get BP from github
+    url = "https://raw.githubusercontent.com/Golgautier/ntnx-escape-game/refs/heads/main/blueprint/NewVM.json?token=GHSAT0AAAAAACWL3ED3FL3LF2LCFKPFT5MEZZTGOBA"
+    response = requests.get(url)
+
+    with open("newvm.json", "wb") as file:
+        #GL file.write(response.content)
+        print("GL")
+
+    with open("newvm.json", "r") as file:
+        content=file.read()
+
+    url = "https://%s:9440/api/nutanix/v3/blueprints/import_json" % variables['PC']
 
 
-    # Push it to the PC
+    headers = {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+    }
 
-    # Update credentials
+    payload = content
+
+    response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
 
     return True
 

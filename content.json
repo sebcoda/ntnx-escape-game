@@ -66,7 +66,7 @@
             "id": 8,
             "active": true,
             "Message": {
-                "en": "\nYou know what ?#>P:2# I already like you, we are great teammates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nGo in the 'Infrastructure' menu, and create a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very useful for us, Please configure your subnet with these info :\n - Network address : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: 192.168.#>V:Vlanid#.1\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
+                "en": "\nYou know what ?#>P:2# I already like you, we are great teammates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nGo in the 'Infrastructure' menu, and create a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very useful for us, Please configure your subnet with these info :\n - Network address : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: 192.168.#>V:Vlanid#.1\n - UNcheck Basic networking ni the advanced menu\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
             },
             "CheckTask": "CheckNetwork",
             "WaitForInputValue": "OK",
