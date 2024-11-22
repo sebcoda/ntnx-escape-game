@@ -1,0 +1,4 @@
+[ZoneTransfer]
+ZoneId=3
+ReferrerUrl=https://10.38.4.74:9440/apps/
+HostUrl=https://10.38.4.74:9440/api/nutanix/v3/runbooks/59deb4f0-fde3-43ff-1f99-3cbb109741ca/export_file

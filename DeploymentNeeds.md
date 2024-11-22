@@ -49,9 +49,12 @@ Deploy blueprint `DeployGame`
 [x] Deploy fakes BP
 [x] Migrate subnets
 [x] Clone git repo
-[] Create conf.env from template
+[x] Create conf.env from template
 [] Add day2 actions
  - [] launch servers
  - [] reset game
 
 # Notes :
+ - [] Double-check node available in lab
+ - [] Double-check project creation with user (in preparation - 2nd try seems ok)
+ - [x] registry for calmdsl container

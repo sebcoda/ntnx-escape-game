@@ -14,7 +14,7 @@
 - [x] Securize the VM
 	- [x] Encryption
 	- [x] Microseg
-	- [x] Replication
+	- [x] Snap
 - [x] Create approval rule to prevent deletion of RP
 - [x] VM has been deleted, restore VM from recovery point
 
@@ -33,9 +33,11 @@
 - [] Change app in marketplace to add (spying) task
 
 # Game Improvement
- - [] Use Web interface to connect on game
+ - [x] Use Web interface to connect on game
  - [x] Script/BP to setup everything on a HPOC
+ - [] recovery mode
  - [] Script/BP to send starting email
+ - [] Support multiple games
  - [] Summary webpage/email to summarize the lab and Nutanix platform features
  - [] Medals system (if some stages are done in limited time)
  - [] Update prerequisites runbook to deploy main bp and launch-it during preparation task ?
