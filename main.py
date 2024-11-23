@@ -29,7 +29,8 @@ variables = {
     "OldPCPassword": os.getenv('OLDPCPASSWORD'),
     "ApprovalPolicy": os.getenv('APPROVALPOLICY'),
     "EmailReport": os.getenv('EMAILREPORT'),
-    "Debug": False
+    "Debug": False,
+    "RecoveryUntilStage": 0
 }
 
 firstStage=1
@@ -71,25 +72,35 @@ if __name__ == "__main__":
 
     # Clear the output screen
     os.system('cls' if os.name == 'nt' else 'clear')
-
-    # Display all stages
+     
+    # *********************************** Display all stages *********************************** 
     with open(contentJsonFile, 'r') as file:
         data = json.load(file)
 
     for stage in data['stages']:
-        # Display all stages on by one, only if they are active
         
-        if stage['id'] >= firstStage and stage['active'] == True:
+        # Check if we need to recover the stage
+        if stage['id'] <= variables['RecoveryUntilStage']:
+            message,color,expectedvalue,checkScript=stageMessage(stage['id'], contentJsonFile, variables['Language'])
+            # Check student work if needed
+            if checkScript != '':
+                CheckStage(checkScript, variables, silent=True)           
+        
+        elif stage['id'] >= firstStage and stage['active'] == True:
             # Get message of the stage
             message,color,expectedvalue,checkScript=stageMessage(stage['id'], contentJsonFile, variables['Language'])
             display(message, variables, color, expectedvalue)
 
             # Check student work if needed
             if checkScript != '':
-                CheckStage(checkScript, variables)
+                if stage['id'] == 1:
+                    silentMode = True
+                else:
+                    silentMode = False
+                CheckStage(checkScript, variables, silent=silentMode)
 
-        # Update the score file
-        UpdateScoreFile(scoreFile, variables['Trigram'], stage['id'])
+            # Update the score file
+            UpdateScoreFile(scoreFile, variables['Trigram'], stage['id'])
 
     # Reset display color
     sys.stdout.write('\033[0m')

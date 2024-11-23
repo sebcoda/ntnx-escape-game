@@ -28,7 +28,7 @@ def DeleteVM(variables):
   
 
     try:
-        api_response = vm_api.get_vm_by_ext_id(extId=variables['VMUUID'])
+        api_response = vm_api.get_vm_by_id(extId=variables['VMUUID'])
     except ntnx_vmm_py_client.rest.ApiException as e:
         print(e)
 
@@ -36,7 +36,7 @@ def DeleteVM(variables):
     etag_value = ntnx_vmm_py_client.ApiClient.get_etag(api_response)
 
     try:
-        api_response = vm_api.delete_vm(extId=variables['VMUUID'], if_match=etag_value)
+        api_response = vm_api.delete_vm_by_id(extId=variables['VMUUID'], if_match=etag_value)
     except ntnx_vmm_py_client.rest.ApiException as e:
         print(e)
 

@@ -32,6 +32,10 @@
 	- [x] Schedule a refresh 
 - [] Change app in marketplace to add (spying) task
 
+## Need double-Check :
+Disabled Playbook
+Add Cat Prod to Prod VM
+
 # Game Improvement
  - [x] Use Web interface to connect on game
  - [x] Script/BP to setup everything on a HPOC

@@ -240,7 +240,7 @@ def retrieveVMInfo(vm_name, variables):
     
     vmUUID=myData['data'][0]['ext_id']
     
-    response=vms_api.get_vm_by_ext_id(vmUUID)
+    response=vms_api.get_vm_by_id(vmUUID)
     myData=response.to_dict()
 
     # If everything is correct, return True
@@ -295,7 +295,7 @@ def retrieveCatID( key, value, variables):
 
     if value == None:
         try:
-            api_response = categories_api.get_all_categories(_page=page, _limit=limit,_filter="key eq '" + key + "'")
+            api_response = categories_api.list_categories(_page=page, _limit=limit,_filter="key eq '" + key + "'")
             myData=api_response.to_dict()
 
             if myData['data'] == None:
@@ -307,7 +307,7 @@ def retrieveCatID( key, value, variables):
             print(e)
     else:
         try:
-            api_response = categories_api.get_all_categories(_page=page, _limit=limit,_filter="key eq '" + key + "' and value eq '" + value + "'")
+            api_response = categories_api.list_categories(_page=page, _limit=limit,_filter="key eq '" + key + "' and value eq '" + value + "'")
             myData=api_response.to_dict()
             
             if myData['data'] == None:
@@ -656,8 +656,13 @@ def retireveVpcId( name, variables):
     limit = 50
 
     try:
-        api_response = vpcs_api.list_vpcs(_filter="name eq '" + name + "'")      
-        return api_response._ListVpcsApiResponse__data[0].ext_id
+        response = vpcs_api.list_vpcs(_filter="name eq '" + name + "'")
+        response_data = response.to_dict()
+        
+        if response_data['data'] == None:
+            return None
+        
+        return response_data['data'][0]['ext_id']
     except ntnx_networking_py_client.rest.ApiException as e:
         print(e)
 

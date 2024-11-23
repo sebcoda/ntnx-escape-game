@@ -1,16 +1,37 @@
 from functions import *
 from jsonpath_ng.ext import parse
 
+scoreFile="score.json"
+
 # Here are all the functions called by the game content to check labs
 # Each function returns a tuple (result, clue, variable name)
 # - result is a boolean (True if the check is OK, False otherwise)
 # - clue is a string that will be displayed to the user why the check is not OK
 # - variable name is the name of the dictionary key containing the value we check to validate the exercise. This value will be reasked by the engine if check is false
 
+
+
+# =============================================================================
+# NeedRecovery - Done
+# =============================================================================
+def NeedRecovery(variables,recoveryMode):
+    with open(scoreFile, 'r') as file:
+        data = json.load(file)
+        
+    jsonpath_expr=parse("score[?(@.player=="+variables['Trigram']+")].value")
+
+    for match in jsonpath_expr.find(data):
+        if match.value > 1:
+            variables['RecoveryUntilStage']=match.value
+            print("\n\nSpecial event : Entering in recovery mode....\n\n")
+
+    return True, '', None
+
+
 # =============================================================================
 # CheckUSer - Done
 # =============================================================================
-def CheckUser(variables):
+def CheckUser(variables,recoveryMode):
     from functions import retrieveUserId, retrieveRoleId, retrieveAuthorizationPolicyId, checkAuthorizationPolicyAssignement
 
     result = True
@@ -53,7 +74,7 @@ def CheckUser(variables):
 # =============================================================================
 # CheckProject - Done
 # =============================================================================
-def CheckProject(variables):
+def CheckProject(variables,recoveryMode):
 
 
     result = True
@@ -90,7 +111,7 @@ def CheckProject(variables):
 # =============================================================================
 # Notes : We only verify if subnet, we do not really care of the configuration, as
 # it is not used later in the game
-def CheckNetwork(variables):
+def CheckNetwork(variables,recoveryMode):
     
     clue=''
     result=True
@@ -111,7 +132,7 @@ def CheckNetwork(variables):
 # =============================================================================
 # CheckImage - Done
 # =============================================================================
-def CheckImage(variables):
+def CheckImage(variables,recoveryMode):
 
     clue=''
     result=True
@@ -132,7 +153,7 @@ def CheckImage(variables):
 # =============================================================================
 # CheckImage - Done
 # =============================================================================
-def CheckVM(variables):
+def CheckVM(variables,recoveryMode):
 
     clue=''
     result=True
@@ -144,7 +165,7 @@ def CheckVM(variables):
         clue="The VM " + variables['Trigram'] + "-vm is not on the cluster. Are you sure you named it correctly?"
         
         return result, clue, None
-    else:
+    elif recoveryMode == False:
         # Check all other information
 
         # Check owner
@@ -217,9 +238,9 @@ def CheckVM(variables):
 # =============================================================================
 # CheckCat - Done
 # =============================================================================
-def CheckCat(variables):
+def CheckCat(variables,recoveryMode):
     clue=''
-    result=True
+    result=True     
 
     found,_ = retrieveCatID(variables['Trigram'] + "-cat", None, variables=variables)
 
@@ -254,9 +275,12 @@ def CheckCat(variables):
 # =============================================================================
 # CheckCatVM - Done
 # =============================================================================
-def CheckCatVM(variables):
+def CheckCatVM(variables,recoveryMode):
     clue=''
     result=True
+    
+    if recoveryMode:
+        return True, '', None
 
     found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
 
@@ -273,7 +297,7 @@ def CheckCatVM(variables):
 # =============================================================================
 # CheckStoragePolicy - Done
 # =============================================================================
-def CheckStoragePolicy(variables):
+def CheckStoragePolicy(variables,recoveryMode):
     clue=''
     result=True
 
@@ -293,7 +317,7 @@ def CheckStoragePolicy(variables):
 # =============================================================================
 # CheckSecurityPolicy - Done
 # =============================================================================
-def CheckSecurityPolicy(variables):
+def CheckSecurityPolicy(variables,recoveryMode):
     clue=''
     result=True
 
@@ -338,7 +362,7 @@ def CheckSecurityPolicy(variables):
 # =============================================================================
 # CheckSecurityPolicy2 - Done
 # =============================================================================
-def CheckSecurityPolicy2(variables):
+def CheckSecurityPolicy2(variables,recoveryMode):
     clue=''
     result=True
 
@@ -376,7 +400,7 @@ def CheckSecurityPolicy2(variables):
 # =============================================================================
 # CheckProtectionPolicy - Done
 # =============================================================================
-def CheckProtectionPolicy(variables):
+def CheckProtectionPolicy(variables,recoveryMode):
     clue=''
     result=True
     
@@ -395,7 +419,7 @@ def CheckProtectionPolicy(variables):
             return False, clue, None
 
         # Retention
-        if info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy']['rollup_retention_policy']['multiple'] != 1 or info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy']['rollup_retention_policy']['snapshot_interval_type'] != 'DAILY':
+        if not ("rollup_retention_policy" in info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy'].keys()) or info['spec']['resources']['availability_zone_connectivity_list'][0]['snapshot_schedule_list'][0]['local_snapshot_retention_policy']['rollup_retention_policy']['snapshot_interval_type'] != 'DAILY':
             clue="It looks like the snapshot retention is not set to 1 day. Can you fix it ?"            
             return False, clue, None
 
@@ -420,7 +444,7 @@ def CheckProtectionPolicy(variables):
 # =============================================================================
 # CheckApprovalPolicy - Done
 # =============================================================================
-def CheckApprovalPolicy(variables):
+def CheckApprovalPolicy(variables,recoveryMode):
     clue=''
     result=True
 
@@ -449,7 +473,7 @@ def CheckApprovalPolicy(variables):
 # =============================================================================
 # CheckRestoreVM - Done
 # =============================================================================
-def CheckRestoreVM(variables):
+def CheckRestoreVM(variables,recoveryMode):
     clue=''
     result=True
 
@@ -466,11 +490,11 @@ def CheckRestoreVM(variables):
 # =============================================================================
 # CheckLiveMigration - Done
 # =============================================================================
-def CheckLiveMigration(variables):
+def CheckLiveMigration(variables,recoveryMode):
    
     found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
 
-    if found and variables['HostUUID'] != response['host']['ext_id']:
+    if recoveryMode or (found and variables['HostUUID'] != response['host']['ext_id']):
         return True,"", None
     else:
         return False, "The VM is still on the same host, move it right now please !", None
@@ -478,7 +502,7 @@ def CheckLiveMigration(variables):
 # =============================================================================
 # CheckLiveMigration - Done
 # =============================================================================
-def CheckReport(variables):
+def CheckReport(variables,recoveryMode):
     clue=''
     result=True
 
@@ -519,9 +543,12 @@ def CheckReport(variables):
 # =============================================================================
 # CheckNewNode - Done
 # =============================================================================
-def CheckNewNode(variables):
+def CheckNewNode(variables,recoveryMode):
     clue=''
     result=True
+    
+    if recoveryMode:
+        return True, '', None
     
     info = getNewNodeSerial(variables)
 
@@ -538,9 +565,12 @@ def CheckNewNode(variables):
 # =============================================================================
 # CheckUpdates - Done
 # =============================================================================
-def CheckUpdates(variables):
+def CheckUpdates(variables,recoveryMode):
     clue=''
     result=True
+    
+    if recoveryMode:
+        return True, '', None    
 
     response = getNumberOfUpdates(variables)
 
@@ -555,9 +585,12 @@ def CheckUpdates(variables):
 # =============================================================================
 # CheckRunway - Done
 # =============================================================================
-def CheckRunway(variables):
+def CheckRunway(variables,recoveryMode):
     clue=''
     result=True
+    
+    if recoveryMode:
+        return True, '', None    
     
     value = getRunwayForCluster(variables)
     
@@ -570,7 +603,7 @@ def CheckRunway(variables):
 # =============================================================================
 # CheckPlaybook - Done
 # =============================================================================
-def CheckPlaybook(variables):
+def CheckPlaybook(variables,recoveryMode):
     clue=''
     result=True
 
@@ -600,7 +633,7 @@ def CheckPlaybook(variables):
 # =============================================================================
 # CheckCloneApp - Done
 # =============================================================================
-def CheckCloneApp(variables):
+def CheckCloneApp(variables,recoveryMode):
     clue=''
     result=True
 
@@ -615,7 +648,7 @@ def CheckCloneApp(variables):
     vpcId = retireveVpcId(variables['Trigram'] + "-vpc", variables=variables)
 
     if not vpcId:
-        clue="Automation has not created VPC " + variables['Trigram'] + "-vpc, that is weird. Can you check apps log in its audit panel?"
+        clue="Automation has not created VPC " + variables['Trigram'] + "-vpc, that is weird. Can you check apps log in its audit panel? You can delete it and redeploy app if you used a bad vpc name."
         return False, clue, None
 
     return True, '', None
@@ -623,7 +656,7 @@ def CheckCloneApp(variables):
 # =============================================================================
 # CheckCloneApp - Done
 # =============================================================================
-def CheckSchedDay2(variables):
+def CheckSchedDay2(variables,recoveryMode):
     clue=''
     result=True
 

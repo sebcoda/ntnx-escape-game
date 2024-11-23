@@ -22,7 +22,7 @@ Deploy blueprint `DeployGame`
  - Select cluster and primary Network
  - Launch-it
 
-
+[text](about:blank#blocked)
 # Deployment of game through BP
 
 ## Runbook
@@ -50,9 +50,9 @@ Deploy blueprint `DeployGame`
 [x] Migrate subnets
 [x] Clone git repo
 [x] Create conf.env from template
-[] Add day2 actions
- - [] launch servers
- - [] reset game
+[x] Add day2 actions
+ - [] launch servers (DOES NOT WORK)
+ - [x] reset game
 
 # Notes :
  - [] Double-check node available in lab

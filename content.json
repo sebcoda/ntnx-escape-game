@@ -7,7 +7,8 @@
             "Message": {
                 "en": "Initializing...#>P:3#\nEstablishing a secure connection to central endpoint...\nPlease wait for few seconds...#>P:4#\nEndpoint reached, sharing encryption keys#>P:3#. Done.\nConnected!\n\n#>P:3#Enter your prefered language (#>V:SupportedLanguages#): #>I:Language#>P:2#Automatic translation activated#>P:2#\n\nPersonal trigram ID required : #>I:Trigram#>P:3#\nThank you\n\nPlease wait for agent contact\n#>P:5"
             },
-            "Color": "green"
+            "Color": "green",
+            "CheckTask": "NeedRecovery"
         },
         {
             "id": 2,
@@ -76,7 +77,7 @@
             "id": 9,
             "active": true,
             "Message": {
-                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add and image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#\nWrite 'OK' when the image is available on the cluster. #>I:#"
+                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add an image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#\nWrite 'OK' when the image is available on the cluster. #>I:#"
             },
             "CheckTask": "CheckImage",
             "WaitForInputValue": "OK",
@@ -86,7 +87,7 @@
             "id": 10,
             "active": true,
             "Message": {
-                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk based on image we just uploaded\n - 2 NICS in the subnet 'Secondary' and '#>V:Trigram#-subnet'\n - Use the project '#>V:Trigram#-proj'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAfter that, move your VM into your project, it's done with 'Manage ownership' action in the VM contextual menu.\nWhen it is done, start the VM, and write 'OK' when you have finished. #>I:#"
+                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk based on image we just uploaded\n - 2 NICS in the subnet 'Secondary' and '#>V:Trigram#-subnet'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAfter that, move your VM into your project, it's done with 'Manage ownership' action in the VM contextual menu.\nWhen it is done, start the VM, and write 'OK' when you have finished. #>I:#"
             },
             "CheckTask": "CheckVM",
             "WaitForInputValue": "OK",
@@ -390,7 +391,7 @@
             "id": 44,
             "active": true,
             "Message": {
-                "en": "\nWe continue to trap this cluster... #>P:3#It seems they use Nutanix Self-Service, to create automation, and provide them in a marketplace for end-users.#>P:2#They have a blueprint to clone some VM into a dedicated private network (VPC), for testing purpose obviously. It could be interesting to execute it and I'll be quiet to investigate, far form production and potention trackers.\nPlease go in Self-Service > Blueprints, and execute 'Clone environment' with these parameters :\n - App Name : #>V:Trigram#-app\n - VPC name : #>V:Trigram#-vpc\n - Category : Environment\n - Category value : 'Production'\n - External Network Name : TestNetwork\n - Category for floating IP : 'Quarantine' (Actually we do not care for my usage)\n\nWrite 'OK' when it's done. #>I:#"
+                "en": "\nWe continue to trap this cluster... #>P:3#It seems they use Nutanix Self-Service, to create automation, and provide them in a marketplace for end-users.#>P:2#They have a blueprint to clone some VM into a dedicated private network (VPC), for testing purpose obviously. It could be interesting to execute it and I'll be quiet to investigate, far form production and potention trackers.\nPlease go in Self-Service > Blueprints, and launch 'CloneProd' with these parameters :\n - App Name : #>V:Trigram#-app\n - VPC name : #>V:Trigram#-vpc\n - Category : Environment\n - Category value : 'Production'\n - External Network Name : TestNetwork\n - Category for floating IP : 'Quarantine' (Actually we do not care for my usage)\n\nWrite 'OK' when blueprint is in 'running' state. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -415,7 +416,7 @@
         },
         {
             "id": 47,
-            "active": 3,
+            "active": true,
             "Message": {
                 "en": "\nTerrific... I check#>P:2#\n"
             },

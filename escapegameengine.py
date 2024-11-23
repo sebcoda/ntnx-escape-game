@@ -125,18 +125,19 @@ def stageMessage(id_number, json_file_path, language='en'):
 # = CheckStage
 # ========================================================================
 # This function checks the script of a stage to validate stage completion
-def CheckStage(checkScript, variables):
+def CheckStage(checkScript, variables,silent=False):
     if checkScript in globals():
         ret=False
         while not ret:
-            ret,clue,renterValue = globals()[checkScript](variables)
+            ret,clue,renterValue = globals()[checkScript](variables, recoveryMode=silent)
             if not ret:
                 if renterValue==None:
                     display("#>P:3#"+random.choice(LabKO)+". "+clue+" When it is done, hit 'Enter'#>I:", variables, 'blue')
                 else:
                     display("#>P:3#"+random.choice(LabKO)+". "+clue+" Please reenter the good value : #>I:"+renterValue, variables, 'blue')
             else:
-                display("#>P:3#"+random.choice(LabOK)+"\n", variables, 'blue')
+                if silent==False:
+                    display("#>P:3#"+random.choice(LabOK)+"\n", variables, 'blue')
     else:
         raise ValueError(f"Function {checkScript} is not defined.")
     
