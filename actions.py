@@ -4,6 +4,8 @@ import ntnx_vmm_py_client
 from functions import *
 import requests
 from base64 import b64encode
+import os
+import uuid
 
 
 # ====================================================================================================
@@ -48,28 +50,37 @@ def DeleteVM(variables):
 # To Do : Migrate to v4 API/SDK when available
 def DeployBP( variables ):
     
-    # Get BP from github
-    url = "https://raw.githubusercontent.com/Golgautier/ntnx-escape-game/refs/heads/main/blueprint/NewVM.json?token=GHSAT0AAAAAACWL3ED3FL3LF2LCFKPFT5MEZZTGOBA"
-    response = requests.get(url)
-
-    with open("newvm.json", "wb") as file:
-        #GL file.write(response.content)
-        print("GL")
-
-    with open("newvm.json", "r") as file:
-        content=file.read()
-
-    url = "https://%s:9440/api/nutanix/v3/blueprints/import_json" % variables['PC']
-
-
+    # 
+    # 
+    
+    # Get BP ID
+    url = "https://%s:9440/api/nutanix/v3/blueprints/list" % variables['PC']
     headers = {
-        "Accept": "application/json",
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
     }
+    payload = {
+        "kind": "blueprint"
+    }
+    response = requests.post(url,json=payload,verify=False,auth=(variables['PCUser'], variables['PCPassword']),headers=headers)
+    response_data = json.loads(response.text)
 
-    payload = content
+    jsonpath_expr = parse('$.entities[?(@.metadata.name =~ "source$")].metadata.uuid')
 
-    response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
+    for match in jsonpath_expr.find(response_data):
+        bpUuid=match.value
+
+    # We Clone it
+    url = "https://%s:9440/api/nutanix/v3/blueprints/%s/clone" % (variables['PC'], bpUuid)
+    payload={
+        "blueprint_name": "bp-blankvm-prd"+variables['Vlanid'],
+        "metadata": {
+            "kind": "blueprint",
+            "uuid": str(uuid.uuid4()),
+            }
+        }
+    response = requests.post(url,json=payload,verify=False,auth=(variables['PCUser'], variables['PCPassword']),headers=headers)
+
 
     return True
 

@@ -445,7 +445,7 @@
             "id": 99,
             "active": false,
             "Message": {
-                "en": "Thank you #>:Username# it was great. Close you session. I wait for you to the bascamp, I owe you a beer or two!\n"
+                "en": "Thank you #>:Username# it was great. Close you session. I wait for you to the basecamp, I owe you a beer or two!\n"
             },
             "Color": "blue"
         },                    

@@ -30,7 +30,8 @@ variables = {
     "ApprovalPolicy": os.getenv('APPROVALPOLICY'),
     "EmailReport": os.getenv('EMAILREPORT'),
     "Debug": False,
-    "RecoveryUntilStage": 0
+    "RecoveryUntilStage": 0,    
+    "DockerRegistry": os.getenv('DOCKERREGISTRY'),
 }
 
 firstStage=1

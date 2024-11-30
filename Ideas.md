@@ -32,19 +32,15 @@
 	- [x] Schedule a refresh 
 - [] Change app in marketplace to add (spying) task
 
-## Need double-Check :
-Disabled Playbook
-Add Cat Prod to Prod VM
-
 # Game Improvement
  - [x] Use Web interface to connect on game
  - [x] Script/BP to setup everything on a HPOC
- - [] recovery mode
+ - [x] recovery mode
  - [] Script/BP to send starting email
- - [] Support multiple games
  - [] Summary webpage/email to summarize the lab and Nutanix platform features
  - [] Medals system (if some stages are done in limited time)
  - [] Update prerequisites runbook to deploy main bp and launch-it during preparation task ?
+ - [] Support multiple games
 
 # Additional content for next release
 - Create file share
