@@ -714,7 +714,7 @@ def getBpContent(bpName, variables):
     response_data=json.loads(response.text)
     
     if len(response_data['entities']) == 0:
-        return None
+        return None, None
     else:
         bpUuid = response_data['entities'][0]['metadata']['uuid']
     
@@ -727,4 +727,4 @@ def getBpContent(bpName, variables):
     jsonpath_expr = parse("$.status.resources.service_definition_list[*].action_list[?(@.name=='action_create')].runbook.task_definition_list")
     task=jsonpath_expr.find(response_data)
     
-    return task
+    return True, task

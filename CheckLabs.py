@@ -608,27 +608,32 @@ def CheckPlaybook(variables,recoveryMode):
     result=True
 
     
-    response, info = retrievePlaybookInfo(variables['Trigram'] + "-playbook", variables=variables)
+    #response, info = retrievePlaybookInfo(variables['Trigram'] + "-playbook", variables=variables)
+    response, info = retrievePlaybookInfo("TestGautier", variables=variables)
 
     if not response:
         clue="The playbook " + variables['Trigram'] + "-playbook is not on the cluster. Are you sure you named it correctly?"
         return False, clue, None
     else:
         # We Check elements
-
+        
         # Trigger
-        if len(info['spec']['resources']['trigger_list']) != 1 or info['spec']['resources']['trigger_list'][0]['input_parameter_values']['type'] != 'VmPowerCycleAudit':
+        if len(info['spec']['resources']['trigger_list']) != 1 or ('type' not in info['spec']['resources']['trigger_list'][0]['input_parameter_values']) or ( info['spec']['resources']['trigger_list'][0]['input_parameter_values']['type'] != 'VmPowerCycleAudit'):
             clue="Are you sure your trigger is correctly set ?"
             return False, clue, None
 
         # Action
-        if len(info['spec']['resources']['action_list'])==1 and  info['spec']['resources']['action_list'][0]['action_type_reference']['name'] == 'email_action':
-            return True, '', None
-        else:
+        if not (len(info['spec']['resources']['action_list'])==1 and  info['spec']['resources']['action_list'][0]['action_type_reference']['name'] == 'email_action'):
             clue = 'It is strange, actions are wrong. We need only one action which sends an email. Can you fix it ?'
             return False, clue, None
-
+            
+       # Enabled
+        if not info['spec']['resources']['is_enabled']:
+            clue="The playbook is not enabled. Can you fix it ?"
+            return False, clue, None
+            
     return True, '', None
+        
 
 # =============================================================================
 # CheckCloneApp - Done
@@ -676,18 +681,18 @@ def CheckSchedDay2(variables,recoveryMode):
 def CheckUpdateBP(variables,recoveryMode):
     clue=''
     result=True
+    bpName = "bp-blankvm-prd"+variables['Vlanid']
     
     #Check it the task exist
-    #GL response = getBpContent("bp-blankvm-prd"+variables['Vlanid'],variables)
-    response = getBpContent("TestGautier",variables)
+    response,info = getBpContent(bpName,variables)
       
     if not response:
-        clue="The blueprint TestGautier is not on the cluster. Have you changed his name?"
+        clue="The blueprint "+bpName+" is not on the cluster. Have you changed his name?"
         return False, clue, None
     else:
         # We have the task details
         jsonpath_expr = parse("$[?(name=='foo')]")
-        task=jsonpath_expr.find(response[0].value)
+        task=jsonpath_expr.find(info[0].value)
         
         if not task:
             clue="I do not see the 'foo' task in the create action of your VM, please check it."
