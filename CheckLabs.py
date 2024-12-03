@@ -668,3 +668,29 @@ def CheckSchedDay2(variables,recoveryMode):
         return False, clue, None
 
     return True, '', None
+
+
+# =============================================================================
+# CheckCloneApp - Done
+# =============================================================================
+def CheckUpdateBP(variables,recoveryMode):
+    clue=''
+    result=True
+    
+    #Check it the task exist
+    #GL response = getBpContent("bp-blankvm-prd"+variables['Vlanid'],variables)
+    response = getBpContent("TestGautier",variables)
+      
+    if not response:
+        clue="The blueprint TestGautier is not on the cluster. Have you changed his name?"
+        return False, clue, None
+    else:
+        # We have the task details
+        jsonpath_expr = parse("$[?(name=='foo')]")
+        task=jsonpath_expr.find(response[0].value)
+        
+        if not task:
+            clue="I do not see the 'foo' task in the create action of your VM, please check it."
+            return False, clue, None
+        else:
+            return True, '', None

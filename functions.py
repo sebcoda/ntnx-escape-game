@@ -692,3 +692,39 @@ def retrieveScheduleInfo( name, variables):
         return match.value
 
     return None
+
+# ========================================================================
+# = CheckBpTask
+# ========================================================================
+# ToDo : Redevelop with v4 API/sdk when available
+def getBpContent(bpName, variables):
+    
+    # We get the ID
+    url="https://%s:9440/api/nutanix/v3/blueprints/list" % variables['PC']
+    headers = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    }
+    payload={
+        "kind": "blueprint",
+        "filter": "name=="+bpName
+    }
+    
+    response = requests.post(url, json=payload, headers=headers, auth=(variables['PCUser'], variables['PCPassword']), verify=False)
+    response_data=json.loads(response.text)
+    
+    if len(response_data['entities']) == 0:
+        return None
+    else:
+        bpUuid = response_data['entities'][0]['metadata']['uuid']
+    
+    # WE get bp
+    url="https://%s:9440/api/nutanix/v3/blueprints/%s" % (variables['PC'], bpUuid)
+    
+    response = requests.get(url, headers=headers, auth=(variables['PCUser'], variables['PCPassword']), verify=False)
+    response_data=json.loads(response.text)
+    
+    jsonpath_expr = parse("$.status.resources.service_definition_list[*].action_list[?(@.name=='action_create')].runbook.task_definition_list")
+    task=jsonpath_expr.find(response_data)
+    
+    return task
