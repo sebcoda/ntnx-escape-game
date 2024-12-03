@@ -608,8 +608,7 @@ def CheckPlaybook(variables,recoveryMode):
     result=True
 
     
-    #response, info = retrievePlaybookInfo(variables['Trigram'] + "-playbook", variables=variables)
-    response, info = retrievePlaybookInfo("TestGautier", variables=variables)
+    response, info = retrievePlaybookInfo(variables['Trigram'] + "-playbook", variables=variables)
 
     if not response:
         clue="The playbook " + variables['Trigram'] + "-playbook is not on the cluster. Are you sure you named it correctly?"
