@@ -4,7 +4,7 @@ Description="Escape-Game SSH Server"
 [Service]
 Restart=always
 WorkingDirectory=/home/nutanix/ntnx-escape-game
-ExecStart=/home/nutanix/ntnx-escape-game/.venv/bin/python3 wssh --address={LISTEN_IP}
+ExecStart=/home/nutanix/ntnx-escape-game/.venv/bin/wssh --address={LISTEN_IP}
 ExecStop=deactivate
 
 [Install]
