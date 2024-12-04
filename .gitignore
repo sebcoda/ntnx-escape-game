@@ -166,3 +166,5 @@ config.env
 score.json
 newvm.json
 testgl.py
+sendgrid.env
+trash
