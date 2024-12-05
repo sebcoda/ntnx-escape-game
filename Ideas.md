@@ -30,13 +30,13 @@
 - [x] Clone prod into a VPC
 	- [x] do it once
 	- [x] Schedule a refresh 
-- [] Change app in marketplace to add (spying) task
+- [x] Change app in marketplace to add (spying) task
 
 # Game Improvement
  - [x] Use Web interface to connect on game
  - [x] Script/BP to setup everything on a HPOC
  - [x] recovery mode
- - [] Script/BP to send starting email
+ - [x] Script/BP to send starting email
  - [] Summary webpage/email to summarize the lab and Nutanix platform features
  - [] Medals system (if some stages are done in limited time)
  - [] Update prerequisites runbook to deploy main bp and launch-it during preparation task ?
