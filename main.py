@@ -32,6 +32,8 @@ variables = {
     "Debug": False,
     "RecoveryUntilStage": 0,    
     "DockerRegistry": os.getenv('DOCKERREGISTRY'),
+    "frontedHost": os.getenv("FRONTENDHOST"),
+    "frontedPort": os.getenv("FRONTENDPORT")
 }
 
 firstStage=1

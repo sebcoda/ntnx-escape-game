@@ -11,6 +11,7 @@ import ntnx_microseg_py_client
 import requests
 import json
 from jsonpath_ng.ext import parse
+import time
 
 
 # ========================================================================
@@ -550,18 +551,17 @@ def getRunwayForCluster( variables):
     }
     payload = {
     "entity_type": "cluster",
-    "group_count": 3,
-    "group_offset": 0,
-    "group_member_count": 100,
-    "group_member_offset": 0,
     "group_member_attributes": [
         {
             "attribute": "capacity.runway"
         }
     ],
-    "query_name": "prism:EBQueryModel"
+    "query_name": "prism:RunwayInfoQueryModel",
+    "interval_end_ms": int((time.time()-3*86400)*1000),
+    "interval_start_ms": 1732977638020,
+    "downsampling_interval": 86400
     }
-
+    
     response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['OldPCUsername'], variables['OldPCPassword']))
     response_data = json.loads(response.text)    
 

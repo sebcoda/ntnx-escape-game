@@ -47,6 +47,16 @@ def terminal():
     """
     return render_template('terminal.html', hostname=os.getenv('FRONTENDHOST'), username=os.getenv('HOSTSSHUSERNAME'), password=base64.b64encode(os.getenv('HOSTSSHPASSWORD').encode("ascii")).decode('utf-8'))
 
+@app.route('/ssh')
+def ssh():
+    """
+    Render the page for in Browser SSH terminal.
+
+    Returns:
+        str: Rendered HTML of the terminal page.
+    """
+    return render_template('terminal2.html', hostname=os.getenv('FRONTENDHOST'), username=os.getenv('HOSTSSHUSERNAME'), password=base64.b64encode(os.getenv('HOSTSSHPASSWORD').encode("ascii")).decode('utf-8'))
+
 if __name__ == '__main__':
     app.run(host=os.getenv('FRONTENDHOST'), port=os.getenv('FRONTENDPORT'), debug=True)
     app.run(debug=True)
