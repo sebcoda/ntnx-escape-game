@@ -49,7 +49,7 @@
             "id": 6,
             "active": true,
             "Message": {
-                "en": "Now, disconnect from Nutanix Prism Central and connect back with your new user. Click 'Enter' when you are in.#>I:#"
+                "en": "Now, disconnect from Nutanix Prism Central and connect back with your new user. Hit 'Enter' when you are in.#>I:#"
             },
             "Color": "blue"
         },
@@ -77,7 +77,7 @@
             "id": 9,
             "active": true,
             "Message": {
-                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add an image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd an image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#\nWrite 'OK' when the image is available on the cluster. #>I:#"
+                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add an image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd a disk (not iso) image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#\nWrite 'OK' when the image is available on the cluster. #>I:#"
             },
             "CheckTask": "CheckImage",
             "WaitForInputValue": "OK",
@@ -133,7 +133,7 @@
             "id": 15,
             "active": true,
             "Message": {
-                "en": "\nCan you go back on your VM view, and apply this category with value 'Critical' to it plese ? #>P:3#Write 'OK' when it's done. #>I:#"
+                "en": "\nCan you go back on your VM view, and apply this category with value 'Critical' to it please ? #>P:3#Write 'OK' when it's done. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -187,7 +187,7 @@
             "id": 21,
             "active": true,
             "Message": {
-                "en": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:10#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, with a simple ping from to your VM. It should not work. To execute your ping, please a new webpage on http://#>V:frontendHost#>V:frontendPort#/ssh\n\n#>P:4#Then update the policy to allow the SSH and icmp traffic. Add 2 Inboud rules :\n - Service 'ssh' your laptop IP only\n - ICMP (Type : 8 - Code : 0) from all everywhere.#>P:3#\nAfter Security policy update, check again the ping and put 'OK' here. #>I:#"
+                "en": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:5#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, with a simple ping from to your VM. It should not work.#>P:2# To execute your ping, please open a new webpage on http://#>V:frontendHost#:#>V:frontendPort#/ssh. It will run a new terminal session on a VM on the Nutanix cluster.\n#>P:4#Then update the policy to allow the SSH and icmp traffic. Add 2 Inboud rules :\n - Service 'ssh' from this IP #>V:frontendHost# only\n - ICMP (Type : 8 - Code : 0) from all everywhere.#>P:3#\nAfter Security policy update, check again the ping and put 'OK' here. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -223,7 +223,7 @@
             "id": 25,
             "active": true,
             "Message": {
-                "en": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named '#>V:ApprovalPolicy#' requesting validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William.#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#"
+                "en": "To secure our work, we are going to setup an approval workflow for snapshot deletion. It will avoid any deletion from our embarrassing friends.\n\nPlease, if it does not already exist, create a approval policy named '#>V:ApprovalPolicy#' requesting validation for deletions of our VM snapshots.#>P:3# You will need to add 3 approvers, use : Charlie, Thom and William (Do the search with lowercase names).#>P:3#\nWhen the policy is created, associate it to your protection policy '#>V:Trigram#-policy'. #>P:4#Then enter 'Done' here. #>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"

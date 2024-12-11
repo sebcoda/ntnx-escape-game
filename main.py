@@ -32,8 +32,8 @@ variables = {
     "Debug": False,
     "RecoveryUntilStage": 0,    
     "DockerRegistry": os.getenv('DOCKERREGISTRY'),
-    "frontedHost": os.getenv("FRONTENDHOST"),
-    "frontedPort": os.getenv("FRONTENDPORT")
+    "frontendHost": os.getenv("FRONTENDHOST"),
+    "frontendPort": os.getenv("FRONTENDPORT")
 }
 
 firstStage=1
@@ -103,7 +103,7 @@ if __name__ == "__main__":
                 CheckStage(checkScript, variables, silent=silentMode)
 
             # Update the score file
-            UpdateScoreFile(scoreFile, variables['Trigram'], stage['id'])
+            UpdateScoreFile(scoreFile, variables['Trigram'].lower(), stage['id'])
 
     # Reset display color
     sys.stdout.write('\033[0m')

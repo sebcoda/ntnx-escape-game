@@ -79,7 +79,7 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
                         sys.stdout.write(color_codes['yellow'])
                         tmp=input()
                         sys.stdout.write(color_codes[color])
-                        if tmp!=expectedValue:
+                        if tmp.lower()!=expectedValue.lower():
                             display("I do not understand. You said? #>I:",variables,color,expectedValue)
                     
 
@@ -116,9 +116,10 @@ def stageMessage(id_number, json_file_path, language='en'):
         checkTask=info['CheckTask']
     else:
         checkTask=''
-
-    print
-    
+ 
+    if language not in info['Message'].keys():
+        language='en'
+ 
     return(info['Message'][language], info['Color'],waitForInputValue,checkTask)
 
 # ========================================================================

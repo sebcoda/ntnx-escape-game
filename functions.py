@@ -557,8 +557,8 @@ def getRunwayForCluster( variables):
         }
     ],
     "query_name": "prism:RunwayInfoQueryModel",
-    "interval_end_ms": int((time.time()-3*86400)*1000),
-    "interval_start_ms": 1732977638020,
+    "interval_start_ms": int((time.time()-3*86400)*1000),
+    "interval_end_ms": int(time.time()*1000),
     "downsampling_interval": 86400
     }
     
@@ -570,7 +570,7 @@ def getRunwayForCluster( variables):
     for match in json_expr.find(response_data):
         return match.value[0]
 
-    return None
+    return 0
 
 # ========================================================================
 # = retrievePlaybookInfo
