@@ -106,7 +106,7 @@
             "id": 12,
             "active": true,
             "Message": {
-                "en": "\nPerfect, it is pretty discrete. The #>V:ProdUsername# owns to 'Production' project only. He is not able to see assets from others projects. So, they won't see your VM, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central and hit 'Enter' when you are ready.\n#>P:6#Oh wait !!!#>P:5#They are scanning the host, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#"
+                "en": "\nPerfect, it is pretty discrete. The #>V:ProdUsername# owns to 'Production' project only. He is not able to see assets from others projects. So, they won't see your VM, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central and hit 'Enter' when you are ready.\n#>P:6#Oh wait !!!#>P:5#They are scanning the server hosting our VM, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#"
             },
             "CheckTask": "CheckLiveMigration",
             "Color": "blue"

@@ -1,2 +1,4 @@
 [] Check Subnet is advanced
-[] Improve subnet exercise text
+[x] Improve subnet exercise text
+[] Policy engine to active
+[] Activate security dashboard ?
