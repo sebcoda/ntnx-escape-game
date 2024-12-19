@@ -34,7 +34,6 @@ def confSDKClient(host, user, password, ssl=False):
 # ========================================================================
 # = retrieveUserId
 # ========================================================================
-# Function to retrieve the extId of a specific subnet
 def retrieveUserId(userName, variables):
 
     # Configure the client
@@ -53,15 +52,11 @@ def retrieveUserId(userName, variables):
     response = usersApi.list_users(_filter="username eq '" + str(userName) + "'")
     myData = response.to_dict()
 
-    if myData['data']:
-        return myData['data'][0]['ext_id']
-    else:
-        return None
+    return myData['data']['is_advanced_networking']
     
 # ========================================================================
 # = retrieveRoleId
 # ========================================================================
-# Function to retrieve the extId of a specific subnet
 def retrieveRoleId(roleName, variables):
 
     # Configure the client
@@ -192,6 +187,29 @@ def retrieveSubnetID(subnet_name, variables):
         
     # If everything is correct, return True
     return  myData['data'][0]['ext_id']
+
+
+# ========================================================================
+# = checkSubnetAdvanced
+# ========================================================================
+def checkSubnetAdvanced( subnetID, variables):
+    
+    # Configure the client
+    sdkConfig = confSDKClient(variables['PC'], variables['PCUser'], variables['PCPassword'])
+
+    client = ntnx_networking_py_client.ApiClient(configuration=sdkConfig)
+    subnets_api = ntnx_networking_py_client.SubnetsApi(api_client=client)
+
+    response=subnets_api.get_subnet_by_id(subnetID)
+    myData = response.to_dict()
+
+    # Check if we got an id
+    if myData['data']==None:
+        return False, None
+
+    # If everything is correct, return True
+    return True, myData['data']
+    
 
 # ========================================================================
 # = retrieveImageID

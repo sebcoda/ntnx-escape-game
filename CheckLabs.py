@@ -124,6 +124,15 @@ def CheckNetwork(variables,recoveryMode):
         
         return result, clue, None
     
+    response = checkSubnetAdvanced(subnetId, variables)
+    
+    if response is False:
+        result=False
+        clue="The subnet " + variables['Trigram'] + "-subnet is not correctly configured, is mode is 'Basic'. Can you fix it ?"
+        
+        return result, clue
+    
+    
     # We store networkUUID in the variables to be used later
     variables['NetworkUUID'] = response
 

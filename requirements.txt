@@ -7,13 +7,13 @@ urllib3
 flask
 webssh
 pybase64
-ntnx-clustermgmt-py-client==4.0.1b2
-ntnx-iam-py-client==4.0.2b1
-ntnx-lifecycle-py-client==4.0.1b1
-ntnx-microseg-py-client==4.0.1b1
-ntnx-networking-py-client==4.0.2b1
-ntnx-prism-py-client==4.0.1b1
-ntnx-vmm-py-client==4.0.1b1
+ntnx-clustermgmt-py-client==4.0.1
+ntnx-iam-py-client==4.0.1
+ntnx-lifecycle-py-client==4.0.1
+ntnx-microseg-py-client==4.0.1
+ntnx-networking-py-client==4.0.1
+ntnx-prism-py-client==4.0.1
+ntnx-vmm-py-client==4.0.1
 sendgrid
 # Not available yet ntnx_security_py_client
 # Not available yet ntnx_opsmgmt_py_client
