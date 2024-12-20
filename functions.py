@@ -52,7 +52,10 @@ def retrieveUserId(userName, variables):
     response = usersApi.list_users(_filter="username eq '" + str(userName) + "'")
     myData = response.to_dict()
 
-    return myData['data']['is_advanced_networking']
+    if myData['data']:
+        return myData['data'][0]['ext_id']
+    else:
+        return None
     
 # ========================================================================
 # = retrieveRoleId
@@ -203,12 +206,7 @@ def checkSubnetAdvanced( subnetID, variables):
     response=subnets_api.get_subnet_by_id(subnetID)
     myData = response.to_dict()
 
-    # Check if we got an id
-    if myData['data']==None:
-        return False, None
-
-    # If everything is correct, return True
-    return True, myData['data']
+    return myData['data']['is_advanced_networking']
     
 
 # ========================================================================
@@ -445,7 +443,7 @@ def retrieveProtectionPolicyInfo(policy_name, variables):
 # GL ToDo : write with SDK when available
 def retrieveApprovalPolicyInfo( policy_name, variables):
 
-    url = "https://%s:9440/api/security/v4.0.a1/dashboard/approval-policies" % variables['PC']
+    url = "https://%s:9440/api/security/v4.0.a1/management/approval-policies" % variables['PC']
     headers = {
         "Content-Type": "application/json",
         "Accept": "application/json"
@@ -455,7 +453,7 @@ def retrieveApprovalPolicyInfo( policy_name, variables):
     response = requests.get(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = json.loads(response.text)
 
-    if len(response_data['data']) and response_data['data'][0]['name'] == variables['ApprovalPolicy']:
+    if len(response_data['data']) and response_data['data'][0]['name'] == policy_name:
         return response_data['data'][0]
     else:
         return None

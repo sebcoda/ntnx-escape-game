@@ -1,0 +1,345 @@
+{
+    "answers":
+    [
+        {
+            "checkFunction": "NeedRecovery",
+            "clues": [
+                {
+                    "en": "",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckUser",
+            "clues": [
+                {
+                    "en": "The user #>V:Trigram#-adm hasn't been found. Are you sure you've created it with the correct name?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The authorization policy #>V:Trigram#-auth is not created as requested. Are you sure you've created it with the correct name?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The authorization policy #>V:Trigram#-auth exist, but is not correctly assigning the role to the user. Are you sure you've assigned the correct ressources?",
+                    "fr": "<answer>"
+                }
+                
+            ]
+        },
+        {
+            "checkFunction": "CheckProject",
+            "clues": [
+                {
+                    "en": "The project #>V:Trigram#-proj doesn't exist. Are you sure you named it correctly?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The project #>V:Trigram#-proj doesn't have any cluster associated. Can you fix it ?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The project #>V:Trigram#-proj doesn't have any user associated. Can you fix it ?",
+                    "fr": "<answer>"
+                }                
+            ]
+        },
+        {
+            "checkFunction": "CheckNetwork",
+            "clues": [
+                {
+                    "en": "The subnet #>V:Trigram#-subnet is not on the cluster. Are you sure you named it correctly?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The subnet #>V:Trigram#-subnet is not correctly configured, is mode is 'Basic'. Can you fix it ?",
+                    "fr": "<answer>"
+                }               
+            ]
+        },
+        {
+            "checkFunction": "CheckImage",
+            "clues": [
+                {
+                    "en": "Are you sure you created the image #>V:Trigram#-ubuntu ? I do not see it?",
+                    "fr": "<answer>"
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckVM",
+            "clues": [
+                {
+                    "en": "The VM #>V:Trigram#-vm is not on the cluster. Are you sure you named it correctly?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The VM #>V:Trigram#-vm should have 2 NICs. Are you sure you've configured it properly?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The VM #>V:Trigram#-vm should be connected to the network #>V:Trigram#-subnet. It looks like it is not done. Can you check ?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The VM #>V:Trigram#-vm should be based on the image #>V:Trigram#-ubuntu. It seems not to be the case. Can you fix it ?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The VM #>V:Trigram#-vm should be based on the image #>V:Trigram#-ubuntu. It seems not to be the case. Can you fix it ?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The VM #>V:Trigram#-vm should be in the project #>V:Trigram#-proj. It seems not to be the case. Can you fix it ?",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "Your should have cloud-init configured. It seems not to be the case. Can you fix it or I won't able to connect on ? You'll have to recreate it, unfortunately.",
+                    "fr": "<answer>"
+                },
+                {
+                    "en": "The VM #>V:Trigram#-vm is not powered on. Are you sure you started it?",
+                    "fr": "<answer>"
+                }                
+            ]
+        },
+        {
+            "checkFunction": "CheckCat",
+            "clues": [
+                {
+                    "en": "The category #>V:Trigram#-cat doesn't exist. Are you sure you named it correctly?",
+                    "fr": ""
+                },
+                {
+                    "en": "The category #>V:Trigram#-cat exists, But I do not see the 'Test' value...",
+                    "fr": ""
+                },
+                {
+                    "en": "The category #>V:Trigram#-cat exists, But I do not see the 'Critical' value...",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckCatVM",
+            "clues": [
+                {
+                    "en": "The VM #>V:Trigram#-vm is not associated to the category #>V:Trigram#-cat with value 'Critical'. Can you fix it ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckStoragePolicy",
+            "clues": [
+                {
+                    "en": "Are you sure you created the storage policy #>V:Trigram#-policy ? I did not find it?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckSecurityPolicy",
+            "clues": [
+                {
+                    "en": "Are you sure you created the security policy #>V:Trigram#-policy ? I guess you should double check ;-) ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The security policy is not associated to your category. Can you check ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The security policy is not in enforce mode. Can you change it ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The security policy seems not authorize all outbound protocols. Can you check ?",
+                    "fr": ""
+                }
+
+            ]
+        },
+        {
+            "checkFunction": "CheckSecurityPolicy2",
+            "clues": [
+                {
+                    "en": "Are you sure you created the security policy #>V:Trigram#-policy ? I guess you should double check ;-) ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The security policy seems not authorize the ssh service. Can you check ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The security policy seems not authorize the icmp service. Can you check ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckProtectionPolicy",
+            "clues": [
+                {
+                    "en": "Are you sure you created the protection policy #>V:Trigram#-policy ? I did not find it?",
+                    "fr": ""
+                },
+                {
+                    "en": "It looks like the snapshot schedule is not set to 1 hour. Can you fix it ?",
+                    "fr": ""
+                },
+                {
+                    "en": "It looks like the snapshot retention is not set to 1 day. Can you fix it ?",
+                    "fr": ""
+                },
+                {
+                    "en": "It looks like the category filter is not set correctly. Can you fix it ?",
+                    "fr": ""
+                },
+                {
+                    "en": "It looks like the category value is not set correctly. Can you fix it ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckApprovalPolicy",
+            "clues": [
+                {
+                    "en": "Are you sure you created the approval policy #>V:ApprovalPolicy#? I did not see it.",
+                    "fr": ""
+                },
+                {
+                    "en": "The approval policy is not linked to the protection policy. Can you fix it ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckRestoreVM",
+            "clues": [
+                {
+                    "en": "The VM #>V:Trigram#-vm is not on the cluster. Are you sure you named it correctly?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckLiveMigration",
+            "clues": [
+                {
+                    "en": "The VM is still on the same host, move it right now please !",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckReport",
+            "clues": [
+                {
+                    "en": "The report #>V:Trigram#-report is not on the cluster. Are you sure you named it correctly?",
+                    "fr": ""
+                },
+                {
+                    "en": "The report #>V:Trigram#-report should be scheduled daily. Can you fix it ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The report does not have te good recipient. Can you check that ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The report #>V:Trigram#-report should list VMs. Can you fix it ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckNewNode",
+            "clues": [
+                {
+                    "en": "I did not find the serial number of the new node. Can you check it ?",
+                    "fr": ""
+                },
+                {
+                    "en": "This serial is really weird... Please double-check !",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckUpdates",
+            "clues": [
+                {
+                    "en": "The number of updates is not the one expected. Can you double-check it ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckRunway",
+            "clues": [
+                {
+                    "en": "The runway is not the one expected. Can you verify it ? ",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckPlaybook",
+            "clues": [
+                {
+                    "en": "The playbook #>V:Trigram#-playbook is not on the cluster. Are you sure you named it correctly?",
+                    "fr": ""
+                },
+                {
+                    "en": "Are you sure your trigger is correctly set ?",
+                    "fr": ""
+                },
+                {
+                    "en": "It is strange, actions are wrong. We need only one action which sends an email. Can you fix it ?",
+                    "fr": ""
+                },
+                {
+                    "en": "The playbook is not enabled. Can you fix it ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckCloneApp",
+            "clues": [
+                {
+                    "en": "The app #>V:Trigram#-app is not on the cluster. Are you sure you named it correctly?",
+                    "fr": ""
+                },
+                {
+                    "en": "Automation has not created VPC #>V:Trigram#-vpc, that is weird. Can you check apps log in its audit panel? You can delete it and redeploy app if you used a bad vpc name.",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckSchedDay2",
+            "clues": [
+                {
+                    "en": "The schedule #>V:Trigram#-sched is not associated to the app. Can you fix it ?",
+                    "fr": ""
+                }
+            ]
+        },
+        {
+            "checkFunction": "CheckUpdateBP",
+            "clues": [
+                {
+                    "en": "The blueprint bp-blankvm-prd#>V:Vlanid# is not on the cluster. Have you changed his name?",
+                    "fr": ""
+                },{
+                    "en": "I do not see the 'foo' task in the create action of your VM, please check it.",
+                    "fr": ""
+                }
+            ]
+        }           
+    ]
+}

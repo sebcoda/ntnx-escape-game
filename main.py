@@ -53,7 +53,8 @@ if os.getenv('DEBUG') == 'True':
 
 
 
-contentJsonFile="./content.json"
+contentJsonFile="./gameContent.json"
+labAnswersJsonFile="./labAnswers.json"
 scoreFile="score.json"
 
 

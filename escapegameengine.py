@@ -7,6 +7,7 @@ from CheckLabs import *
 import random
 from Sentences import *
 from actions import *
+from main import labAnswersJsonFile
 
 # ========================================================================
 # = display
@@ -122,6 +123,26 @@ def stageMessage(id_number, json_file_path, language='en'):
  
     return(info['Message'][language], info['Color'],waitForInputValue,checkTask)
 
+
+# ========================================================================
+# = clueMessage
+# ========================================================================
+# This function reads a JSON file and returns the message of a specific check function
+def clueMessage(checkScript, messageNumber, language='en'):
+    with open(labAnswersJsonFile, 'r') as file:
+        data = json.load(file)
+  
+    jsonpath_expr=parse('$.answers[?(@.checkFunction=="'+checkScript+'")].clues')
+    
+    info = jsonpath_expr.find(data)[0].value   
+    
+    if language not in info[messageNumber].keys():
+        language='en'
+     
+ 
+    return(info[messageNumber][language])
+
+
 # ========================================================================
 # = CheckStage
 # ========================================================================
@@ -130,15 +151,20 @@ def CheckStage(checkScript, variables,silent=False):
     if checkScript in globals():
         ret=False
         while not ret:
-            ret,clue,renterValue = globals()[checkScript](variables, recoveryMode=silent)
+            
+            ret,messageNumber,renterValue = globals()[checkScript](variables, recoveryMode=silent)
+            
             if not ret:
+                
+                clue=clueMessage(checkScript, messageNumber, variables['Language'])
+                
                 if renterValue==None:
-                    display("#>P:3#"+random.choice(LabKO)+". "+clue+" When it is done, hit 'Enter'#>I:", variables, 'blue')
+                    display("#>P:3#"+random.choice(labKo[variables['Language']])+". "+clue+" "+labRetry[variables['Language']]+".#>I:", variables, 'blue')
                 else:
-                    display("#>P:3#"+random.choice(LabKO)+". "+clue+" Please reenter the good value : #>I:"+renterValue, variables, 'blue')
+                    display("#>P:3#"+random.choice(labKo[variables['Language']])+". "+clue+" "+labRetryWithValue[variables['Language']]+". #>I:"+renterValue, variables, 'blue')
             else:
                 if silent==False:
-                    display("#>P:3#"+random.choice(LabOK)+"\n", variables, 'blue')
+                    display("#>P:3#"+random.choice(labOk[variables['Language']])+"\n", variables, 'blue')
     else:
         raise ValueError(f"Function {checkScript} is not defined.")
     
