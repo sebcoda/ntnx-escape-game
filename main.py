@@ -5,6 +5,7 @@ from escapegameengine import *
 from functions import *
 import urllib3
 import sys
+import random
 
 urllib3.disable_warnings()
 

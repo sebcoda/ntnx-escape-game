@@ -1,7 +1,8 @@
 from functions import *
 from jsonpath_ng.ext import parse
+from main import contentJsonFile, scoreFile
 
-scoreFile="score.json"
+#GL scoreFile="score.json"
 
 # Here are all the functions called by the game content to check labs
 # Each function returns a tuple (result, messageNumber, variable name)
@@ -15,6 +16,19 @@ scoreFile="score.json"
 # NeedRecovery - Done
 # =============================================================================
 def NeedRecovery(variables,recoveryMode):
+
+    # Good moment to lower the trigram and language
+    variables['Trigram']=variables['Trigram'].lower()
+    variables['Language']=variables['Language'].lower()
+    
+    # Good moment to force language
+    with open(contentJsonFile, 'r') as file:
+        data = json.load(file)
+    
+    if not (variables['Language'] in data['supportedLanguages']):
+        variables['Language']='en'
+    
+    
     with open(scoreFile, 'r') as file:
         data = json.load(file)
         
