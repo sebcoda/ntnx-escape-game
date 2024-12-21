@@ -14,8 +14,8 @@
             "id": 2,
             "active": true,
             "Message": {
-                "en": "\nHey, are you ok?\nI am John, I am here to help you. Please tell me your name : #>I:Username#>P:4#\nHi #>V:Username#, it's our first time together. My nickname is 'Lucky', you are in good hands !.#>P:2#\nWe do not have too much time, I will guide you through the process. Please follow my instructions.#>P:5#\n\n",
-                "fr": "to do"                
+                "en": "\nHey, are you ok?\nI am John, I am here to help you. Please tell me your name : #>I:Username#>P:4#\nHi #>V:Username#, it's our first time together. My nickname is 'Lucky', you are in good hands !.#>P:2#\nWe do not have too much time, I will guide you through the process. Please follow my instructions closely.#>P:5#\n\n",
+                "fr": "\nSalut, ça va ?\nJe suis John, je suis là pour t'aider. Peux-tu me donner ton nom : #>I:Username#>P:4#\nSalut #>V:Username#, c'est notre première fois ensemble. Mon surnom est 'Lucky', tu es entre de bonnes mains !.#>P:2#\nNous n'avons pas beaucoup de temps, je vais te guider à travers le processus. Suis mes instructions au plus près.#>P:5#\n\n"
             },
             "Color": "blue"
         },
@@ -23,7 +23,8 @@
             "id": 3,
             "active": true,
             "Message": {
-                "en": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.#>A:lowercaseTrigram#>P:3#\n\n"
+                "en": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.#>A:lowercaseTrigram#>P:3#\n\n",
+                "fr": "#>V:Username#, nous avons intercepté un message des autres, et nous avons maintenant accès à leur cluster Nutanix. Ils ne se soucient pas des règles élémentaires de sécurité, c'est notre chance.\nDonc, les infos sont :\n - Cluster Nutanix : #>V:PC#\n - Utilisateur : #>V:PCUser#\n - Mot de passe : #>V:PCPassword#\n\nNous devons agir rapidement et sortir d'ici.#>A:lowercaseTrigram#>P:3#\n\n"
             },
             "Color": "blue"
         },
@@ -31,16 +32,18 @@
             "id": 4,
             "active": true,
             "Message": {
-                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster 9Be carreful, 'admin' is a LOCAL accoount), create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights in a policy named  #>V:Trigram#-auth. This is done in the 'Admin center' part of the GUI.\nWrite here 'Done' when it's... done LOL. #>I:# \n"
+                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster (Be carreful, 'admin' is a LOCAL accoount), create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights in a authorization policy named  #>V:Trigram#-auth. This is done in the 'Admin center' part of the GUI.\nWrite here 'Done' when it's... OK LOL. #>I:# \n",
+                "fr": "Tout d'abord, nous devons créer un nouvel utilisateur administrateur, pour éviter tout impact de changement de mot de passe. Ils partagent des mots de passe dans des e-mails, mais ils ont probablement une politique de changement.\nVeuillez vous connecter sur le cluster (Soyez prudent, 'admin' est un compte LOCAL), créez un nouvel utilisateur #>V:Trigram#-adm, et donnez-lui les droits 'Super admin' dans une politique d'autorisation nommée #>V:Trigram#-auth. Cela se fait dans la partie 'admin center' de l'interface graphique.\nEcrivez ici 'OK' quand c'est... OK LOL. #>I:# \n"
             },
             "Color": "blue",
-            "WaitForInputValue": "Done"
+            "WaitForInputValue": "OK"
         },      
         {
             "id": 5,
             "active": true,
             "Message": {
-                "en": "Perfect, let me check that... \n"
+                "en": "Perfect, let me check that... \n",
+                "fr": "Parfait, laissez-moi vérifier cela... \n"
             },
             "CheckTask": "CheckUser",
             "Color": "blue"
@@ -49,7 +52,8 @@
             "id": 6,
             "active": true,
             "Message": {
-                "en": "Now, disconnect from Nutanix Prism Central and connect back with your new user. Hit 'Enter' when you are in.#>I:#"
+                "en": "Now, disconnect from Nutanix Prism Central and connect back with your new user. Hit 'Enter' when you are in.#>I:#",
+                "fr": "Maintenant, déconnectez-vous de Nutanix Prism Central et reconnectez-vous avec votre nouvel utilisateur. Appuyez sur 'Entrée' lorsque vous êtes connecté.#>I:#"
             },
             "Color": "blue"
         },
@@ -57,7 +61,8 @@
             "id": 7,
             "active": true,
             "Message": {
-                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenants. Users from other projects won't see what we do into this project.\n\nOh! An important thing : if I forgot to guide you into the good part of the interface, use the search bar at the top of Prism Central interface, it is soooo useful to go quickly from a point to another one.#>P:3# You can try to type 'projects' in the search bar, then create a new project named '#>V:Trigram#-proj', add any user you will find in the AD (look for user*), and add the Nutanix cluster in infrastructure list.\n Write 'OK' here when the project is created. #>I:#\n"
+                "en": "\n#>V:Username#, you are in ? #>P:3#Great. I need you create a new project. Project are used to group resources, manage access rights and define quotas. It is the Nutanix way to handle tenants. Users from other projects won't see what we do into this project.\n\nOh! An important thing : if I forgot to guide you into the good part of the interface, use the search bar at the top of Prism Central interface, it is soooo useful to go quickly from a point to another one.#>P:3# You can try to type 'projects' in the search bar, then create a new project named '#>V:Trigram#-proj', add any user you will find in the AD (search with user* an pick up one or more), and add the Nutanix cluster in infrastructure list.\n Write 'OK' here when the project is created. #>I:#\n",
+                "fr": "\n#>V:Username#, vous êtes connecté ? #>P:3#Super. J'ai besoin que vous créiez un nouveau projet. Les projets sont utilisés pour regrouper les ressources, gérer les droits d'accès et définir les quotas. C'est la manière de Nutanix de gérer les tenants. Les utilisateurs des autres projets ne verront pas ce que nous faisons dans ce projet.\n\nOh ! Une chose importante : si j'ai oublié de vous guider dans la bonne partie de l'interface, utilisez la barre de recherche en haut de l'interface Prism Central, c'est tellement utile pour passer rapidement d'une page à l'autre sans avoir à chercher.#>P:3# Vous pouvez essayer de taper 'projects' dans la barre de recherche, puis créer un nouveau projet nommé '#>V:Trigram#-proj', ajouter un utilisateur que vous trouverez dans l'AD (recherchez avec user* et choisissez-en un ou plusieurs), et ajoutez le cluster Nutanix dans la liste des infrastructures.\n Ecrivez 'OK' ici lorsque le projet est créé. #>I:#\n"
             },
             "CheckTask": "CheckProject",
             "WaitForInputValue": "OK",
@@ -67,7 +72,8 @@
             "id": 8,
             "active": true,
             "Message": {
-                "en": "\nYou know what ?#>P:2# I already like you, we are great teammates ! :)#>P:3#\nBob has updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nGo in the 'Infrastructure' menu, and create a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very useful for us, Please configure your subnet with these info :\n - Network address : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: 192.168.#>V:Vlanid#.1\n - IMPORTANT : UNcheck Basic networking in the advanced configuration\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#"
+                "en": "\nYou know what ?#>P:2# I already like you, we are great teammates ! :)#>P:3#\nBob has updated switch configuration. You need to create a new subnet in the Nutanix cluster to use it. It should help us to extract data outside without being detected.\nGo in the 'Infrastructure' menu, and create a new subnet named '#>V:Trigram#-subnet' with the VLAN ID '#>V:Vlanid#'.\nSubnet can provide IP to VM like a DHCP, very useful for us, Please configure your subnet with these info :\n - Network address : 192.168.#>V:Vlanid#.0/24\n - IP Pool: 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Gateway: 192.168.#>V:Vlanid#.1\n - IMPORTANT : UNcheck Basic networking in the advanced configuration\nI am waiting for your update. Write 'OK' when the subnet is setup. #>I:#",
+                "fr": "\nVous savez quoi ?#>P:2# Je vous aime déjà, nous sommes de super coéquipiers ! :)#>P:3#\nBob a mis à jour la configuration du switch. Vous devez créer un nouveau subnet dans le cluster Nutanix pour l'utiliser. Cela devrait nous aider à extraire des données à l'extérieur sans être détecté.\nAllez dans le menu 'Infrastructure' et créez un nouveau subnet nommé '#>V:Trigram#-subnet' avec l'ID VLAN '#>V:Vlanid#'.\nLe sous-réseau peut fournir une IP aux VM comme un DHCP, très utile pour nous. Veuillez configurer votre sous-réseau avec ces informations :\n - Adresse réseau : 192.168.#>V:Vlanid#.0/24\n - Pool IP : 192.168.#>V:Vlanid#.50-192.168.#>V:Vlanid#.115\n - Passerelle : 192.168.#>V:Vlanid#.1\n - IMPORTANT : Décochez Basic networking dans la configuration avancée\nJ'attends votre signal. Écrivez 'OK' lorsque le sous-réseau est configuré. #>I:#"
             },
             "CheckTask": "CheckNetwork",
             "WaitForInputValue": "OK",
@@ -77,7 +83,8 @@
             "id": 9,
             "active": true,
             "Message": {
-                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add an image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd a disk (not iso) image named '#>V:Trigram#-ubuntu' in the image library from this URL:#>V:ImageURL#\nWrite 'OK' when the image is available on the cluster. #>I:#"
+                "en": "\nWe are good, especially you. #>P:4#Before creating a VM, we need to add an image in the library. I pushed a home-made image on the ubuntu official repository. It should be enough to fake the others.\nAdd a disk (not iso) image named '#>V:Trigram#-ubuntu' in the image library from this URL: #>V:ImageURL#\nWrite 'OK' when the image is available on the cluster. #>I:#",
+                "fr": "\nNous sommes bons, surtout vous. #>P:4#Avant de créer une VM, nous devons ajouter une image dans la bibliothèque. J'ai poussé une image faite maison sur le dépôt officiel d'ubuntu. Cela devrait suffire pour tromper les autres.\nAjoutez une image de disque (pas iso) nommée '#>V:Trigram#-ubuntu' dans la bibliothèque d'images à partir de cette URL : #>V:ImageURL#\nEcrivez 'OK' lorsque l'image est disponible sur le cluster. #>I:#"
             },
             "CheckTask": "CheckImage",
             "WaitForInputValue": "OK",
@@ -87,7 +94,8 @@
             "id": 10,
             "active": true,
             "Message": {
-                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk based on image we just uploaded\n - UEFI mode\n - 2 NICS in the subnets 'Secondary' and '#>V:Trigram#-subnet'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAfter that, move your VM into your project, it's done with 'Manage ownership' action in the VM contextual menu.\nWhen it is done, start the VM, and write 'OK' when you have finished. #>I:#"
+                "en": "\nWe are on time, and that is good, but we need to hurry up. I have detected an activity from the others, they are looking for us. We need to work carefully.\nPlease, create a new VM named '#>V:Trigram#-vm' with the following configuration :\n - 2 vCPU\n - 4GB RAM\n - 20GB disk based on image we just uploaded\n - UEFI mode\n - 2 NICS in the subnets 'Secondary' and '#>V:Trigram#-subnet'\n\nYou can use this Cloud-init to create a user in this VM:\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAfter that, move your VM into your project, it's done with 'Manage ownership' action in the VM contextual menu.\nWhen it is done, start the VM, and write 'OK' when you have finished. #>I:#",
+                "fr": "\nNous sommes dans les temps, et c'est bien, mais nous devons quand-même nous dépêcher. J'ai détecté une activité des autres, ils nous cherchent. Nous devons travailler avec prudence.\nVeuillez créer une nouvelle VM nommée '#>V:Trigram#-vm' avec la configuration suivante :\n - 2 vCPU\n - 4 Go de RAM\n - 20 Go de disque basé sur l'image que nous venons de télécharger\n - Mode UEFI\n - 2 NICS dans les sous-réseaux 'Secondary' et '#>V:Trigram#-subnet'\n\nVous pouvez utiliser ce Cloud-init pour créer un utilisateur dans cette VM :\n\n---\n#>S#cloud-config\nusers:\n  - name: admin\n    sudo: ['ALL=(ALL) NOPASSWD:ALL']\nchpasswd:\n  list: |\n    admin:MyPassword\n  expire: False\nssh_pwauth: true\n---\n\nAprès cela, déplacez votre VM dans votre projet, c'est fait avec l'action 'manage ownership' dans le menu contextuel de la VM.\nLorsque c'est fait, démarrez la VM, et écrivez 'OK' lorsque vous avez terminé. #>I:#"
             },
             "CheckTask": "CheckVM",
             "WaitForInputValue": "OK",
@@ -97,7 +105,8 @@
             "id": 11,
             "active": true,
             "Message": {
-                "en": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this AD user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM list in the UI, and confirm the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#"
+                "en": "\nI am not very peaceful, there are many strange things happening around us.#>P:5#\nCan you disconnect from the Nutanix Prism Central and connect back with this AD user : #>V:ProdUsername# / #>V:ProdPassword# ? Look at the VM list in the UI, and confirm the VM you have created is not listed.\nSay 'OK' when you are in. #>I:#",
+                "fr": "\nJe ne suis pas très serein, il se passe beaucoup de choses étranges autour de nous.#>P:5#\nPouvez-vous vous déconnecter de Nutanix Prism Central et vous reconnecter avec cet utilisateur AD : #>V:ProdUsername# / #>V:ProdPassword# ? Regardez la liste des VM dans l'interface, et confirmez que la VM que vous avez créée n'est pas répertoriée.\nDites 'OK' lorsque vous êtes connecté. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -106,7 +115,8 @@
             "id": 12,
             "active": true,
             "Message": {
-                "en": "\nPerfect, it is pretty discrete. The #>V:ProdUsername# owns to 'Production' project only. He is not able to see assets from others projects. So, they won't see your VM, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central and hit 'Enter' when you are ready.\n#>P:6#Oh wait !!!#>P:5#They are scanning the server hosting our VM, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#"
+                "en": "\nPerfect, it is pretty discrete. The user #>V:ProdUsername# owns to 'Production' project only. He is not able to see assets from others projects. So, they won't see your VM, except if they look for it. We need to be careful.\n\nPlease, connect back with our admin user #>V:Trigram#-adm on Prism Central and hit 'Enter' when you are ready.\n#>P:6#Oh wait !!!#>P:5#They are scanning the server hosting our VM, shit. Move our VM to another one right now ! Go go go !\nHit 'Enter' when its done#>I:#",
+                "fr": "Parfait, c'est plutôt discret. L'utilisateur #>V:ProdUsername# n'a accés qu'au projet 'Production'. Il ne peut voir les objets des autres projets. Donc, ils ne verront pas notre VM, sauf si ils la chercheng vraiment. On doit être prudents.\n\nS'il vous plaît, reconnectez-vous avec votre utilsateur #>V:Trigram#-adm sur Prism Central, et pressez 'Entrée' quand vout êtes prêt.\n#>P:6#Oh, bougez pas !!!#>P:5#Ils sont en train de scanner la machine qui porte notre VM. Merde. Bougez la VM sur un autre hôte immédiattement ! Vite, vite, vite !\nAppuyez sur 'Entrée' quand c'est fait.#>I:#" 
             },
             "CheckTask": "CheckLiveMigration",
             "Color": "blue"
@@ -115,7 +125,8 @@
             "id": 13,
             "active": true,
             "Message": {
-                "en": "\nThanks god, they have not detected the VM... huhu, it was VERY hot !\n\nNow we are starting serious things. Unfortunately, you are not Nutanix certified, but it is not a big deal. They makes things simple with their interface, and you should find how to do that by yourself#>P:4#\nIn the 'Infrastructure' page, you should find something to manage categories. Nutanix uses Catagories to manage all the policies on the cluster, it is very efficient.#>P:3#\nCreate a new category #>V:Trigram#-cat with 2 values : 'Critical' and 'Test'.#>P:3# I am waiting for your 'OK'. #>I:"
+                "en": "\nThanks god, they have not detected the VM... huhu, it was VERY hot !\n\nNow we are starting serious things. Unfortunately, you are not Nutanix certified, but it is not a big deal. They makes things simple with their interface, and you should find how to do that by yourself#>P:4#\nIn the 'Infrastructure' page, you should find something to manage categories. Nutanix uses Catagories to manage all the policies on the cluster, it is very efficient.#>P:3#\nCreate a new category #>V:Trigram#-cat with 2 values : 'Critical' and 'Test'.#>P:3# I am waiting for your 'OK'. #>I:",
+                "fr": "\nDieu merci, ils n'ont pas détecté la VM... hehe, c'était TRÈS chaud !\n\nMaintenant, nous allons commencer les choses sérieuses. Malheureusement, vous n'êtes pas certifié Nutanix, mais ce n'est pas grave. Ils simplifient les choses avec leur interface, et vous devriez trouver comment faire par vous-même assez facilement#>P:4#\nDans la page 'Infrastructure', vous devriez trouver quelque chose pour gérer les catégories. Nutanix utilise les catégories pour gérer toutes les politiques sur le cluster, c'est très efficace.#>P:3#\nCréez une nouvelle catégorie #>V:Trigram#-cat avec 2 valeurs : 'Critical' et 'Test'.#>P:3# J'attends votre 'OK'. #>I:"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -124,7 +135,8 @@
             "id": 14,
             "active": true,
             "Message": {
-                "en": "\nNice, you work quickly. I expect you don't do it dirty ;) #>P:4#\nLet me check this category... \n"
+                "en": "\nNice, you work quickly. I expect you don't do it dirty ;) #>P:4#\nLet me check this category... \n",
+                "fr": "\nBien, vous travaillez vite. J'espère que vous ne l'avez pas trop fait à l'arrache ;) #>P:4#\nLaissez-moi vérifier cette catégorie... \n"
             },
             "CheckTask": "CheckCat",
             "Color": "blue"
@@ -133,7 +145,8 @@
             "id": 15,
             "active": true,
             "Message": {
-                "en": "\nCan you go back on your VM view, and apply this category with value 'Critical' to it please ? #>P:3#Write 'OK' when it's done. #>I:#"
+                "en": "\nCan you go back on your VM view, and apply this category with value 'Critical' to it please ? #>P:3#Write 'OK' when it's done. #>I:#",
+                "fr": "\nPouvez-vous retourner sur la vue de votre VM, et appliquer cette catégorie avec la valeur 'Critical' dessus s'il vous plaît ? #>P:3#Ecrivez 'OK' quand c'est fait. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -142,7 +155,8 @@
             "id": 16,
             "active": true,
             "Message": {
-                "en": "\nOne second...\n"
+                "en": "\nOne second...\n",
+                "fr": "\nUne seconde...\n"
             },
             "CheckTask": "CheckCatVM",
             "Color": "blue"
@@ -151,7 +165,8 @@
             "id": 17,
             "active": true,
             "Message": {
-                "en": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need to create a Storage policy '#>V:Trigram#-policy' enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nApply it to VMs with your categorie, and the value 'Critical'.\nWrite 'OK' when it's done. #>I:#"
+                "en": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need to create a Storage policy '#>V:Trigram#-sto-policy' enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nApply it to VMs with your categorie, and the value 'Critical'.\nWrite 'OK' when it's done. #>I:#",
+                "fr": "\nMaintenant, nous allons créer différentes politiques pour protéger notre VM.\nTout d'abord, nous allons chiffrer notre VM. #>P:3#Vous devez créer une storage policy '#>V:Trigram#-sto-policy' activant le chiffrement. Vous pouvez utiliser les valeurs par défaut pour les autres champs, nous n'en avons pas vraiment besoin ici, mais si vous êtes curieux, jetez-y un œil, c'est intéressant.\nAppliquez-le aux VM avec votre catégorie, et la valeur 'Critical'.\nEcrivez 'OK' quand c'est fait. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -160,7 +175,8 @@
             "id": 18,
             "active": true,
             "Message": {
-                "en": "\nLet me check this storage policy... \n"
+                "en": "\nLet me check this storage policy... \n",
+                "fr": "\nLaissez-moi vérifier cette politique de stockage... \n"
             },
             "CheckTask": "CheckStoragePolicy",
             "Color": "blue"
@@ -169,7 +185,8 @@
             "id": 19,
             "active": true,
             "Message": {
-                "en": "\nOK...#>P:4#\n\nNext step, create a microsegmentation policy to protect our VM.#>P:3# It is a way to control network exchange between the VM and other elements of the network. It is very useful to avoid any data leak or attack. #>P:3# It is a bit embarrassing to have this feature and not use it. It would have annoyed us in our mission... If they knew :D ... #>P:5#\nCreate a new Security policy named '#>V:Trigram#-policy' with the following rules :\n - Apply it to your category with value 'Critical'\n - Refuse all traffic to the VM\n - Allow all outbound traffic\n - Enforce mode (to apply the rule)\n\nWrite 'OK' when it's done. #>I:#"
+                "en": "\nOK...#>P:4#\n\nNext step, create a microsegmentation policy to protect our VM.#>P:3# It is a way to control network exchange between the VM and other elements of the network. It is very useful to avoid any data leak or attack. #>P:3# It is a bit embarrassing to have this feature and not use it. It would have annoyed us in our mission... If they knew :D ... #>P:5#\nCreate a new Security policy named '#>V:Trigram#-mseg-policy' with the following rules :\n - Apply it to your category with value 'Critical'\n - Refuse all inboud traffic to the VM\n - Allow all outbound traffic\n - Enforce mode (to apply the rule)\n\nWrite 'OK' when it's done. #>I:#",
+                "fr": "\nOK...#>P:4#\n\nProchaine étape, créez une politique de microsegmentation pour protéger notre VM.#>P:3# C'est une manière de contrôler les échanges réseau entre la VM et les autres éléments du réseau. C'est très utile pour éviter toute fuite de données ou attaque. #>P:3# C'est un peu gênant d'avoir cette fonctionnalité et de ne pas l'utiliser. Cela nous aurait ennuyé dans notre mission... S'ils savaient :D ... #>P:5#\nCréez une nouvelle politique de sécurité nommée '#>V:Trigram#-mseg-policy' avec les règles suivantes :\n - Appliquez-la à votre catégorie avec la valeur 'Critical'\n - Refusez tout le trafic entrant (inbound) vers la VM\n - Autorisez tout le trafic sortant (outbound)\n - Enforce Mode (pour appliquer la règle)\n\nEcrivez 'OK' quand c'est fait. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -178,7 +195,8 @@
             "id": 20,
             "active": true,
             "Message": {
-                "en": "\nI am going to check that... \n"
+                "en": "\nI am going to check that... \n",
+                "fr": "\nJe vais vérifier cela... \n"
             },
             "CheckTask": "CheckSecurityPolicy",
             "Color": "blue"
@@ -187,7 +205,8 @@
             "id": 21,
             "active": true,
             "Message": {
-                "en": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:5#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, with a simple ping from to your VM. It should not work.#>P:2# To execute your ping, please open a new webpage on http://#>V:frontendHost#:#>V:frontendPort#/ssh. It will run a new terminal session on a VM on the Nutanix cluster.\n#>P:4#Then update the policy to allow the SSH and icmp traffic. Add 2 Inboud rules :\n - Service 'ssh' from this IP #>V:frontendHost# only\n - ICMP (Type : 8 - Code : 0) from all everywhere.#>P:3#\nAfter Security policy update, check again the ping and put 'OK' here. #>I:#"
+                "en": "\nNext step, connect with ssh on #>V:Trigram#-vm\n#>P:5#As a reminder, the user and password defined in the cloud-init were 'admin' and 'MyPassword'. Your turn... #>P:5#\nOh wait, it won't work with our security policy... My bad :'-(.#>P:2#\nFirst check if our Security policy is working as we expect, with a simple ping from to your VM. It should not work.#>P:2# To execute your ping, please open a new webpage on http://#>V:frontendHost#:#>V:frontendPort#/ssh. It will run a new terminal session on a VM on the Nutanix cluster.\n#>P:4#Then update the policy to allow the SSH and icmp traffic. Add 2 Inboud rules :\n - Service 'ssh' from this IP #>V:frontendHost# only\n - ICMP (Type : 8 - Code : 0) from all everywhere.#>P:3#\nAfter Security policy update, check again the ping and put 'OK' here. #>I:#",
+                "fr": "\nProchaine étape, connectez-vous en ssh sur #>V:Trigram#-vm\n#>P:5#Pour rappel, l'utilisateur et le mot de passe définis dans le cloud-init étaient 'admin' et 'MyPassword'. A vous de jouer... #>P:5#\nOh, attendez, ça ne fonctionnera pas avec notre politique de sécurité... Désolé :'-(.#>P:2#\nCommencez par vérifier si notre politique de sécurité fonctionne comme prévu, avec un simple ping de votre VM. Cela ne devrait pas fonctionner.#>P:2# Pour exécuter votre ping, veuillez ouvrir une nouvelle page web sur http://#>V:frontendHost#:#>V:frontendPort#/ssh. Cela lancera une nouvelle session de terminal sur une VM du cluster Nutanix.\n#>P:4#Ensuite, mettez à jour la security policy pour autoriser le trafic SSH et icmp. Ajoutez 2 règles entrantes :\n - Service 'ssh' depuis cette IP #>V:frontendHost# uniquement\n - ICMP (Type : 8 - Code : 0) depuis partout.#>P:3#\nAprès la mise à jour de la politique de sécurité, vérifiez à nouveau le ping et écrivez 'OK' ici. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -196,7 +215,8 @@
             "id": 22,
             "active": true,
             "Message": {
-                "en": "\nI trut you but I prefer to double-check that buddy... \n"
+                "en": "\nI trust you but I prefer to double-check that buddy... \n",
+                "fr": "\nJe vous fais confiance mais je préfère vérifier ça 2x... \n"
             },
             "CheckTask": "CheckSecurityPolicy2",
             "Color": "blue"
@@ -205,7 +225,8 @@
             "id": 23,
             "active": true,
             "Message": {
-                "en": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-policy' with the following rules :\n - Take a snapshot every 1 hour\n - Keep 1 day of snapshots\n - It will be applied to VM with your categorie with value 'Critical'\nWe do not need to replicate here.\nAs you will see, you can also configure near-sync replication (1mn RPO) but it is not really interesting here, but I like the idea.\n#>P:2#Write 'OK' when it's done. #>I:#"
+                "en": "\nWe have a last policy to setup : the protection policy. It is a way to pilot snapshots and their replication, to reduce disaster impact.#>P:5#\nCreate a new Protection policy named '#>V:Trigram#-prot-policy' with the following rules :\n - Take a snapshot every 1 hour\n - Keep 1 day of snapshots\n - It will be applied to VM with your categorie with value 'Critical'\nWe do not need to replicate here.\nAs you will see, you can also configure near-sync replication (1mn RPO) but it is not really interesting here, but I like the idea.\n#>P:2#Write 'OK' when it's done. #>I:#",
+                "fr": "\nNous avons une dernière politique à configurer : la politique de protection. C'est une manière de piloter les snapshots et leur réplication, pour réduire l'impact des sinistres.#>P:5#\nCréez une nouvelle protection policy nommée '#>V:Trigram#-prot-policy' avec les règles suivantes :\n - Prendre un snapshot toutes les 1 heure\n - Conserver 1 jour de snapshots\n - Elle sera appliquée aux VM avec votre catégorie avec la valeur 'Critical'\nNous n'avons pas besoin de réplication ici.\nComme vous le verrez, vous pouvez également configurer une réplication near-sync (RPO de 1mn) ou synchrone (RPO 0) mais ce n'est pas vraiment intéressant ici, mais j'aime l'idée.\n#>P:2#Ecrivez 'OK' quand c'est fait. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -364,7 +385,7 @@
             "id": 41,
             "active": true,
             "Message": {
-                "en": "Ok, #>P:3#Now go back on the first cluster please.#>P:3#\nWe are going to leverage Intelligent-Ops Low-Code capabilities from NCM. They call this feature X-play, and it is very useful to automate tasks. #>P:3#Can you create a new playbook\n - named '#>V:Trigram#-playbook'\n - it will send an email to #>V:EmailReport# as soon as a VM is 'Power cycled'\n - In the email body, put all information you have on the VM please.\nDo not forget to enable it ;). I wait here for your 'OK'. #>I:#"
+                "en": "Ok, #>P:3#Now go back on the first cluster please.#>P:3#\nWe are going to leverage Intelligent-Ops Low-Code capabilities from NCM. They call this feature X-play, and it is very useful to automate tasks. #>P:3#Can you create a new playbook\n - named '#>V:Trigram#-playbook'\n - it will send an email to #>V:EmailReport# as soon as a VM is 'Power cycled'\n - In the email body, put the VM ID please.\nDo not forget to enable it ;). I wait here for your 'OK'. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -391,7 +412,7 @@
             "id": 44,
             "active": true,
             "Message": {
-                "en": "\nWe continue to trap this cluster... #>P:3#It seems they use Nutanix Self-Service, to create automation, and provide them in a marketplace for end-users.#>P:2#They have a blueprint to clone some VM into a dedicated private network (VPC), for testing purpose obviously. It could be interesting to execute it and I'll be quiet to investigate, far form production and potention trackers.\nPlease go in Self-Service > Blueprints, and launch 'CloneProd' with these parameters :\n - App Name : #>V:Trigram#-app\n - VPC name : #>V:Trigram#-vpc\n - Category : Environment\n - Category value : 'Production'\n - External Network Name : TestNetwork\n - Category for floating IP : 'Quarantine' (Actually we do not care for my usage)\n\nWrite 'OK' when blueprint is in 'running' state. #>I:#"
+                "en": "\nWe continue to trap this cluster... #>P:3#It seems they use Nutanix Self-Service, to create automation, and provide them in a marketplace for end-users. #>P:2#They have a blueprint to clone some VM into a dedicated private network (VPC), for testing purpose obviously. It could be interesting to execute it and I'll be quiet to investigate, far form production and potention trackers.\nPlease go in Self-Service > Blueprints, and launch 'CloneProd' with these parameters :\n - App Name : #>V:Trigram#-app\n - VPC name : #>V:Trigram#-vpc\n - Category : Environment\n - Category value : 'Production'\n - External Network Name : TestNetwork\n - Category for floating IP : 'Quarantine' (Actually we do not care for my usage)\n\nWrite 'OK' when blueprint is in 'running' state. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
@@ -409,7 +430,7 @@
             "id": 46,
             "active": true,
             "Message": {
-                "en": "\nTo have a fresh config of prod VM on a daily basis, I would like you schedule an action named 'Refresh machines'. It can be done in the 'Self-Service > Policies' page. Name it '#>V:Trigram#-sched' please. FYI, your app is currently deployed in the 'Production' project'. Enter 'Done' when the schedule is created. #>I:#"
+                "en": "\nTo have a fresh config of prod VM on a daily basis, I would like you schedule an action named 'Refresh machines'. It can be done in the 'Self-Service > Policies' page. Name it '#>V:Trigram#-sched' please. FYI, your app is currently deployed in the 'Production' project'. Do a daily task, time does not matter. #>P:3#Enter 'Done' when the schedule is created. #>I:#"
             },
             "WaitForInputValue": "Done",
             "Color": "blue"

@@ -154,23 +154,19 @@ def CheckVM(variables,recoveryMode):
         if response['disks'][0]['backing_info']['data_source']['reference']['image_ext_id'] != variables['ImageUUID']:
             return False, 3, None
 
-        # Check owner
-        if response['disks'][0]['backing_info']['data_source']['reference']['image_ext_id'] != variables['ImageUUID']:
-            return False, 4, None
-
         # Project
         # GL ToDo : Migrate to v4/SDK when project will be available in SDK
         if getVMProjectUUID(response['ext_id'],pc=variables['PC'], user=variables['PCUser'],password=variables['PCPassword']) != variables['ProjectUUID']:
-            return False, 5, None
+            return False, 4, None
         
         # Cloud Init
         # GL ToDo : Migrate to v4/SDK when guest-customization will be available in SDK
         if hasVMCloudinit(response['ext_id'],pc=variables['PC'], user=variables['PCUser'],password=variables['PCPassword']) == False:
-            return False, 6, None
+            return False, 5, None
 
         # Power State
         if response['power_state'] != 'ON':
-            return False, 7, None
+            return False, 6, None
 
     # Store VMUUID and HostUUID in the variables to be used later
     variables['VMUUID'] = response['ext_id']
@@ -223,7 +219,7 @@ def CheckCatVM(variables,recoveryMode):
 # CheckStoragePolicy - Done
 # =============================================================================
 def CheckStoragePolicy(variables,recoveryMode):
-    response = retrieveStoragePolicyID(policy_name=variables['Trigram'] + "-policy", variables=variables)
+    response = retrieveStoragePolicyID(policy_name=variables['Trigram'] + "-sto-policy", variables=variables)
 
     if response is None: 
         return False, 0, None
@@ -239,7 +235,7 @@ def CheckStoragePolicy(variables,recoveryMode):
 def CheckSecurityPolicy(variables,recoveryMode):
     
     # Get info
-    info = retrieveSecurityPolicyInfo(policy_name=variables['Trigram'] + "-policy", variables=variables)
+    info = retrieveSecurityPolicyInfo(policy_name=variables['Trigram'] + "-mseg-policy", variables=variables)
 
     if info is None: 
         return False, 0 , None
@@ -279,7 +275,7 @@ def CheckSecurityPolicy2(variables,recoveryMode):
     sshServiceUUID = retrieveFlowServiceID(service_name="ssh", variables=variables)
 
     # Get info
-    info = retrieveSecurityPolicyInfo(policy_name=variables['Trigram'] + "-policy", variables=variables)
+    info = retrieveSecurityPolicyInfo(policy_name=variables['Trigram'] + "-mseg-policy", variables=variables)
 
     if info is None: 
         return False, 0, None
@@ -306,7 +302,7 @@ def CheckSecurityPolicy2(variables,recoveryMode):
 # =============================================================================
 def CheckProtectionPolicy(variables,recoveryMode):
     
-    info = retrieveProtectionPolicyInfo(variables['Trigram'] + "-policy", variables=variables)
+    info = retrieveProtectionPolicyInfo(variables['Trigram'] + "-prot-policy", variables=variables)
 
     if info == None:
         return False, 0, None
