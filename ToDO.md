@@ -3,3 +3,4 @@
 [x] French translation
 [x] Use different policy names
 [x] For playbook, some users add vm lookup action. and it reports an error -> Changed instructions to avoid this
+[] Intercept Ctrl+d or +z

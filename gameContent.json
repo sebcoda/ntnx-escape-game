@@ -32,7 +32,7 @@
             "id": 4,
             "active": true,
             "Message": {
-                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster (Be carreful, 'admin' is a LOCAL accoount), create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights in a authorization policy named  #>V:Trigram#-auth. This is done in the 'Admin center' part of the GUI.\nWrite here 'Done' when it's... OK LOL. #>I:# \n",
+                "en": "First we have to create a new admin user, to avoid any password change impact. They share passwords in emails, but they probably have a change policy.\nPlease, connect on the cluster (Be carreful, 'admin' is a LOCAL accoount), create a new user #>V:Trigram#-adm, and give him the 'Super admin' rights in a authorization policy named  #>V:Trigram#-auth. This is done in the 'Admin center' part of the GUI.\nWrite here 'OK' when it's... OK LOL. #>I:# \n",
                 "fr": "Tout d'abord, nous devons créer un nouvel utilisateur administrateur, pour éviter tout impact de changement de mot de passe. Ils partagent des mots de passe dans des e-mails, mais ils ont probablement une politique de changement.\nVeuillez vous connecter sur le cluster (Soyez prudent, 'admin' est un compte LOCAL), créez un nouvel utilisateur #>V:Trigram#-adm, et donnez-lui les droits 'Super admin' dans une politique d'autorisation nommée #>V:Trigram#-auth. Cela se fait dans la partie 'admin center' de l'interface graphique.\nEcrivez ici 'OK' quand c'est... OK LOL. #>I:# \n"
             },
             "Color": "blue",

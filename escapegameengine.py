@@ -73,8 +73,24 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
                     
                     # If we have a read action, we wait for the user to press enter and store the input in the variables dictionary
                     if len(element)>3:
-                        sys.stdout.write(color_codes['yellow'])
-                        variables[element[3:]]=input()
+                        
+                        # Loop until we have a good value
+                        tmp=True
+                        while tmp:
+                            try:
+                                # Get value
+                                sys.stdout.write(color_codes['yellow'])
+                                value=input()
+                                
+                                if value:
+                                    variables[element[3:]]=value
+                                    tmp=False
+                                else:
+                                    display("Please enter a value...",variables,color,expectedValue)
+                                    
+                            except EOFError:
+                                print("")
+                        
                         sys.stdout.write(color_codes[color])
                     else:
                         sys.stdout.write(color_codes['yellow'])
