@@ -165,7 +165,7 @@
             "id": 17,
             "active": true,
             "Message": {
-                "en": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need to create a Storage policy '#>V:Trigram#-sto-policy' enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nApply it to VMs with your categorie, and the value 'Critical'.\nWrite 'OK' when it's done. #>I:#",
+                "en": "\nNow we are going to create different policies to protect our VM.\nFirst we are going to encrypt our VM. #>P:3#You need to create a Storage policy '#>V:Trigram#-sto-policy' enabling the encryption. You can use the default values for others, we do not really care here, but if you are curious, take a look at them, it is interesting.\nApply it to VMs with your category, and the value 'Critical'.\nWrite 'OK' when it's done. #>I:#",
                 "fr": "\nMaintenant, nous allons créer différentes politiques pour protéger notre VM.\nTout d'abord, nous allons chiffrer notre VM. #>P:3#Vous devez créer une storage policy '#>V:Trigram#-sto-policy' activant le chiffrement. Vous pouvez utiliser les valeurs par défaut pour les autres champs, nous n'en avons pas vraiment besoin ici, mais si vous êtes curieux, jetez-y un œil, c'est intéressant.\nAppliquez-le aux VM avec votre catégorie, et la valeur 'Critical'.\nEcrivez 'OK' quand c'est fait. #>I:#"
             },
             "WaitForInputValue": "OK",
