@@ -24,7 +24,7 @@
             "active": true,
             "Message": {
                 "en": "#>V:Username#, we have intercepted a message from the others, and we now have access to their Nutanix cluster. They don't care about elementary security rules, it is our chance.\nSo, the infos are :\n - Nutanix cluster: #>V:PC#\n - User: #>V:PCUser#\n - Password: #>V:PCPassword#\n\nWe need to act quickly and get out of here.#>P:3#\n\n",
-                "fr": "#>V:Username#, nous avons intercepté un message des autres, et nous avons maintenant accès à leur cluster Nutanix. Ils ne se soucient pas des règles élémentaires de sécurité, c'est notre chance.\nDonc, les infos sont :\n - Cluster Nutanix : #>V:PC#\n - Utilisateur : #>V:PCUser#\n - Mot de passe : #>V:PCPassword#\n\nNous devons agir rapidement et sortir d'ici.#>A:lowercaseTrigram#>P:3#\n\n"
+                "fr": "#>V:Username#, nous avons intercepté un message des autres, et nous avons maintenant accès à leur cluster Nutanix. Ils ne se soucient pas des règles élémentaires de sécurité, c'est notre chance.\nDonc, les infos sont :\n - Cluster Nutanix : #>V:PC#\n - Utilisateur : #>V:PCUser#\n - Mot de passe : #>V:PCPassword#\n\nNous devons agir rapidement et sortir d'ici#>P:3#\n\n"
             },
             "Color": "blue"
         },

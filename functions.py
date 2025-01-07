@@ -156,7 +156,10 @@ def retrieveProjectInfo(projectName, variables):
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
-    payload={}
+    payload={
+        "kind": "project",
+        "length": 100
+    }
 
     response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = response.json()
@@ -225,7 +228,7 @@ def retrieveImageID(image_name, variables):
 
     payload={
         "kind": "image",
-        "length": 100,
+        "length": 100
         }
 
     response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
@@ -350,7 +353,10 @@ def retrieveStoragePolicyID(policy_name, variables):
         "Accept": "application/json"
     }
 
-    payload = {}
+    payload = {
+        "kind": "storage_policy",
+        "length": 100
+    }
 
     response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = response.json()
@@ -417,7 +423,10 @@ def retrieveProtectionPolicyInfo(policy_name, variables):
         "Accept": "application/json"
     }
 
-    payload = {}
+    payload = {
+        "kind": "protection_rule",
+        "length": 100
+    }
 
     response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = response.json()
@@ -473,7 +482,10 @@ def retrieveReportInfo( reportName, variables):
         "Content-Type": "application/json",
         "Accept": "application/json"
     }
-    payload = {}
+    payload = {
+        "kind": "report_config",
+        "length": 100
+    }
 
     response = requests.post(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = json.loads(response.text)
@@ -603,6 +615,7 @@ def retrievePlaybookInfo( name, variables):
     }
 
     payload = {
+        "length": 100,
         "entity_type": "action_rule",    
         "grouping_attribute": " ",
         "group_count": 3,
@@ -646,7 +659,10 @@ def retrieveAppId( name, variables):
         "Accept": "application/json"
     }
 
-    payload = { "kind": "app" }
+    payload = { 
+               "kind": "app",
+               "length": 100
+               }
 
     response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = json.loads(response.text)
@@ -696,7 +712,10 @@ def retrieveScheduleInfo( name, variables):
         "Accept": "application/json"
     }
 
-    payload = { }
+    payload = { 
+               "kind": "job",
+               "length": 100
+               }
 
     response = requests.post(url, data=json.dumps(payload), headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = json.loads(response.text)
