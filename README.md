@@ -9,6 +9,7 @@ Roleplay to discover Nutanix platform
     - NSS enabled
     - Leap Enabled
     - Flow security enabled
+    - Files with old version 
 - Upload the runbook  `blueprint/EG-prerequisites.json` in the `lab` project
 - Launch it
 - Upload the blueprint `blueprint/EG-EscapeGame.json` in the `lab` project
