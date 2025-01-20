@@ -10,6 +10,8 @@ Roleplay to discover Nutanix platform
     - Leap Enabled
     - Flow security enabled
     - Files with old version 
+- prepare your sendgrid token.
+  - If you do not have one, create an account and get a token.
 - Upload the runbook  `blueprint/EG-prerequisites.json` in the `lab` project
 - Launch it
 - Upload the blueprint `blueprint/EG-EscapeGame.json` in the `lab` project
