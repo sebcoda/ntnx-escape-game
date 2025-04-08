@@ -2,22 +2,24 @@
 Roleplay to discover Nutanix platform
 
 # Preparation
-- Book a HPOC with Nutanix Self-Service activated
+- Book a HPOC with following characteristics : 
     - Multinode-cluster
     - AOS 7 <- May need manual update
     - PC2024.3 <- May need manual update
-    - NSS enabled
+    - Self-Service enabled
     - Leap Enabled
     - Flow security enabled
-    - Files with old version 
+    - Files with old version 4.x
 - prepare your sendgrid token.
   - If you do not have one, create an account and get a token.
 - Upload the runbook  `blueprint/EG-prerequisites.json` in the `lab` project
 - Launch it
-- Upload the blueprint `blueprint/EG-EscapeGame.json` in the `lab` project
+- Upload the blueprint `blueprint/EG-EscapeGame.json` in the `lab` project (wARNING : Ensure you have launched the runbook first or you'll have problems)
 - Update NUTANIX credential with password `nutanix/4u`
 - Select cluster and primary Network
 - Launch it
+
+!! IMPORTANT !! Known Issue : The current deployemnt as a small problem. Please update manually the project `production` to remove then add the user `thebadguy`
 
 # Player prerequisites
 - Players need to have VPN access to HPOC (is going to be updated and use VDI for a more convenient approach)

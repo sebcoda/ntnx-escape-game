@@ -403,7 +403,7 @@
             "active": true,
             "Message": {
                 "en": "Ok, #>P:3#Now go back on the first cluster please.#>P:3#\nWe are going to leverage Intelligent-Ops Low-Code capabilities from NCM. They call this feature X-play, and it is very useful to automate tasks. #>P:3#Can you create a new playbook\n - named '#>V:Trigram#-playbook'\n - it will send an email to #>V:EmailReport# as soon as a VM is 'Power cycled'\n - In the email body, put the VM ID please.\nDo not forget to enable it ;). I wait here for your 'OK'. #>I:#",
-                "fr": "Ok, #>P:3#Maintenant, retournez sur le premier cluster s'il vous plaît.#>P:3#\nNous allons exploiter les capacités Low-Code d'Intelligent-Ops de NCM. Ils appellent cette fonctionnalité X-play, et elle est très utile pour automatiser les tâches. #>P:3#Pouvez-vous créer un nouveau playbook\n - nommé '#>V:Trigram#-playbook'\n - il enverra un email à #V:>EmailReport# dès qu'une VM est 'Power cycled'\n - Dans le corps de l'email, mettez l'ID de la VM s'il vous plaît.\nN'oubliez pas de l'activer ;). J'attends votre 'OK'. #>I:#"
+                "fr": "Ok, #>P:3#Maintenant, retournez sur le premier cluster s'il vous plaît.#>P:3#\nNous allons exploiter les capacités Low-Code d'Intelligent-Ops de NCM. Ils appellent cette fonctionnalité X-play, et elle est très utile pour automatiser les tâches. #>P:3#Pouvez-vous créer un nouveau playbook\n - nommé '#>V:Trigram#-playbook'\n - il enverra un email à #>V:EmailReport# dès qu'une VM est 'Power cycled'\n - Dans le corps de l'email, mettez l'ID de la VM s'il vous plaît.\nN'oubliez pas de l'activer ;). J'attends votre 'OK'. #>I:#"
             },
             "WaitForInputValue": "OK",
             "Color": "blue"
