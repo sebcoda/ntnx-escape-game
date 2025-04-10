@@ -73,6 +73,24 @@ if __name__ == "__main__":
         print('Game cleaned')
         sys.exit(0)
 
+    # Check for -changeStage parameter
+    if '-changeStage' in sys.argv:
+        try:
+            trigram = sys.argv[2]
+            stageId = int(sys.argv[3])
+            if stageId < 1 or stageId > max(stage['id'] for stage in data['stages']):
+                raise ValueError
+        except (IndexError, ValueError):
+            print('Invalid stage ID. Please provide a valid number between 1 and', max(stage['id'] for stage in data['stages']))
+            sys.exit(1)
+        
+        # Updqate score file
+        UpdateScoreFile(scoreFile, trigram, stageId)
+        print('Stage changed to', stageId, 'for user', trigram)
+        
+        # Exit 
+        sys.exit(0)
+
     variables['SupportedLanguages'] = GetSupportedLanguages(contentJsonFile)
 
     # Clear the output screen
