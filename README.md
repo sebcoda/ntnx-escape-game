@@ -19,7 +19,9 @@ Roleplay to discover Nutanix platform
 - Select cluster and primary Network
 - Launch it
 
-!! IMPORTANT !! Known Issue : The current deployemnt as a small problem. Please update manually the project `production` to remove then add the user `thebadguy`
+!! IMPORTANT !! Known Issues : 
+ - The current deployemnt as a little problem. Please update manually the project `production` to remove then re-add the user `thebadguy`
+ - Please confirm the cluster has only 3 nodes (I experienced an issue once). If not, please remove 4th node.
 
 # Player prerequisites
 - Players need to have VPN access to HPOC (is going to be updated and use VDI for a more convenient approach)
