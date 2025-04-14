@@ -35,7 +35,7 @@ def DeleteVM(variables):
     return True
 
 # ====================================================================================================
-# DeployBP - WIP
+# DeployBP
 # ====================================================================================================
 # To Do : Migrate to v4 API/SDK when available
 def DeployBP( variables ):
