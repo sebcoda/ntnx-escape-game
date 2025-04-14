@@ -352,8 +352,8 @@
             "id": 36,
             "active": true,
             "Message": {
-                "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM page, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Tell me how many updates are available : #>I:NumberUpdates#",
-                "fr": "\nAutre point que je voudrais que vous vérifiez pour cette future mission : l'état des mises à jour. Regardez la page Admin Center > LCM, et prenez une capture d'écran de la liste des produits et de la version actuelle. Vérifiez également si des mises à jour sont disponibles pour la plateforme. Vous me l'enverrez plus tard. #>P:3#Dites-moi combien de mises à jour sont disponibles : #>I:NumberUpdates#"
+                "en": "\nOther point I would like you check for this future mission : the status of the updates. Look at the Admin Center > LCM for Prism Central updates, and take a screenshot of product list and current version. Check also if updates are available for the platform. You'll send me it later. #>P:3#Tell me how many updates are available : #>I:NumberUpdates#",
+                "fr": "\nAutre point que je voudrais que vous vérifiez pour cette future mission : l'état des mises à jour. Regardez Admin Center > LCM pour voir ce qui est intallé dans Prism Central, et prenez une capture d'écran de la liste des produits et de la version actuelle. Vérifiez également si des mises à jour sont disponibles pour la plateforme. Vous me l'enverrez plus tard. #>P:3#Dites-moi combien de mises à jour sont disponibles : #>I:NumberUpdates#"
             },
             "CheckTask": "CheckUpdates",
             "Color": "blue"
