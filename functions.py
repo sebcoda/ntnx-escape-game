@@ -253,7 +253,6 @@ def retrieveVMInfo(vm_name, variables):
 
     response=vms_api.list_vms(_filter="name eq '" + vm_name + "'")
     myData = response.to_dict()
-
     # Check if we got an id
     if myData['data']==None or len(myData['data']) != 1:
         return False, {}

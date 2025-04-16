@@ -139,9 +139,10 @@ def CheckImage(variables,recoveryMode):
 # =============================================================================
 def CheckVM(variables,recoveryMode):
 
-    found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
+    found,responsev = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
 
-    if found == False: 
+
+    if found == False:
         return False, 0 , None
     elif recoveryMode == False:
         # Check all other information
@@ -163,7 +164,7 @@ def CheckVM(variables,recoveryMode):
         # Check network connection on our subnet
         if ( response['nics'][0]['network_info']['subnet']['ext_id'] != variables['NetworkUUID']) and (response['nics'][1]['network_info']['subnet']['ext_id'] != variables['NetworkUUID'] ):
             return False, 2, None
-        
+
         # Check image used
         if response['disks'][0]['backing_info']['data_source']['reference']['image_ext_id'] != variables['ImageUUID']:
             return False, 3, None
