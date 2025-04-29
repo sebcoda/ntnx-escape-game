@@ -139,7 +139,7 @@ def CheckImage(variables,recoveryMode):
 # =============================================================================
 def CheckVM(variables,recoveryMode):
 
-    found,responsev = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
+    found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
 
 
     if found == False:
