@@ -37,7 +37,7 @@ def NeedRecovery(variables,recoveryMode):
     for match in jsonpath_expr.find(data):
         if match.value > 1:
             variables['RecoveryUntilStage']=match.value
-            print("\n\nSpecial event : Entering in recovery mode....\n\n")
+            print("\n\nSpecial event : Entering in recovery mode (Recovery Code : ",variables['RecoveryUntilStage'],")...\n\n")
 
     return True, -1, None
 
