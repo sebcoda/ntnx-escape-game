@@ -326,7 +326,12 @@
                 {
                     "en": "The schedule #>V:Trigram#-sched is not associated to the app. Can you fix it ?",
                     "fr": "Le schedule #>V:Trigram#-sched n'est pas associé à l'application. Pouvez-vous corriger ça ?"
+                },
+                {
+                    "en": "You have created #>V:Trigram#-sched ?? It seems not to be the case... Can you check it ?",
+                    "fr": "Vous avez créé le schedule #>V:Trigram#-sched ?? On ne dirait pas... Pouvez-vous corriger ça ?"
                 }
+                
             ]
         },
         {

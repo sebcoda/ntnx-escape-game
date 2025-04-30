@@ -457,7 +457,7 @@ def CheckNewNode(variables,recoveryMode):
     if info is None:
         return False, 0, None
     
-    if info != variables['NodeSerial']:
+    if info.strip() != variables['NodeSerial'].strip():
         return False, 1, 'NodeSerial'
 
     return True, -1, None
@@ -545,8 +545,11 @@ def CheckSchedDay2(variables,recoveryMode):
     # Check Schedule
     response = retrieveScheduleInfo(variables['Trigram'] + "-sched", variables=variables)
 
-    if response['executable']['entity']['uuid'] != variables['AppUUID']:
-        return False, 0, None
+    try:
+        if response['executable']['entity']['uuid'] != variables['AppUUID']:
+            return False, 0, None
+    except:
+        return False, 1, None
 
     return True, -1, None
 

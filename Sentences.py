@@ -47,7 +47,7 @@ labKo={
         'Hum, ça colle pas',
         'Semble être faux',
         'Un truc cloche',
-        'Ça mne marche pas',
+        'Ça va pas',
         'Je te croyais meilleur en fait'
     ]
 }
