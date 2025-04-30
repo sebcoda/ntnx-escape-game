@@ -390,6 +390,10 @@ def CheckRestoreVM(variables,recoveryMode):
 
     if found == False: 
         return False, 0, None
+    
+    # Check Power State
+    if response['power_state'] != 'ON':
+        return False, 1, None    
 
     return True, -1, None
 
