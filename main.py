@@ -100,18 +100,24 @@ if __name__ == "__main__":
     with open(contentJsonFile, 'r') as file:
         data = json.load(file)
 
+    # We brose all stages one by one
     for stage in data['stages']:
+        
+        # We load the message
+        message,color,expectedvalue,checkScript=stageMessage(stage['id'], contentJsonFile, variables['Language'])
         
         # Check if we need to recover the stage
         if stage['id'] <= variables['RecoveryUntilStage']:
-            message,color,expectedvalue,checkScript=stageMessage(stage['id'], contentJsonFile, variables['Language'])
-            # Check student work if needed
+            
+            # We do not display the message, because we are recovering the stage
+            
+            # ...but we check student work if needed
             if checkScript != '':
-                CheckStage(checkScript, variables, silent=True)           
+                CheckStage(checkScript, variables, silent=True)
         
         elif stage['id'] >= firstStage and stage['active'] == True:
-            # Get message of the stage
-            message,color,expectedvalue,checkScript=stageMessage(stage['id'], contentJsonFile, variables['Language'])
+            
+            # We display the message because we are not recovering the stage and it is active            
             display(message, variables, color, expectedvalue)
 
             # Check student work if needed
@@ -122,8 +128,8 @@ if __name__ == "__main__":
                     silentMode = False
                 CheckStage(checkScript, variables, silent=silentMode)
 
-            # Update the score file
-            UpdateScoreFile(scoreFile, variables['Trigram'].lower(), stage['id'])
+        # Update the score file
+        UpdateScoreFile(scoreFile, variables['Trigram'].lower(), stage['id'])
 
     # Reset display color
     sys.stdout.write('\033[0m')
