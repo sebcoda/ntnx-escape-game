@@ -418,9 +418,13 @@ def CheckReport(variables,recoveryMode):
 
         # Content
         listvm=False
-        for elt in info['spec']['resources']['template']['template_rows']:
-            if elt['row_element_list'][0]['widget_config']['entity_type'] == 'vm':
-                listvm=True
+        
+        try:
+            for elt in info['spec']['resources']['template']['template_rows']:
+                if elt['row_element_list'][0]['widget_config']['entity_type'] == 'vm':
+                    listvm=True
+        except: 
+            return False, 3, None
 
         if listvm == False:
             return False, 3, None

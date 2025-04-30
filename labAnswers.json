@@ -246,8 +246,8 @@
                     "fr": "Le rapport n'a pas le bon destinataire. Pouvez-vous vérifier ça ?"
                 },
                 {
-                    "en": "The report #>V:Trigram#-report should list VMs. Can you fix it ?",
-                    "fr": "Le rapport #>V:Trigram#-report devrait lister les VMs. Pouvez-vous corriger ça ?"
+                    "en": "The report #>V:Trigram#-report should just have a table with a list of all the VMs. Can you fix it ?",
+                    "fr": "Le rapport #>V:Trigram#-report devrait simplement comporter un tableau avec la liste des VMs. Pouvez-vous corriger ça ?"
                 }
             ]
         },
