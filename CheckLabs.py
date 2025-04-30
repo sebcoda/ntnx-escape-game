@@ -158,15 +158,24 @@ def CheckVM(variables,recoveryMode):
         #     return result, clue
 
         # Number of NICS
-        if len(response['nics']) != 2:
+        try:
+            if len(response['nics']) != 2:
+                return False, 1, None
+        except:
             return False, 1, None
 
         # Check network connection on our subnet
-        if ( response['nics'][0]['network_info']['subnet']['ext_id'] != variables['NetworkUUID']) and (response['nics'][1]['network_info']['subnet']['ext_id'] != variables['NetworkUUID'] ):
+        try: 
+            if ( response['nics'][0]['network_info']['subnet']['ext_id'] != variables['NetworkUUID']) and (response['nics'][1]['network_info']['subnet']['ext_id'] != variables['NetworkUUID'] ):
+                return False, 2, None
+        except:
             return False, 2, None
 
-        # Check image used
-        if response['disks'][0]['backing_info']['data_source']['reference']['image_ext_id'] != variables['ImageUUID']:
+        try:
+            # Check image used
+            if response['disks'][0]['backing_info']['data_source']['reference']['image_ext_id'] != variables['ImageUUID']:
+                return False, 3, None
+        except:
             return False, 3, None
 
         # Project
