@@ -23,7 +23,7 @@ if "{ID}" in html_content:
     html_content = html_content.replace("{ID}", f"{int(user_id):02d}")
 
 message = Mail(
-    from_email="Your new important friend {SENDER_EMAIL}",
+    from_email="Your new important friend <{SENDER_EMAIL}>",
     to_emails= recipient,
     subject=title,
     html_content=html_content
