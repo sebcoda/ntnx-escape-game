@@ -3,7 +3,7 @@ Roleplay to discover Nutanix platform
 
 # Preparation
 - Book a HPOC with following characteristics : 
-    - Multinode-cluster
+    - 3 nodes cluster (no more, no less)
     - AOS 7 <- May need manual update
     - PC2024.3 <- May need manual update
     - Self-Service enabled
@@ -20,7 +20,7 @@ Roleplay to discover Nutanix platform
 - Launch it
 
 !! IMPORTANT !! Known Issues : 
- - The current deployemnt as a little problem. Please update manually the project `production` to remove then re-add the user `thebadguy`
+ - The current deployment as a little problem. Please update manually the project `production` to remove then re-add the user `thebadguy`
  - Please confirm the cluster has only 3 nodes (I experienced an issue once). If not, please remove 4th node.
 
 # Player prerequisites
