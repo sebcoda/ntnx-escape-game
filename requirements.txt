@@ -14,6 +14,5 @@ ntnx-microseg-py-client==4.0.1
 ntnx-networking-py-client==4.0.1
 ntnx-prism-py-client==4.0.1
 ntnx-vmm-py-client==4.0.1
-sendgrid
 # Not available yet ntnx_security_py_client
 # Not available yet ntnx_opsmgmt_py_client
