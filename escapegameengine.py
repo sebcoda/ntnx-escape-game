@@ -198,7 +198,7 @@ def GetSupportedLanguages(json_file_path):
 # = UpdateScoreFile
 # ========================================================================
 # This function updates the score file with the format Trigram:Stage
-def UpdateScoreFile(scoreFile, trigram, stage):
+def UpdateScoreFile(scoreFile, trigram, stage, maxStage):
     # Load the existing scores from the JSON file
     try:
         with open(scoreFile, 'r' ) as file:
@@ -208,15 +208,17 @@ def UpdateScoreFile(scoreFile, trigram, stage):
         sys.exit(4)
 
     # Update the score for the given trigram
-    ##GL score['players'][trigram] = str(stage)
-
     jsonpath_expr = parse('$.score[?(@.player == "' + trigram + '")]')
     result = jsonpath_expr.find(score)
 
     if len(result)==0:
-        score['score'].append({'player': trigram, 'value': stage})
+        score['score'].append({'player': trigram, 'value': stage, 'finishedTime': ""})
     else:
         result[0].value['value']=stage
+        
+    # Check is the game is finished
+    if stage >= maxStage:
+        result[0].value['finishedTime'] = time.strftime("%H:%M:%S", time.localtime())
 
     # Write the updated score back to the JSON file
     try:

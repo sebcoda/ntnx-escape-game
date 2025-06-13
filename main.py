@@ -66,6 +66,9 @@ if __name__ == "__main__":
     with open(contentJsonFile, 'r') as file:
         data = json.load(file)
 
+    # Define maxstage
+    maxStage = max(stage['id'] for stage in data['stages'])
+
     # Check for -clean parameter
     if '-clean' in sys.argv:
         maxStages=max(stage['id'] for stage in data['stages'])
@@ -81,11 +84,11 @@ if __name__ == "__main__":
             if stageId < 1 or stageId > max(stage['id'] for stage in data['stages']):
                 raise ValueError
         except (IndexError, ValueError):
-            print('Invalid stage ID. Please provide a valid number between 1 and', max(stage['id'] for stage in data['stages']))
+            print('Invalid stage ID. Please provide a valid number between 1 and', maxStage)
             sys.exit(1)
         
         # Updqate score file
-        UpdateScoreFile(scoreFile, trigram, stageId)
+        UpdateScoreFile(scoreFile, trigram, stageId, maxStage)
         print('Stage changed to', stageId, 'for user', trigram)
         
         # Exit 
@@ -129,7 +132,7 @@ if __name__ == "__main__":
                 CheckStage(checkScript, variables, silent=silentMode)
 
         # Update the score file
-        UpdateScoreFile(scoreFile, variables['Trigram'].lower(), stage['id'])
+        UpdateScoreFile(scoreFile, variables['Trigram'].lower(), stage['id'], maxStage)
 
     # Reset display color
     sys.stdout.write('\033[0m')
