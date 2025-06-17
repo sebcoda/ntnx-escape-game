@@ -168,3 +168,4 @@ newvm.json
 testgl.py
 sendgrid.env
 trash
+.vscode

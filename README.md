@@ -4,19 +4,22 @@ Roleplay to discover Nutanix platform
 # Preparation
 - Book a HPOC with following characteristics : 
     - 3 nodes cluster (no more, no less)
-    - AOS 7 <- May need manual update
-    - PC2024.3 <- May need manual update
+    - AOS 7
+    - PC2024.3.1+ (Need Calm 4.1 min)
     - Self-Service enabled
     - Leap Enabled
     - Flow security enabled
-- prepare your sendgrid token.
-  - If you do not have one, create an account and get a token.
-- Upload the runbook  `blueprint/EG-prerequisites.json` in the `lab` project
+- In PC > Self-service, upload the **runbook**  `blueprint/EG-prerequisites.json` in the `lab` project 
 - Launch it
-- Upload the blueprint `blueprint/EG-EscapeGame.json` in the `lab` project (WARNING : Ensure you have launched the runbook first or you'll have problems)
+- Upload the **blueprint** `blueprint/EG-EscapeGame.json` in the `lab` project (WARNING : Ensure you have launched the runbook first or you'll have problems)
+- Then, in this blueprint :
   - Update NUTANIX credential with password `nutanix/4u` (in the credential menu)
   - Select cluster and primary Network (click on the `GAME` white square first)
+- Save it
 - Launch it
+  - Chose a name of your choice
+  - Fill the form
+  - Clck on `deploy`
 
 !! IMPORTANT !! Known Issues : 
  - The current deployment has a little problem. Please update manually the project `production` to remove then re-add the user `thebadguy`
@@ -27,11 +30,17 @@ Roleplay to discover Nutanix platform
 - If you want to use VPN access, ensure your players have installed and tested it first
 
 # Game launch
-- Use Day 2 action of the BP to :
+- Use Day 2 actions of the BP to :
   - Launch invitation email to your players (you'll have to enter recipients list)
-  - Launch "End of lab" email (1st recipients list will be used)
+  - Launch "End of lab" email (First recipients list will be used)
 
 Self-Service Application description will provide the URL to play, as it will be mentioned in the invitation email too.
+
+Note : Day-2 operations can be found clicking on `Self-Service > Application > {your application} > Manage tab`, and you will run them by clicking on play icon, just after the day-2 action name.
+
+# Dashboard
+
+In the app description, you'll see dashboard URL. Display the dashboard on a screen, it will improve game feeling for players.
 
 # TIPS
 - Unsuccesfull lab checks may happen even if the exercise is succesfully done. In this case, the player can refresh is web page, use the same trigram, and recovery mode will bring him to the same lab step, which could pass...

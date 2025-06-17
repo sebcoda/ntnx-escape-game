@@ -8,3 +8,4 @@
     - Either mention leave Set Name as default or provide a name it should be changed to.
     - Also provide a value for the expiration (24 hours for example).
 [x] About LCM task, change instruction because of 'Connected cluster' new entry 
+[] Change error handling for preRequisites runbook (error passowrd)
