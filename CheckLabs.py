@@ -37,7 +37,7 @@ def NeedRecovery(variables,recoveryMode):
     for match in jsonpath_expr.find(data):
         if match.value > 1:
             variables['RecoveryUntilStage']=match.value
-            print("\n\nSpecial event : Entering in recovery mode (Recovery Code : ",variables['RecoveryUntilStage'],")...\n\n")
+            print("\n\nSpecial event : Entering in recovery mode ( Recovery Code :",variables['RecoveryUntilStage'],")...\n\n")
 
     return True, -1, None
 
@@ -422,11 +422,17 @@ def CheckReport(variables,recoveryMode):
         # We check report config
 
         # Schedule
-        if 'schedule' in info['spec']['resources'].keys() and info['spec']['resources']['schedule']['interval_type'] != 'DAILY':
+        try:
+            if not ('schedule' in info['spec']['resources'].keys() and 'interval_type' in info['spec']['resources']['schedule'].keys() and info['spec']['resources']['schedule']['interval_type'] == 'DAILY'):
+                return False, 1, None
+        except:
             return False, 1, None
 
         # Recipients
-        if not (len(info['spec']['resources']['notification_policy']['email_config']['recipient_list'])!=0 and info['spec']['resources']['notification_policy']['email_config']['recipient_list'][0]['email_address']==variables['EmailReport']):
+        try:
+            if not (len(info['spec']['resources']['notification_policy']['email_config']['recipient_list'])!=0 and info['spec']['resources']['notification_policy']['email_config']['recipient_list'][0]['email_address']==variables['EmailReport']):
+                return False, 2, None
+        except:
             return False, 2, None
 
         # Content
