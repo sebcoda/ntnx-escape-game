@@ -48,11 +48,15 @@
                     <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" style="width: {{ score_percentage }}%"></div>
                 {% endif %}
             </div>
-            {% if entry.finishedTime != "" %}
             <div>
-                Finished at {{ entry.finishedTime }}<br>
+                {% if entry.finishedTime != "" %}
+                    Finished at {{ entry.finishedTime }} / Duration: {{ entry.duration }}<br><br>
+                {% else %}
+                    Last updated at {{ entry.lastUpdated }}
+                {% endif %}
+                
             </div>
-            {% endif %}
+            
         </div>
         {% endfor %}
     </div>

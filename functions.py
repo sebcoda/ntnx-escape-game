@@ -295,7 +295,10 @@ def hasVMCloudinit(vmuuid, pc, user, password):
     response = requests.get(url, headers=headers, verify=False, auth=(user, password))
     response_data = response.json()
 
-    if response_data['spec']['resources']['guest_customization'] == None:
+    try:
+        if response_data['spec']['resources']['guest_customization'] == None:
+            return False
+    except:
         return False
     
     return True
@@ -450,6 +453,8 @@ def retrieveProtectionPolicyInfo(policy_name, variables):
 # Function that is returning the info of a Approval policy
 # GL ToDo : write with SDK when available
 def retrieveApprovalPolicyInfo( policy_name, variables):
+    # IMPORTANT : Due to several issues during labs, with bad names/typoes/etc., and because we can only have
+    # one approval policy, we will return the first one if no name is provided
 
     url = "https://%s:9440/api/security/v4.0.a1/management/approval-policies" % variables['PC']
     headers = {
@@ -461,11 +466,13 @@ def retrieveApprovalPolicyInfo( policy_name, variables):
     response = requests.get(url, json=payload, headers=headers, verify=False, auth=(variables['PCUser'], variables['PCPassword']))
     response_data = json.loads(response.text)
 
-    if len(response_data['data']) and response_data['data'][0]['name'] == policy_name:
-        return response_data['data'][0]
-    else:
+    try:
+        if len(response_data['data']):
+            return response_data['data'][0]
+        else:
+            return None
+    except:
         return None
-
 
 
 # ========================================================================

@@ -96,8 +96,8 @@ def display(input_string, variables, color=None, expectedValue='', delay=0.03):
                         sys.stdout.write(color_codes['yellow'])
                         tmp=input()
                         sys.stdout.write(color_codes[color])
-                        if tmp.lower()!=expectedValue.lower():
-                            display("I do not understand. You said? #>I:",variables,color,expectedValue)
+                        if tmp.lower()!=expectedValue.lower() and expectedValue!='':
+                            display(labNotUnderstood[variables['Language']],variables,color,expectedValue)
                     
 
                 elif element[1]=='V':
@@ -212,13 +212,25 @@ def UpdateScoreFile(scoreFile, trigram, stage, maxStage):
     result = jsonpath_expr.find(score)
 
     if len(result)==0:
-        score['score'].append({'player': trigram, 'value': stage, 'finishedTime': ""})
+        score['score'].append({'player': trigram, 'value': stage, 'startTime': time.strftime("%H:%M:%S", time.localtime()), 'lastUpdated':time.strftime("%H:%M:%S", time.localtime()), 'finishedTime': "",'duration':""})
     else:
         result[0].value['value']=stage
+        result[0].value['lastUpdated'] = time.strftime("%H:%M:%S", time.localtime())
         
     # Check is the game is finished
     if stage >= maxStage:
         result[0].value['finishedTime'] = time.strftime("%H:%M:%S", time.localtime())
+        # Calculate duration in seconds and format as HH:MM:SS
+        start_struct = time.strptime(result[0].value['startTime'], "%H:%M:%S")
+        finish_struct = time.strptime(result[0].value['finishedTime'], "%H:%M:%S")
+        start_seconds = start_struct.tm_hour * 3600 + start_struct.tm_min * 60 + start_struct.tm_sec
+        finish_seconds = finish_struct.tm_hour * 3600 + finish_struct.tm_min * 60 + finish_struct.tm_sec
+        duration_seconds = max(0, finish_seconds - start_seconds)
+        hours = duration_seconds // 3600
+        minutes = (duration_seconds % 3600) // 60
+        seconds = duration_seconds % 60
+        result[0].value['duration'] = f"{hours:02}:{minutes:02}:{seconds:02}"
+        
 
     # Write the updated score back to the JSON file
     try:

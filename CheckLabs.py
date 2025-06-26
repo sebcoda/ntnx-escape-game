@@ -231,10 +231,13 @@ def CheckCatVM(variables,recoveryMode):
         return True, -1 , None
 
     found,response = retrieveVMInfo(vm_name=variables['Trigram'] + "-vm", variables=variables)
-
-    for tmp in response['categories']:
-        if variables['CatUUID'] == tmp['ext_id']:
-            return True, -1 , None
+    
+    try:
+        for tmp in response['categories']:
+            if variables['CatUUID'] == tmp['ext_id']:
+                return True, -1 , None
+    except:
+        return True, -1 , None
     
     return False, 0, None
 

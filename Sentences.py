@@ -61,4 +61,9 @@ labRetryWithValue={
     "en": "When it is ok, put the good value here and press 'Enter'.",
     "fr": "Quand c'est bon, mets la bonne valeur ici et appuies sur 'Entrée'."
 }
+
+labNotUnderstood={
+    "en": "I did not understand what you said, please try again. #>I:",
+    "fr": "Je n'ai pas compris ce que tu as dit, réessaye s'il te plaît. #>I:"
+}
     

@@ -114,7 +114,7 @@ if __name__ == "__main__":
             
             # We do not display the message, because we are recovering the stage
             
-            # ...but we check student work if needed
+            # ...but we check student work if needed, in silent mode
             if checkScript != '':
                 CheckStage(checkScript, variables, silent=True)
         
