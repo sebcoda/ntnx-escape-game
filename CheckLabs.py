@@ -11,6 +11,13 @@ from main import contentJsonFile, scoreFile
 # - variable name is the name of the dictionary key containing the value we check to validate the exercise. This value will be reasked by the engine if check is false
 
 
+def CheckTrigram(variables,recoveryMode):
+    # We check trigram info...     
+    if len(variables['Trigram']) != 3:
+        # If trigram is not 3 characters, we return False
+        return False, 0, 'Trigram'
+
+    return True, -1, None
 
 # =============================================================================
 # NeedRecovery - Done
@@ -145,18 +152,8 @@ def CheckVM(variables,recoveryMode):
     if found == False:
         return False, 0 , None
     elif recoveryMode == False:
-        # Check all other information
-
-        # Check owner
-        # GL : Currently disabled because user must be in an IDP to be associated to a project.
-        #      User <Trigram>-adm is local
-        #
-        # if response['ownership_info']['owner']['ext_id'] != variables['UserUUID']:
-        #     result=False
-        #     clue="The VM is not owned by the user " + variables['Trigram'] + "-adm. Can you fix it ?"
-            
-        #     return result, clue
-
+        # We check VM details
+        
         # Number of NICS
         try:
             if len(response['nics']) != 2:
@@ -478,10 +475,15 @@ def CheckUpdates(variables,recoveryMode):
     if recoveryMode:
         return True, -1, None    
 
-    response = getNumberOfUpdates(variables)
+    
+    response = int(getNumberOfUpdates(variables))
+    
+    try:
+        if response != int(variables['NumberUpdates']):
+            return False, 0, "NumberUpdates"
+    except:
+        return False, 1, "NumberUpdates"
 
-    if response != int(variables['NumberUpdates']):
-        return False, 0, "NumberUpdates"
 
     return True, -1 , None
 

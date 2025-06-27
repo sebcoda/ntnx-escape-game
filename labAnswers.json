@@ -9,6 +9,16 @@
                     "fr": ""
                 }
             ]
+
+        },
+        {
+            "checkFunction": "CheckTrigram",
+            "clues": [
+                {
+                    "en": "Warning... It appears you are not familiar with charter 2354-C5 defining the good use of IT tools in Gov services: a trigram is composed of 3 letters, no more, no less. Hint: It is usually made of the first letter of the first name, followed by the first two letters of the last name.\nYou have a new try :",
+                    "fr": "PROBLEME... Il semble que vous ne soyez pas familier avec la charte 2354-C5 définissant les bon usages des outils informatique des services de l'état : un trigramme est composé de 3 lettres, ni plus, ni moins. Astuce : Il est généralement composé de la première lettre du prénom, suivie des 2 premières lettres du nom de famille.\nVous avez une nouvelle chance : "
+                }
+            ]
         },
         {
             "checkFunction": "CheckUser",
@@ -274,6 +284,10 @@
                 {
                     "en": "The number of updates is not the one expected. Can you double-check it ?",
                     "fr": "Le nombre de mises à jour n'est pas celui que je pensais. Pouvez-vous vérifier ?"
+                },
+                {
+                    "en": "Hum, I need a number normally, I do not understand... ",
+                    "fr": "Euh, il me faut un nombre normalement, je ne comprends pas... "
                 }
             ]
         },

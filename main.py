@@ -38,6 +38,7 @@ variables = {
 }
 
 firstStage=1
+forceSilentModeDuringChecks = ['CheckTrigram','NeedRecovery']
 
 # handling debug mode
 if os.getenv('DEBUG') == 'True':

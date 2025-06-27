@@ -7,7 +7,8 @@ from CheckLabs import *
 import random
 from Sentences import *
 from actions import *
-from main import labAnswersJsonFile
+from main import labAnswersJsonFile,forceSilentModeDuringChecks
+
 
 # ========================================================================
 # = display
@@ -166,21 +167,40 @@ def clueMessage(checkScript, messageNumber, language='en'):
 def CheckStage(checkScript, variables,silent=False):
     if checkScript in globals():
         ret=False
+        color='blue'
+        
+        # We do force silent mode for predefinied checks.
+        if checkScript in forceSilentModeDuringChecks:
+            silent=True
+            color='green'
+        
         while not ret:
+            ret,messageNumber,reenterValue = globals()[checkScript](variables, recoveryMode=silent)
+                
+            if silent:
+                errorMessage=""
+                retryMessage=""
+            else:
+                errorMessage=random.choice(labKo[variables['Language']])+". "
+                if reenterValue != None:
+                    retryMessage=labRetryWithValue[variables['Language']]
+                else:
+                    retryMessage=labRetry[variables['Language']]
+        
             
-            ret,messageNumber,renterValue = globals()[checkScript](variables, recoveryMode=silent)
-            
+            # If function returns unsuccessful message
             if not ret:
                 
                 clue=clueMessage(checkScript, messageNumber, variables['Language'])
                 
-                if renterValue==None:
-                    display("#>P:3#"+random.choice(labKo[variables['Language']])+". "+clue+" "+labRetry[variables['Language']]+".#>I:", variables, 'blue')
+                if reenterValue != None:
+                    display("#>P:3#"+errorMessage+clue+" "+retryMessage+"#>I:"+reenterValue, variables, color) 
                 else:
-                    display("#>P:3#"+random.choice(labKo[variables['Language']])+". "+clue+" "+labRetryWithValue[variables['Language']]+". #>I:"+renterValue, variables, 'blue')
+                    display("#>P:3#"+errorMessage+clue+" "+retryMessage, variables, color)
             else:
+                # If function returns successful message
                 if silent==False:
-                    display("#>P:3#"+random.choice(labOk[variables['Language']])+"\n", variables, 'blue')
+                    display("#>P:3#"+random.choice(labOk[variables['Language']])+"\n", variables, color)
     else:
         raise ValueError(f"Function {checkScript} is not defined.")
     

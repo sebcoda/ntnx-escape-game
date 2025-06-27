@@ -25,7 +25,7 @@ labOk={
         "Parfait",
         "Impeccable",
         "T'es un génie",
-        "Top, t'est un pro",
+        "Top, t'es un pro",
         "T'es un maître",
         "Facile",
     ]
@@ -42,10 +42,10 @@ labKo={
         'I knew you better, retry'
     ],
     "fr": [
-        'Oups, ça ne semble pas bon.',
+        'Oups, ça ne semble pas bon',
         'Non, réessayez',
         'Hum, ça colle pas',
-        'Semble être faux',
+        'Ça semble être faux',
         'Un truc cloche',
         'Ça va pas',
         'Je te croyais meilleur en fait'
@@ -53,13 +53,13 @@ labKo={
 }
 
 labRetry={
-    "en": "When it is done, hit 'Enter'",
-    "fr": "Quand c'est fait, appuies sur 'Entrée'"
+    "en": "When it is done, hit 'Enter'.",
+    "fr": "Quand c'est fait, appuies sur 'Entrée'."
 }
 
 labRetryWithValue={
-    "en": "When it is ok, put the good value here and press 'Enter'.",
-    "fr": "Quand c'est bon, mets la bonne valeur ici et appuies sur 'Entrée'."
+    "en": "When it is ok, put the good value here and press 'Enter' : ",
+    "fr": "Quand c'est bon, mets la bonne valeur ici et appuies sur 'Entrée' : "
 }
 
 labNotUnderstood={
