@@ -21,6 +21,9 @@ Roleplay to discover Nutanix platform
   - Fill the form
   - Clck on `deploy`
 
+Note : 
+ - 1st task of the blueprint checks AD credential. If tasks fails, please delete the app, change AD Endpoint credentials, and then redeploy the app from the BP.
+
 !! IMPORTANT !! Known Issues : 
  - The current deployment has a little problem. Please update manually the project `production` to remove then re-add the user `thebadguy`
  - Please confirm the cluster has only 3 nodes (I experienced an issue once, because of erasure-coding). If not, please remove 4th node.
