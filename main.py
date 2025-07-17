@@ -59,7 +59,6 @@ contentJsonFile="./gameContent.json"
 labAnswersJsonFile="./labAnswers.json"
 scoreFile="score.json"
 
-
 # Main function
 if __name__ == "__main__":
 

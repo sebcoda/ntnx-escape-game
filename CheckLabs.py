@@ -62,6 +62,16 @@ def CheckUser(variables,recoveryMode):
     
     # Store UserUUID in the variables
     variables['UserUUID'] = userId
+        
+    return True ,-1, None
+
+# =============================================================================
+# CheckAuthPolicy - Done
+# =============================================================================
+def CheckAuthPolicy(variables,recoveryMode):
+    
+    # Store UserUUID in the variables
+    userId = variables['UserUUID']
 
     #retrieve the Super Admin role ID
     roleId = retrieveRoleId(roleName="Super Admin", variables=variables)
@@ -70,13 +80,13 @@ def CheckUser(variables,recoveryMode):
     authorizationPolicyId = retrieveAuthorizationPolicyId(policyName=variables['Trigram'] + "-auth", variables=variables)
 
     if authorizationPolicyId is None:
-        return False, 1, None
+        return False, 0, None
     
     #check if the authorization policy is associated to the correct role and user
     response = checkAuthorizationPolicyAssignement(authorizationPolicyId=authorizationPolicyId, roleId=roleId, userId=userId, variables=variables)
 
     if response is False:  
-        return False, 2, None
+        return False, 1, None
         
     return True ,-1, None
 
