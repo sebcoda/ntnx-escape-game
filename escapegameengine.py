@@ -196,7 +196,7 @@ def CheckStage(checkScript, variables,silent=False):
                 if reenterValue != None:
                     display("#>P:3#"+errorMessage+clue+" "+retryMessage+"#>I:"+reenterValue, variables, color) 
                 else:
-                    display("#>P:3#"+errorMessage+clue+" "+retryMessage, variables, color)
+                    display("#>P:3#"+errorMessage+clue+" "+retryMessage+"#>I:#", variables, color)
             else:
                 # If function returns successful message
                 if silent==False:
@@ -219,6 +219,10 @@ def GetSupportedLanguages(json_file_path):
 # ========================================================================
 # This function updates the score file with the format Trigram:Stage
 def UpdateScoreFile(scoreFile, trigram, stage, maxStage):
+    #We do not update score file at this step (Will break recovery mode)
+    if stage == 1:
+        return
+    
     # Load the existing scores from the JSON file
     try:
         with open(scoreFile, 'r' ) as file:

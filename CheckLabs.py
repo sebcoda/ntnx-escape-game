@@ -42,7 +42,7 @@ def NeedRecovery(variables,recoveryMode):
     jsonpath_expr=parse("score[?(@.player=="+variables['Trigram']+")].value")
 
     for match in jsonpath_expr.find(data):
-        if match.value > 1:
+        if match.value > 2:
             variables['RecoveryUntilStage']=match.value
             print("\n\nSpecial event : Entering in recovery mode ( Recovery Code :",variables['RecoveryUntilStage'],")...\n\n")
 
