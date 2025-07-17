@@ -17,13 +17,31 @@ def loadScores():
         dict: A dictionary containing the scores and maximum score.
     """
     parentDir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
-    filePath = os.path.join(parentDir, 'score.json')
+    scoreDir = os.path.join(parentDir, 'score')
     
-    with open(filePath) as f:
-        data = json.load(f)
+    # Intialize the data structure
+    data = {"score": [], "maximumScore": {}}
     
+    mas_stage_path = os.path.join(scoreDir, 'maxStage.json')
+    if os.path.exists(mas_stage_path):
+        with open(mas_stage_path) as f:
+            data["maximumScore"] = json.load(f)['maximumScore']
+    
+    # Load all trigram score files
+    for filename in os.listdir(scoreDir):
+        if filename.endswith('.json') and len(os.path.splitext(filename)[0]) == 3:
+            file_path = os.path.join(scoreDir, filename)
+            trigram = os.path.splitext(filename)[0]
+            with open(file_path) as f:
+                file_data = json.load(f)
+                file_data["player"] = trigram
+                data["score"].append(file_data)
+
+
+    print("Loaded scores from:", data)
+
     # Sort scores by player name
-    data["score"].sort(key=lambda x: x["player"])
+    data["score"].sort(key=lambda x: (x["value"], x["lastUpdated"]), reverse=True)
     return data
 
 @app.route('/')

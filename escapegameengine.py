@@ -8,6 +8,8 @@ import random
 from Sentences import *
 from actions import *
 from main import labAnswersJsonFile,forceSilentModeDuringChecks
+import os
+import re
 
 
 # ========================================================================
@@ -218,50 +220,51 @@ def GetSupportedLanguages(json_file_path):
 # = UpdateScoreFile
 # ========================================================================
 # This function updates the score file with the format Trigram:Stage
-def UpdateScoreFile(scoreFile, trigram, stage, maxStage):
-    #We do not update score file at this step (Will break recovery mode)
+def UpdateScoreFile(scoreFolder, trigram, stage, maxStage):
+    
+    # We setup the score filename for this user
+    scoreFile=scoreFolder + "/" + trigram + ".json"
+    
+    # We do not update score file at this step 1 (Will break recovery mode)
     if stage == 1:
         return
     
     # Load the existing scores from the JSON file
     try:
+        # Try to open the score file and read the content
         with open(scoreFile, 'r' ) as file:
-            score = json.load(file)
-    except FileNotFoundError:
-        print("Error, score file not found, please run the game with the -clean option first")
-        sys.exit(4)
+            scoreJson = json.load(file)
+            scoreJson['value'] = stage  # Update the stage value
+            scoreJson['lastUpdated'] = time.strftime("%H:%M:%S", time.localtime())
+    except:
+        # If file does not exist, create a new score structure
+        scoreJson = {'value': stage, 'startTime': time.strftime("%H:%M:%S", time.localtime()), 'lastUpdated':time.strftime("%H:%M:%S", time.localtime()), 'finishedTime': "",'duration':""}
 
-    # Update the score for the given trigram
-    jsonpath_expr = parse('$.score[?(@.player == "' + trigram + '")]')
-    result = jsonpath_expr.find(score)
+    # # Update the score for the given trigram
+    # jsonpath_expr = parse('$.score[?(@.player == "' + trigram + '")]')
+    # result = jsonpath_expr.find(score)
 
-    if len(result)==0:
-        score['score'].append({'player': trigram, 'value': stage, 'startTime': time.strftime("%H:%M:%S", time.localtime()), 'lastUpdated':time.strftime("%H:%M:%S", time.localtime()), 'finishedTime': "",'duration':""})
-    else:
-        result[0].value['value']=stage
-        result[0].value['lastUpdated'] = time.strftime("%H:%M:%S", time.localtime())
-        
     # Check is the game is finished
     if stage >= maxStage:
-        result[0].value['finishedTime'] = time.strftime("%H:%M:%S", time.localtime())
+        scoreJson['finishedTime'] = time.strftime("%H:%M:%S", time.localtime())
         # Calculate duration in seconds and format as HH:MM:SS
-        start_struct = time.strptime(result[0].value['startTime'], "%H:%M:%S")
-        finish_struct = time.strptime(result[0].value['finishedTime'], "%H:%M:%S")
+        start_struct = time.strptime(scoreJson['startTime'], "%H:%M:%S")
+        finish_struct = time.strptime(scoreJson['finishedTime'], "%H:%M:%S")
         start_seconds = start_struct.tm_hour * 3600 + start_struct.tm_min * 60 + start_struct.tm_sec
         finish_seconds = finish_struct.tm_hour * 3600 + finish_struct.tm_min * 60 + finish_struct.tm_sec
         duration_seconds = max(0, finish_seconds - start_seconds)
         hours = duration_seconds // 3600
         minutes = (duration_seconds % 3600) // 60
         seconds = duration_seconds % 60
-        result[0].value['duration'] = f"{hours:02}:{minutes:02}:{seconds:02}"
+        scoreJson['duration'] = f"{hours:02}:{minutes:02}:{seconds:02}"
         
 
     # Write the updated score back to the JSON file
     try:
         with open(scoreFile, 'w') as file:
-            json.dump(score, file, indent=4)
+            json.dump(scoreJson, file, indent=4)
     except FileNotFoundError:
-        print("Error, score file not found, please run the game with the -clean option first")
+        print("Error, unable to write to the score file. Please check the path and permissions.")
         sys.exit(4)
 
 
@@ -269,11 +272,25 @@ def UpdateScoreFile(scoreFile, trigram, stage, maxStage):
 # = gameClean
 # ========================================================================
 # This function clean the scoreboard file
-def gameClean(scoreFile,maxStages):
+def gameClean(scoreFolder,maxStages):
+    
+    # We check if the score folder exists, if not we create it
+    if not os.path.exists(scoreFolder):
+        os.makedirs(scoreFolder)
+    
+    # We create the maxStage file
     score={
-        'maximumScore': maxStages,
-        'score': []
+        'maximumScore': maxStages
     }
 
-    with open(scoreFile, 'w') as file:
+    # Write the maxStage file
+    with open(scoreFolder + "/maxStage.json", 'w') as file:
         json.dump(score, file, indent=4)
+
+    # We remove all files in the score folder that match the pattern [A-Za-z0-9]{3}\.json
+    for filename in os.listdir(scoreFolder):
+        if re.fullmatch(r'[A-Za-z0-9]{3}\.json', filename):
+            try:
+                os.remove(os.path.join(scoreFolder, filename))
+            except Exception as e:
+                print(f"Error removing {filename}: {e}")

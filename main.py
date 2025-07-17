@@ -57,7 +57,7 @@ if os.getenv('DEBUG') == 'True':
 
 contentJsonFile="./gameContent.json"
 labAnswersJsonFile="./labAnswers.json"
-scoreFile="score.json"
+scoreFolder="./score"
 
 # Main function
 if __name__ == "__main__":
@@ -72,7 +72,7 @@ if __name__ == "__main__":
     # Check for -clean parameter
     if '-clean' in sys.argv:
         maxStages=max(stage['id'] for stage in data['stages'])
-        gameClean(scoreFile, maxStages)
+        gameClean(scoreFolder, maxStages)
         print('Game cleaned')
         sys.exit(0)
 
@@ -86,9 +86,9 @@ if __name__ == "__main__":
         except (IndexError, ValueError):
             print('Invalid stage ID. Please provide a valid number between 1 and', maxStage)
             sys.exit(1)
-        
-        # Updqate score file
-        UpdateScoreFile(scoreFile, trigram, stageId, maxStage)
+
+        # Update score file
+        UpdateScoreFile(scoreFolder, trigram, stageId, maxStage)
         print('Stage changed to', stageId, 'for user', trigram)
         
         # Exit 
@@ -132,7 +132,7 @@ if __name__ == "__main__":
                 CheckStage(checkScript, variables, silent=silentMode)
 
         # Update the score file
-        UpdateScoreFile(scoreFile, variables['Trigram'].lower(), stage['id'], maxStage)
+        UpdateScoreFile(scoreFolder, variables['Trigram'].lower(), stage['id'], maxStage)
 
     # Reset display color
     sys.stdout.write('\033[0m')

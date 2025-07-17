@@ -1,8 +1,7 @@
 from functions import *
 from jsonpath_ng.ext import parse
-from main import contentJsonFile, scoreFile
-
-#GL scoreFile="score.json"
+from main import contentJsonFile, scoreFolder
+import os
 
 # Here are all the functions called by the game content to check labs
 # Each function returns a tuple (result, messageNumber, variable name)
@@ -35,16 +34,24 @@ def NeedRecovery(variables,recoveryMode):
     if not (variables['Language'] in data['supportedLanguages']):
         variables['Language']='en'
     
-    
-    with open(scoreFile, 'r') as file:
-        data = json.load(file)
-        
-    jsonpath_expr=parse("score[?(@.player=="+variables['Trigram']+")].value")
+      
+    # We check if the score file exists for this trigram
+    scoreFile=scoreFolder+"/"+variables['Trigram']+".json"
 
-    for match in jsonpath_expr.find(data):
-        if match.value > 2:
-            variables['RecoveryUntilStage']=match.value
-            print("\n\nSpecial event : Entering in recovery mode ( Recovery Code :",variables['RecoveryUntilStage'],")...\n\n")
+    if os.path.exists(scoreFile) and os.path.getsize(scoreFile) == 0:
+        data={}
+    else:
+        # We try to load the score file
+        try:
+            with open(scoreFolder+"/"+variables['Trigram']+".json", 'r') as fileScore:
+                data = json.load(fileScore)
+        except:
+            data={}
+        
+    
+    if data!={} and data['value'] > 2:
+        variables['RecoveryUntilStage']=data['value']
+        print("\n\nSpecial event : Entering in recovery mode ( Recovery Code :",variables['RecoveryUntilStage'],")...\n\n")
 
     return True, -1, None
 
