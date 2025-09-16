@@ -35,9 +35,11 @@ Note :
 # Game launch
 - Use Day 2 actions of the BP to :
   - Launch invitation email to your players (you'll have to enter recipients list)
-  - Launch "End of lab" email (First recipients list will be used)
 
 Self-Service Application description will provide the URL to play, as it will be mentioned in the invitation email too.
+
+# Game end
+  - Launch "End of lab" email (First recipients list will be used)
 
 Note : Day-2 operations can be found clicking on `Self-Service > Application > {your application} > Manage tab`, and you will run them by clicking on play icon, just after the day-2 action name.
 
